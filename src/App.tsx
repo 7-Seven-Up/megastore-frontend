@@ -2,10 +2,10 @@ function App() {
   return (
     <main
       className={
-        "h-screen flex items-center justify-center flex-col gap-4 light bg-background text-foreground"
+        "flex h-screen flex-col items-center justify-center gap-4 bg-background text-foreground light"
       }
     >
-      <h1 className={"text-5xl font-medium font-raleway"}>Megastore</h1>
+      <h1 className={"font-raleway text-5xl font-medium"}>Megastore</h1>
     </main>
   );
 }
