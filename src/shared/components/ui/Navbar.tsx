@@ -30,13 +30,13 @@ export default function Navbar() {
     <NextNavbar isBlurred disableAnimation maxWidth={"2xl"} className={"py-3"}>
       <NavbarContent className="pr-3 sm:hidden" justify="center">
         <NavbarBrand>
-          <Title>SevenUp</Title>
+          <Title>Megastore</Title>
         </NavbarBrand>
       </NavbarContent>
 
       <NavbarContent className="hidden gap-4 sm:flex" justify="center">
         <NavbarBrand className={"pr-4"}>
-          <Title>SevenUp</Title>
+          <Title>Megastore</Title>
         </NavbarBrand>
         {menuItems.map(({ path, label }) => {
           return (
