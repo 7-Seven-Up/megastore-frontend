@@ -30,7 +30,7 @@ export default function Navbar() {
     <NextNavbar isBlurred disableAnimation maxWidth={"2xl"} className={"py-3"}>
       <NavbarContent className="pr-3 sm:hidden" justify="center">
         <NavbarBrand>
-          <Title>Megastore</Title>
+          <Title className={"text-3xl"}>Megastore</Title>
         </NavbarBrand>
       </NavbarContent>
 
@@ -83,7 +83,12 @@ export default function Navbar() {
           </Link>
         </NavbarItem>
         <NavbarItem>
-          <Button as={Link} color="secondary" href="#" variant="flat">
+          <Button
+            as={Link}
+            color="secondary"
+            href="/auth/signup"
+            variant="flat"
+          >
             Registrarse
           </Button>
         </NavbarItem>
@@ -111,7 +116,7 @@ export default function Navbar() {
               as={Link}
               className={"w-full"}
               color="secondary"
-              href="#"
+              href="/auth/signup"
               variant="flat"
             >
               Registrarse

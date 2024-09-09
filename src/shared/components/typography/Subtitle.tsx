@@ -1,5 +1,14 @@
-import { PropsWithChildren } from "react";
+import React from "react";
+import { cn } from "@nextui-org/react";
 
-export default function Subtitle({ children }: PropsWithChildren) {
-  return <h2 className={"text-3xl font-medium"}>{children}</h2>;
+interface Props extends React.HTMLAttributes<HTMLHeadingElement> {
+  className?: string;
+}
+
+export default function Subtitle({ children, className, ...rest }: Props) {
+  return (
+    <h2 className={cn("text-3xl font-medium", className)} {...rest}>
+      {children}
+    </h2>
+  );
 }
