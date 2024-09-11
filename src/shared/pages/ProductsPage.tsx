@@ -1,5 +1,5 @@
-import Title from "../components/typography/Title.tsx";
+import { Title } from "@/shared/components/typography/Title.tsx";
 
-export default function ProductsPage() {
+export function ProductsPage() {
   return <Title>ProductsPage</Title>;
 }

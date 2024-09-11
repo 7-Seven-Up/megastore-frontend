@@ -1,6 +1,6 @@
-import SignInForm from "@/modules/auth/components/SignInForm.tsx";
+import { SignInForm } from "@auth/components/SignInForm.tsx";
 
-export default function SignInPage() {
+export function SignInPage() {
   return (
     <div
       className={

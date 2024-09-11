@@ -1,5 +1,5 @@
-import SignUpForm from "../../../modules/auth/components/SignUpForm.tsx";
+import { SignUpForm } from "@auth/components/SignUpForm.tsx";
 
-export default function SignUpPage() {
+export function SignUpPage() {
   return <SignUpForm />;
 }

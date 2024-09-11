@@ -5,7 +5,9 @@ interface LogoProps {
   height?: number | string;
 }
 
-export default function Logo(props: LogoProps) {
+export function Logo(props: LogoProps) {
   const { width, height } = props;
-  return <Image src={"/logo.png"} width={width} height={height} />;
+  return (
+    <Image disableSkeleton height={height} src={"/logo.png"} width={width} />
+  );
 }

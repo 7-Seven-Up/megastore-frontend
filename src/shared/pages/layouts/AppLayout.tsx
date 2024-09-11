@@ -1,7 +1,7 @@
 import { Outlet } from "react-router-dom";
-import Navbar from "../../components/ui/Navbar.tsx";
+import { Navbar } from "@/shared/components/ui/Navbar.tsx";
 
-export default function AppLayout() {
+export function AppLayout() {
   return (
     <>
       <Navbar />

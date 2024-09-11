@@ -10,19 +10,19 @@ import {
   NavbarMenuItem,
   NavbarMenuToggle,
 } from "@nextui-org/react";
-import Title from "../typography/Title.tsx";
 import { useLocation } from "react-router-dom";
+import { Title } from "@/shared/components/typography/Title.tsx";
 
-export default function Navbar() {
+export function Navbar() {
   const { pathname } = useLocation();
   const menuItems = [
     {
       path: "/",
-      label: "Inicio",
+      label: "Home",
     },
     {
       path: "/products",
-      label: "Productos",
+      label: "Products",
     },
   ];
 
@@ -79,7 +79,7 @@ export default function Navbar() {
         <Divider orientation={"vertical"} className={"mx-4"} />
         <NavbarItem>
           <Link href="/auth/signin" color={"secondary"}>
-            Iniciar sesión
+            Login
           </Link>
         </NavbarItem>
         <NavbarItem>
@@ -89,7 +89,7 @@ export default function Navbar() {
             href="/auth/signup"
             variant="flat"
           >
-            Registrarse
+            Sign up
           </Button>
         </NavbarItem>
       </NavbarContent>
@@ -109,7 +109,7 @@ export default function Navbar() {
 
         <div className={"flex flex-col gap-2"}>
           <NavbarMenuItem>
-            <Link href="/auth/signin">Iniciar sesión</Link>
+            <Link href="/auth/signin">Login</Link>
           </NavbarMenuItem>
           <NavbarMenuItem>
             <Button
@@ -119,7 +119,7 @@ export default function Navbar() {
               href="/auth/signup"
               variant="flat"
             >
-              Registrarse
+              Sign Up
             </Button>
           </NavbarMenuItem>
         </div>

@@ -1,5 +1,5 @@
-import Title from "../components/typography/Title.tsx";
+import { Title } from "@/shared/components/typography/Title.tsx";
 
-export default function HomePage() {
+export function HomePage() {
   return <Title>HomePage</Title>;
 }

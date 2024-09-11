@@ -3,11 +3,11 @@ import { toast } from "sonner";
 import { useMutation } from "@tanstack/react-query";
 import { useNavigate, useSearchParams } from "react-router-dom";
 
-import Title from "@/shared/components/typography/Title.tsx";
 import { ActivateUserRequest } from "@auth/interfaces/requests/activate-user.interface.ts";
+import { Title } from "@/shared/components/typography/Title.tsx";
 import { activateUser } from "@/modules/auth/auth.service.ts";
 
-export default function ActivateUserPage() {
+export function ActivateUserPage() {
   const [searchParams] = useSearchParams();
   const navigate = useNavigate();
   const { mutate, isPending, isError, isSuccess } = useMutation({

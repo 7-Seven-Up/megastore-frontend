@@ -1,7 +1,7 @@
 import { Outlet } from "react-router-dom";
-import Logo from "@/shared/components/ui/Logo.tsx";
+import { Logo } from "@/shared/components/ui/Logo.tsx";
 
-export default function AuthLayout() {
+export function AuthLayout() {
   return (
     <main className={"flex min-h-screen"}>
       <section
