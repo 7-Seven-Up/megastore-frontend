@@ -68,7 +68,7 @@ export function SignUpForm() {
         <PasswordInput<SignUpSchemaType>
           className={"col-span-12 lg:col-span-6"}
           control={control}
-          label={"Password Confirmation"}
+          label={"Password confirmation"}
           name={"confirmPassword"}
           placeholder={"Retype your password"}
           rules={{ required: true }}
