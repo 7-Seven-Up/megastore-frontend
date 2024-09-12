@@ -46,6 +46,16 @@ export function SignUpForm() {
           type={"text"}
         />
 
+        <InputField<SignUpSchemaType>
+          className={"col-span-12 lg:col-span-6"}
+          control={control}
+          label={"E-mail"}
+          name={"email"}
+          placeholder={"Type your e-mail"}
+          rules={{ required: true }}
+          type={"email"}
+        />
+
         <PasswordInput<SignUpSchemaType>
           className={"col-span-12 lg:col-span-6"}
           control={control}
@@ -55,14 +65,13 @@ export function SignUpForm() {
           rules={{ required: true }}
         />
 
-        <InputField<SignUpSchemaType>
+        <PasswordInput<SignUpSchemaType>
           className={"col-span-12 lg:col-span-6"}
           control={control}
-          label={"E-mail"}
-          name={"email"}
-          placeholder={"Type your e-mail"}
+          label={"Password Confirmation"}
+          name={"confirmPassword"}
+          placeholder={"Retype your password"}
           rules={{ required: true }}
-          type={"email"}
         />
 
         <InputField<SignUpSchemaType>
@@ -76,7 +85,7 @@ export function SignUpForm() {
         />
 
         <InputField<SignUpSchemaType>
-          className={"col-span-12"}
+          className={"col-span-12 lg:col-span-6"}
           control={control}
           label={"Phone number"}
           name={"phoneNumber"}
