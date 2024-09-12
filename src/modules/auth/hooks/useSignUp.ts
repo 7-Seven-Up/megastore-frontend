@@ -1,7 +1,7 @@
 import { useMutation } from "@tanstack/react-query";
 import { useNavigate } from "react-router-dom";
 
-import { AUTH_SIGN_IN_KEY } from "@auth/constants.ts";
+import { AUTH_SIGN_UP_KEY } from "@auth/constants.ts";
 import { signUpUser } from "@auth/auth.service.ts";
 
 export function useSignUp() {
