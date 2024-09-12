@@ -1,14 +1,11 @@
-import { Button, Link } from "@nextui-org/react";
-import { SubmitHandler, useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
+import {Button} from "@nextui-org/react";
+import {SubmitHandler, useForm} from "react-hook-form";
+import {zodResolver} from "@hookform/resolvers/zod";
 
-import { InputField } from "@/shared/components/ui/InputField.tsx";
-import { PasswordInput } from "@/shared/components/ui/PasswordInput.tsx";
-import {
-  SignUpSchema,
-  SignUpSchemaType,
-} from "@/modules/auth/schemas/sign-up.schema.ts";
-import { Title } from "@/shared/components/typography/Title.tsx";
+import {InputField} from "@/shared/components/ui/InputField.tsx";
+import {PasswordInput} from "@/shared/components/ui/PasswordInput.tsx";
+import {SignUpSchema, SignUpSchemaType,} from "@/modules/auth/schemas/sign-up.schema.ts";
+import {Title} from "@/shared/components/typography/Title.tsx";
 
 export function SignUpForm() {
   const { control, handleSubmit } = useForm<SignUpSchemaType>({
@@ -98,11 +95,6 @@ export function SignUpForm() {
       <Button color={"secondary"} type={"submit"}>
         Create account
       </Button>
-
-      <footer className={"flex justify-center gap-2"}>
-        <p className={"text-content4-foreground"}>Already have an account?</p>
-        <Link href={"/auth/signin"}>Sign in here.</Link>
-      </footer>
     </form>
   );
 }

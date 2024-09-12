@@ -1,20 +1,17 @@
-import { Button } from "@nextui-org/react";
-import { SubmitHandler, useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
+import {Button} from "@nextui-org/react";
+import {SubmitHandler, useForm} from "react-hook-form";
+import {zodResolver} from "@hookform/resolvers/zod";
 
-import { InputField } from "@/shared/components/ui/InputField.tsx";
-import { PasswordInput } from "@/shared/components/ui/PasswordInput.tsx";
-import {
-  SignInSchema,
-  SignInSchemaType,
-} from "@/modules/auth/schemas/sign-in.schema.ts";
-import { Title } from "@/shared/components/typography/Title.tsx";
+import {InputField} from "@/shared/components/ui/InputField.tsx";
+import {PasswordInput} from "@/shared/components/ui/PasswordInput.tsx";
+import {SignInSchema, SignInSchemaType,} from "@/modules/auth/schemas/sign-in.schema.ts";
+import {Title} from "@/shared/components/typography/Title.tsx";
 
 export function SignInForm() {
   const { control, handleSubmit } = useForm<SignInSchemaType>({
     resolver: zodResolver(SignInSchema),
   });
-  const onSubmit: SubmitHandler = (data) => console.log(data);
+  const onSubmit: SubmitHandler<SignInSchemaType> = (data) => console.log(data);
 
   return (
     <form
