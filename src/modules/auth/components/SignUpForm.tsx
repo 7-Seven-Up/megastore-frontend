@@ -18,7 +18,7 @@ export function SignUpForm() {
 
   return (
     <form
-      className={"flex w-full max-w-screen-sm flex-col gap-8 p-6 text-center"}
+      className={"flex w-full max-w-screen-sm flex-col gap-8 text-center"}
       onSubmit={handleSubmit(onSubmit)}
     >
       <div className={"grid gap-4"}>

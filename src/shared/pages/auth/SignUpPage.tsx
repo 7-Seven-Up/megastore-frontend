@@ -5,7 +5,7 @@ export function SignUpPage() {
   return (
     <div
       className={
-        "fadeInUp flex w-full max-w-screen-sm flex-col p-6 text-center"
+        "fadeInUp flex w-full max-w-screen-sm flex-col gap-6 p-6 text-center"
       }
     >
       <SignUpForm />
