@@ -28,6 +28,9 @@ export default function RoutesProvider() {
         <Route path={"/users"} element={null}>
           <Route path={"recover-password"} element={null}></Route>
         </Route>
+        <Route path={"/users"} element={null}>
+          <Route path={"recover-password"} element={null}></Route>
+        </Route>
       </Routes>
     </NextUIProvider>
   );
