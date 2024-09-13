@@ -1,13 +1,19 @@
-import SignInForm from "@/modules/auth/components/SignInForm.tsx";
+import { AuthFooter } from "@auth/components/AuthFooter.tsx";
+import { SignInForm } from "@auth/components/SignInForm.tsx";
 
-export default function SignInPage() {
+export function SignInPage() {
   return (
     <div
       className={
-        "fadeInUp flex w-full max-w-screen-sm flex-col p-6 text-center"
+        "fadeInUp flex w-full max-w-screen-sm flex-col gap-6 p-6 text-center"
       }
     >
       <SignInForm />
+      <AuthFooter
+        actionText={"Don't have an account yet?"}
+        linkHref={"/auth/signup"}
+        linkText={"Sign up here."}
+      />
     </div>
   );
 }

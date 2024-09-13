@@ -1,11 +1,12 @@
-import InputField from "./InputField.tsx";
 import { FieldValues, UseControllerProps } from "react-hook-form";
 import { InputProps } from "@nextui-org/react";
 import { useState } from "react";
-import { EyeSlashFilledIcon } from "../icons/EyeSlashFilledIcon.tsx";
-import { EyeFilledIcon } from "../icons/EyeFilledIcon.tsx";
 
-export default function PasswordInput<T extends FieldValues>(
+import { EyeFilledIcon } from "../icons/EyeFilledIcon.tsx";
+import { EyeSlashFilledIcon } from "../icons/EyeSlashFilledIcon.tsx";
+import { InputField } from "@/shared/components/ui/InputField.tsx";
+
+export function PasswordInput<T extends FieldValues>(
   props: UseControllerProps<T> & InputProps,
 ) {
   const [passwordVisible, setPasswordVisible] = useState(false);

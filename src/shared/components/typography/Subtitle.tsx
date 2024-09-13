@@ -5,7 +5,7 @@ interface Props extends React.HTMLAttributes<HTMLHeadingElement> {
   className?: string;
 }
 
-export default function Subtitle({ children, className, ...rest }: Props) {
+export function Subtitle({ children, className, ...rest }: Props) {
   return (
     <h2 className={cn("text-3xl font-medium", className)} {...rest}>
       {children}

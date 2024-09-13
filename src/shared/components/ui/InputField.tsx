@@ -6,7 +6,7 @@ import {
 
 import { Input, InputProps } from "@nextui-org/react";
 
-export default function InputField<T extends FieldValues>(
+export function InputField<T extends FieldValues>(
   props: UseControllerProps<T> & InputProps,
 ) {
   const { field, fieldState } = useController(props);

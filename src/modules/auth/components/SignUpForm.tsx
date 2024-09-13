@@ -1,26 +1,29 @@
-import { Button, Link } from "@nextui-org/react";
-import { SubmitHandler, useForm } from "react-hook-form";
+import { Button } from "@nextui-org/react";
+import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 
-import InputField from "@/shared/components/ui/InputField.tsx";
-import PasswordInput from "@/shared/components/ui/PasswordInput.tsx";
-import Title from "@/shared/components/typography/Title.tsx";
+import { InputField } from "@/shared/components/ui/InputField.tsx";
+import { PasswordInput } from "@/shared/components/ui/PasswordInput.tsx";
 import {
   SignUpSchema,
   SignUpSchemaType,
 } from "@/modules/auth/schemas/sign-up.schema.ts";
+import { Title } from "@/shared/components/typography/Title.tsx";
+import { useSignUp } from "@auth/hooks/useSignUp.ts";
 
-export default function SignUpForm() {
+export function SignUpForm() {
+  const { mutate, isPending } = useSignUp();
   const { control, handleSubmit } = useForm<SignUpSchemaType>({
     resolver: zodResolver(SignUpSchema),
   });
-  const onSubmit: SubmitHandler<SignUpSchemaType> = (data) => console.log(data);
+
+  function onSubmit(data: SignUpSchemaType) {
+    mutate(data);
+  }
 
   return (
     <form
-      className={
-        "fadeInUp flex w-full max-w-screen-sm flex-col gap-8 p-6 text-center"
-      }
+      className={"flex w-full max-w-screen-sm flex-col gap-8 text-center"}
       onSubmit={handleSubmit(onSubmit)}
     >
       <div className={"grid gap-4"}>
@@ -37,13 +40,18 @@ export default function SignUpForm() {
           label={"Username"}
           name={"username"}
           placeholder={"Type your username"}
-          rules={{
-            minLength: {
-              value: 3,
-              message: "The username must have at least 3 characters",
-            },
-          }}
+          rules={{ required: true }}
           type={"text"}
+        />
+
+        <InputField<SignUpSchemaType>
+          className={"col-span-12 lg:col-span-6"}
+          control={control}
+          label={"E-mail"}
+          name={"email"}
+          placeholder={"Type your e-mail"}
+          rules={{ required: true }}
+          type={"email"}
         />
 
         <PasswordInput<SignUpSchemaType>
@@ -55,14 +63,13 @@ export default function SignUpForm() {
           rules={{ required: true }}
         />
 
-        <InputField<SignUpSchemaType>
+        <PasswordInput<SignUpSchemaType>
           className={"col-span-12 lg:col-span-6"}
           control={control}
-          label={"E-mail"}
-          name={"email"}
-          placeholder={"Type your e-mail"}
+          label={"Password confirmation"}
+          name={"confirmPassword"}
+          placeholder={"Retype your password"}
           rules={{ required: true }}
-          type={"email"}
         />
 
         <InputField<SignUpSchemaType>
@@ -76,7 +83,7 @@ export default function SignUpForm() {
         />
 
         <InputField<SignUpSchemaType>
-          className={"col-span-12"}
+          className={"col-span-12 lg:col-span-6"}
           control={control}
           label={"Phone number"}
           name={"phoneNumber"}
@@ -86,14 +93,9 @@ export default function SignUpForm() {
         />
       </div>
 
-      <Button color={"secondary"} type={"submit"}>
+      <Button isLoading={isPending} color={"secondary"} type={"submit"}>
         Create account
       </Button>
-
-      <footer className={"flex justify-center gap-2"}>
-        <p className={"text-content4-foreground"}>Already have an account?</p>
-        <Link href={"/auth/signin"}>Sign in here.</Link>
-      </footer>
     </form>
   );
 }

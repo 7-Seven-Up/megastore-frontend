@@ -1,16 +1,16 @@
-import { Button, Link } from "@nextui-org/react";
+import { Button } from "@nextui-org/react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 
-import InputField from "@/shared/components/ui/InputField.tsx";
-import PasswordInput from "@/shared/components/ui/PasswordInput.tsx";
-import Title from "@/shared/components/typography/Title.tsx";
+import { InputField } from "@/shared/components/ui/InputField.tsx";
+import { PasswordInput } from "@/shared/components/ui/PasswordInput.tsx";
 import {
   SignInSchema,
   SignInSchemaType,
 } from "@/modules/auth/schemas/sign-in.schema.ts";
+import { Title } from "@/shared/components/typography/Title.tsx";
 
-export default function SignInForm() {
+export function SignInForm() {
   const { control, handleSubmit } = useForm<SignInSchemaType>({
     resolver: zodResolver(SignInSchema),
   });
@@ -50,11 +50,6 @@ export default function SignInForm() {
       <Button color={"secondary"} type={"submit"}>
         Sign In
       </Button>
-
-      <footer className={"flex justify-center gap-2"}>
-        <p className={"text-content4-foreground"}>Don’t have an account yet?</p>
-        <Link href={"/auth/signup"}>Sign up here.</Link>
-      </footer>
     </form>
   );
 }
