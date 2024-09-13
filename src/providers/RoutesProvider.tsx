@@ -23,6 +23,9 @@ export default function RoutesProvider() {
           <Route path={"signin"} element={<SignInPage />} />
           <Route path={"activate"} element={<ActivateUserPage />} />
         </Route>
+        <Route path={"/users"} element={null}>
+          <Route path={"recover-password"} element={null}></Route>
+        </Route>
       </Routes>
     </NextUIProvider>
   );
