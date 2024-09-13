@@ -1,5 +1,5 @@
 import { Button } from "@nextui-org/react";
-import { SubmitHandler, useForm } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 
 import { InputField } from "@/shared/components/ui/InputField.tsx";
@@ -9,12 +9,17 @@ import {
   SignUpSchemaType,
 } from "@/modules/auth/schemas/sign-up.schema.ts";
 import { Title } from "@/shared/components/typography/Title.tsx";
+import { useSignUp } from "@auth/hooks/useSignUp.ts";
 
 export function SignUpForm() {
+  const { mutate, isPending } = useSignUp();
   const { control, handleSubmit } = useForm<SignUpSchemaType>({
     resolver: zodResolver(SignUpSchema),
   });
-  const onSubmit: SubmitHandler<SignUpSchemaType> = (data) => console.log(data);
+
+  function onSubmit(data: SignUpSchemaType) {
+    mutate(data);
+  }
 
   return (
     <form
@@ -35,12 +40,7 @@ export function SignUpForm() {
           label={"Username"}
           name={"username"}
           placeholder={"Type your username"}
-          rules={{
-            minLength: {
-              value: 3,
-              message: "The username must have at least 3 characters",
-            },
-          }}
+          rules={{ required: true }}
           type={"text"}
         />
 
@@ -93,7 +93,7 @@ export function SignUpForm() {
         />
       </div>
 
-      <Button color={"secondary"} type={"submit"}>
+      <Button isLoading={isPending} color={"secondary"} type={"submit"}>
         Create account
       </Button>
     </form>
