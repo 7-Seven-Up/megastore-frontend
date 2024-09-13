@@ -25,6 +25,9 @@ export default function RoutesProvider() {
           <Route path={"activate"} element={<ActivateUserPage />} />
           <Route path={"email-sent"} element={<EmailSent />} />
         </Route>
+        <Route path={"/users"} element={null}>
+          <Route path={"recover-password"} element={null}></Route>
+        </Route>
       </Routes>
     </NextUIProvider>
   );
