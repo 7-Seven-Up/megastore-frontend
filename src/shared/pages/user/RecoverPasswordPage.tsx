@@ -1,26 +1,30 @@
+import RecoverPasswordForm from "@/modules/user/components/RecoverPasswordForm.tsx";
+import { Title } from "@/shared/components/typography/Title.tsx";
 import { useSearchParams } from "react-router-dom";
-import InputField from "@/shared/components/ui/InputField.tsx";
-import { useMutation } from "@tanstack/react-query";
-import Title from "@/shared/components/typography/Title";
 
 type RecoverPasswordParams = {
-  userId: string,
-  token: string
-}
+  userId: string;
+  token: string;
+};
+
 export default function RecoverPasswordPage() {
   const [searchParams] = useSearchParams();
+
   const params: RecoverPasswordParams = {
     userId: searchParams.get("userId")!,
     token: searchParams.get("token")!,
-  }
-
-  const {mutate, isPending, isError,isSuccess} = useMutation();
+  };
 
   return (
-    <div>
-      <Title>Recover your password</Title>
-      <InputField name={email}/>
+    <div className={"fadeInUp flex flex-col items-center gap-8 text-center"}>
+      <header>
+        <Title>Recover your password</Title>
+      </header>
+      <div className={"flex flex-col items-center gap-6"}>
+        <div className={"flex flex-col content-center items-center"}>
+          <RecoverPasswordForm token={params.token} userId={params.userId} />
+        </div>
+      </div>
     </div>
   );
-
 }
