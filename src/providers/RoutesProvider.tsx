@@ -9,6 +9,9 @@ import { ProductsPage } from "@/shared/pages/ProductsPage.tsx";
 import { SignInPage } from "@/shared/pages/auth/SignInPage.tsx";
 import { SignUpPage } from "@/shared/pages/auth/SignUpPage.tsx";
 import { EmailSent } from "@/shared/pages/auth/EmailSent.tsx";
+import RecoverPasswordPage from "@/shared/pages/user/RecoverPasswordPage.tsx";
+import SendEmailToRecoverPasswordPage from "@/shared/pages/user/SendEmailToRecoverPasswordPage.tsx";
+import EmailSentToRecoverPassword from "@/modules/user/components/EmailSentToRecoverPassword.tsx";
 
 export default function RoutesProvider() {
   const navigate = useNavigate();
@@ -24,12 +27,15 @@ export default function RoutesProvider() {
           <Route path={"signin"} element={<SignInPage />} />
           <Route path={"activate"} element={<ActivateUserPage />} />
           <Route path={"email-sent"} element={<EmailSent />} />
-        </Route>
-        <Route path={"/users"} element={null}>
-          <Route path={"recover-password"} element={null}></Route>
-        </Route>
-        <Route path={"/users"} element={null}>
-          <Route path={"recover-password"} element={null}></Route>
+          <Route path={"recover-password"} element={<RecoverPasswordPage />} />
+          <Route
+            path={"send-email"}
+            element={<SendEmailToRecoverPasswordPage />}
+          />
+          <Route
+            path={"recover-password-email-sent"}
+            element={<EmailSentToRecoverPassword />}
+          />
         </Route>
       </Routes>
     </NextUIProvider>
