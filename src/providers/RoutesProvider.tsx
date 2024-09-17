@@ -9,6 +9,7 @@ import { ProductsPage } from "@/shared/pages/ProductsPage.tsx";
 import { SignInPage } from "@/shared/pages/auth/SignInPage.tsx";
 import { SignUpPage } from "@/shared/pages/auth/SignUpPage.tsx";
 import { EmailSent } from "@/shared/pages/auth/EmailSent.tsx";
+import { UnauthenticatedRoute } from "@/shared/pages/routes/UnauthenticatedRoute.tsx";
 
 export default function RoutesProvider() {
   const navigate = useNavigate();
@@ -20,8 +21,22 @@ export default function RoutesProvider() {
           <Route path={"products"} element={<ProductsPage />} />
         </Route>
         <Route path={"/auth"} element={<AuthLayout />}>
-          <Route path={"signup"} element={<SignUpPage />} />
-          <Route path={"signin"} element={<SignInPage />} />
+          <Route
+            path={"signup"}
+            element={
+              <UnauthenticatedRoute>
+                <SignUpPage />
+              </UnauthenticatedRoute>
+            }
+          />
+          <Route
+            path={"signin"}
+            element={
+              <UnauthenticatedRoute>
+                <SignInPage />
+              </UnauthenticatedRoute>
+            }
+          />
           <Route path={"activate"} element={<ActivateUserPage />} />
           <Route path={"email-sent"} element={<EmailSent />} />
         </Route>
