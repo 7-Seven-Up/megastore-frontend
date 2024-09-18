@@ -12,6 +12,10 @@ export default {
       fontFamily: {
         raleway: ["Raleway", "sans-serif"],
       },
+      spacing: {
+        "admin-sidebar": "var(--admin-sidebar-width)",
+        screenMinusNavbar: "calc(100dvh - 90px)",
+      },
     },
   },
   plugins: [nextui()],
