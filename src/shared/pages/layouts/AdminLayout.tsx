@@ -15,7 +15,7 @@ export function AdminLayout() {
     <section className={"min-h-screenMinusNavbar w-full"}>
       <aside
         className={
-          "w-admin-sidebar fixed flex h-full flex-col gap-2 border-1 border-b-0 border-t-0 border-r-default/50 bg-background p-2 md:p-6"
+          "w-adminSidebar fixed flex h-full flex-col gap-2 border-1 border-b-0 border-t-0 border-r-default/50 bg-background p-2 md:p-6"
         }
       >
         {adminItems.map((item) => {
@@ -37,7 +37,7 @@ export function AdminLayout() {
         })}
       </aside>
 
-      <div className={"pl-admin-sidebar"}>
+      <div className={"pl-adminSidebar"}>
         <Outlet />
       </div>
     </section>

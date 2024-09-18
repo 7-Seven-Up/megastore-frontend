@@ -13,7 +13,7 @@ export default {
         raleway: ["Raleway", "sans-serif"],
       },
       spacing: {
-        "admin-sidebar": "var(--admin-sidebar-width)",
+        adminSidebar: "var(--admin-sidebar-width)",
         screenMinusNavbar: "calc(100dvh - 90px)",
       },
     },
