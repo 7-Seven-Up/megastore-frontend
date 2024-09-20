@@ -11,6 +11,12 @@ export default function SendEmailToRecoverPasswordPage() {
         <div className={"flex flex-col content-center items-center"}>
           <SendEmailForm />
         </div>
+        <div className={"flex flex-col content-center items-center"}>
+          <p>
+            For your account's security, we will send you an email to verify
+            that it's you who wants to change the password.
+          </p>
+        </div>
       </div>
     </div>
   );

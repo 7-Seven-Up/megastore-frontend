@@ -15,8 +15,8 @@ export default function SendEmailForm() {
 
   const { mutate, isPending } = useSendEmail();
 
-  const onSubmit = (data: SendEmailSchemaType) => {
-    mutate({ email: data.email });
+  const onSubmit = ({ email }: SendEmailSchemaType) => {
+    mutate({ email });
   };
 
   return (
