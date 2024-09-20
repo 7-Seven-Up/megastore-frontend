@@ -12,6 +12,7 @@ import { EmailSent } from "@/shared/pages/auth/EmailSent.tsx";
 import RecoverPasswordPage from "@/shared/pages/user/RecoverPasswordPage.tsx";
 import SendEmailToRecoverPasswordPage from "@/shared/pages/user/SendEmailToRecoverPasswordPage.tsx";
 import EmailSentToRecoverPassword from "@/modules/user/components/EmailSentToRecoverPassword.tsx";
+import NotFoundPage from "@/shared/pages/NotFoundPage.tsx";
 
 export default function RoutesProvider() {
   const navigate = useNavigate();
@@ -37,6 +38,7 @@ export default function RoutesProvider() {
             element={<EmailSentToRecoverPassword />}
           />
         </Route>
+        <Route path={"/not-found"} element={<NotFoundPage />} />
       </Routes>
     </NextUIProvider>
   );
