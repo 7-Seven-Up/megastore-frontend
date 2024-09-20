@@ -8,21 +8,19 @@ export const recoverPassword = async (params: RecoverPasswordRequest) => {
   const { userId, newPassword, token } = params;
   await httpClient.post<void>(
     `${BACKEND_URL}/api/v1/users/${userId}/recover-password`,
-    null,
     {
-      params: {
-        newPassword,
-        recoverPasswordToken: token,
-      },
+      newPassword,
+      recoverPasswordToken: token,
     },
   );
 };
 
-export const sendEmail = async (params: SendEmailRequest) => {
-  const { email } = params;
+export const sendRecoverPasswordEmail = async ({ email }: SendEmailRequest) => {
   await httpClient.post<void>(
     `${BACKEND_URL}/api/v1/users/recover-password/send-email`,
-    null,
+    {
+      email,
+    },
     {
       params: {
         email,
