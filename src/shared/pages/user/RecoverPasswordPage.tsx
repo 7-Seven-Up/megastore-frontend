@@ -5,14 +5,14 @@ import { useRecoverPasswordValidationParams } from "@/modules/user/hooks/useReco
 import { useEffect } from "react";
 
 type RecoverPasswordParams = {
-  token?: string;
+  token: string | null;
 };
 
 export default function RecoverPasswordPage() {
   const [searchParams] = useSearchParams();
 
   const params: RecoverPasswordParams = {
-    token: searchParams.get("token")!,
+    token: searchParams.get("token"),
   };
 
   const { redirectToNotFound } = useRecoverPasswordValidationParams();

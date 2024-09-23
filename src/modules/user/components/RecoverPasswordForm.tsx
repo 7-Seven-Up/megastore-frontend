@@ -20,11 +20,14 @@ export default function RecoverPasswordForm({ token }: RecoverPasswordProps) {
       resolver: zodResolver(RecoverPasswordSchema),
     });
 
-  const onSubmit = (data: ChangePasswordRecoverPasswordSchemaType) => {
+  const onSubmit = ({
+    password,
+    confirmPassword,
+  }: ChangePasswordRecoverPasswordSchemaType) => {
     mutate({
-      userId: "",
-      token: token,
-      newPassword: data.password,
+      newPassword: password,
+      confirmNewPassword: confirmPassword,
+      token,
     });
   };
 
