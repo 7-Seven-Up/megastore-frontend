@@ -1,5 +1,6 @@
 export interface RecoverPasswordRequest {
-  userId: string,
-  newPassword: string,
-  token: string
+  email: string;
+  newPassword: string;
+  confirmNewPassword: string;
+  token: string;
 }

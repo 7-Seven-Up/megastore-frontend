@@ -4,12 +4,17 @@ import { SendEmailRequest } from "@/modules/user/interfaces/requests/send-email.
 
 const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
 
-export const recoverPassword = async (params: RecoverPasswordRequest) => {
-  const { userId, newPassword, token } = params;
+export const recoverPassword = async ({
+  email,
+  newPassword,
+  confirmNewPassword,
+  token,
+}: RecoverPasswordRequest) => {
   await httpClient.post<void>(
-    `${BACKEND_URL}/api/v1/users/${userId}/recover-password`,
+    `${BACKEND_URL}/api/v1/auth/recover-password/${email}`,
     {
-      newPassword,
+      password: newPassword,
+      confirmPassword: confirmNewPassword,
       recoverPasswordToken: token,
     },
   );
@@ -20,11 +25,6 @@ export const sendRecoverPasswordEmail = async ({ email }: SendEmailRequest) => {
     `${BACKEND_URL}/api/v1/users/recover-password/send-email`,
     {
       email,
-    },
-    {
-      params: {
-        email,
-      },
     },
   );
 };
