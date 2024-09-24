@@ -15,6 +15,7 @@ import { SignInPage } from "@/shared/pages/auth/SignInPage.tsx";
 import { SignUpPage } from "@/shared/pages/auth/SignUpPage.tsx";
 import { UnauthenticatedRoute } from "@/shared/pages/routes/UnauthenticatedRoute.tsx";
 import { CategoryAdminPage } from "@/shared/pages/admin/CategoryAdminPage.tsx";
+import { CreateCategoryPage } from "@/shared/pages/admin/CreateCategoryPage.tsx";
 
 export default function RoutesProvider() {
   const navigate = useNavigate();
@@ -33,7 +34,9 @@ export default function RoutesProvider() {
             }
           >
             <Route index element={<AdminPage />} />
-            <Route path={"categories"} element={<CategoryAdminPage />} />
+            <Route path={"categories"} element={<CategoryAdminPage />}>
+              <Route path={"create"} element={<CreateCategoryPage />} />
+            </Route>
           </Route>
         </Route>
         <Route
