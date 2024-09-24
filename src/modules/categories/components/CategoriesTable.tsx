@@ -42,11 +42,11 @@ const columns = [
 ];
 
 export function CategoriesTable() {
-  const [currentPage, setCurrentPage] = useState(0);
+  const [currentPage, setCurrentPage] = useState(1);
   const { data, isLoading } = useGetCategories({
     page: currentPage,
   });
-  const { mutate } = useDeleteCategory();
+  const { deleteCategory } = useDeleteCategory();
   const { onOpen, onClose, isOpen } = useDisclosure();
   const [editingCategory, setEditingCategory] = useState<Category | undefined>(
     undefined,
@@ -140,8 +140,12 @@ export function CategoriesTable() {
                 <TableActions
                   deleteContent={"Delete category"}
                   editContent={"Edit category"}
-                  onDelete={() => mutate(category.categoryId)}
+                  onDelete={() => deleteCategory(category.categoryId)}
                   onEdit={() => handleOnEdit(category)}
+                  confirmModalProps={{
+                    title: "Delete category",
+                    description: `Are you sure you want to delete the category ${category.name}?`,
+                  }}
                 />
               </TableCell>
             </TableRow>
