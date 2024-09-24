@@ -1,30 +1,40 @@
-import { useForm } from "react-hook-form";
 import {
   CreateCategorySchema,
   CreateCategorySchemaType,
 } from "@/modules/categories/schemas/create-category.schema.ts";
-import { zodResolver } from "@hookform/resolvers/zod";
 import { InputField } from "@/shared/components/ui/InputField.tsx";
 import { Button, SelectItem } from "@nextui-org/react";
 import { useCreateCategory } from "@/modules/categories/hooks/useCreateCategory.ts";
 import { ControlledSelect } from "@/shared/components/ui/ControlledSelect.tsx";
-import { useGetCategories } from "@/modules/categories/hooks/useGetCategories.ts";
+import { useInfiniteScroll } from "@nextui-org/use-infinite-scroll";
+import { useInfiniteCategories } from "@/modules/categories/hooks/useInfiniteCategories.ts";
+import { useMemo, useState } from "react";
+import { useZodForm } from "@/shared/hooks/useZodForm.ts";
 
 interface CreateCategoryFormProps {
   onClose: () => void;
 }
 
 export function CreateCategoryForm({ onClose }: CreateCategoryFormProps) {
-  const { control, handleSubmit } = useForm<CreateCategorySchemaType>({
-    resolver: zodResolver(CreateCategorySchema),
-  });
-  const { mutateAsync, isPending } = useCreateCategory();
-  const { data, isLoading } = useGetCategories({
-    pageSize: 99999999,
+  const { control, handleSubmit } = useZodForm(CreateCategorySchema);
+  const { createCategory, isCreating } = useCreateCategory();
+  const { data, fetchNextPage, isLoading, hasNextPage } =
+    useInfiniteCategories();
+
+  const [isOpen, setIsOpen] = useState(false);
+  const [, scrollerRef] = useInfiniteScroll({
+    hasMore: hasNextPage,
+    isEnabled: isOpen,
+    onLoadMore: fetchNextPage,
+    shouldUseLoader: false,
   });
 
+  const categories = useMemo(() => {
+    return data?.pages.map((page) => page.content).flat();
+  }, [data]);
+
   async function onSubmit(data: CreateCategorySchemaType) {
-    await mutateAsync(data);
+    await createCategory(data);
     onClose();
   }
 
@@ -47,10 +57,12 @@ export function CreateCategoryForm({ onClose }: CreateCategoryFormProps) {
       <ControlledSelect
         control={control}
         isLoading={isLoading}
-        items={data?.content || []}
+        items={categories || []}
         label={"Super category"}
         name={"superCategoryId"}
+        onOpenChange={setIsOpen}
         placeholder={"Select a super category"}
+        scrollRef={scrollerRef}
       >
         {(category) => {
           return (
@@ -63,7 +75,7 @@ export function CreateCategoryForm({ onClose }: CreateCategoryFormProps) {
         <Button color="danger" variant="light" onPress={onClose}>
           Close
         </Button>
-        <Button color="primary" type={"submit"} isLoading={isPending}>
+        <Button color="primary" type={"submit"} isLoading={isCreating}>
           Save
         </Button>
       </footer>

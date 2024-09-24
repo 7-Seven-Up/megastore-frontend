@@ -1,15 +1,16 @@
 import { Category } from "@/modules/categories/interfaces/responses/category.interface.ts";
-import { useForm } from "react-hook-form";
 import {
   UpdateCategorySchema,
   UpdateCategorySchemaType,
 } from "@/modules/categories/schemas/update-category.schema.ts";
-import { zodResolver } from "@hookform/resolvers/zod";
 import { InputField } from "@/shared/components/ui/InputField.tsx";
 import { Button, SelectItem } from "@nextui-org/react";
-import { useGetCategories } from "@/modules/categories/hooks/useGetCategories.ts";
 import { ControlledSelect } from "@/shared/components/ui/ControlledSelect.tsx";
 import { useUpdateCategory } from "@/modules/categories/hooks/useUpdateCategory.ts";
+import { useMemo, useState } from "react";
+import { useInfiniteCategories } from "@/modules/categories/hooks/useInfiniteCategories.ts";
+import { useInfiniteScroll } from "@nextui-org/use-infinite-scroll";
+import { useZodForm } from "@/shared/hooks/useZodForm.ts";
 
 interface EditCategoryFormProps {
   category: Category;
@@ -17,13 +18,18 @@ interface EditCategoryFormProps {
 }
 
 export function EditCategoryForm({ onClose, category }: EditCategoryFormProps) {
-  const { control, handleSubmit } = useForm<UpdateCategorySchemaType>({
-    resolver: zodResolver(UpdateCategorySchema),
-  });
-  const { data, isLoading } = useGetCategories({
-    pageSize: 99999999,
-  });
+  const { control, handleSubmit } = useZodForm(UpdateCategorySchema);
   const { updateCategory, isUpdating } = useUpdateCategory();
+  const { data, fetchNextPage, hasNextPage, isLoading } =
+    useInfiniteCategories();
+
+  const [isOpen, setIsOpen] = useState(false);
+  const [, scrollerRef] = useInfiniteScroll({
+    hasMore: hasNextPage,
+    isEnabled: isOpen,
+    shouldUseLoader: false,
+    onLoadMore: fetchNextPage,
+  });
 
   async function onSubmit(data: UpdateCategorySchemaType) {
     if (data.superCategoryId === "") {
@@ -37,6 +43,26 @@ export function EditCategoryForm({ onClose, category }: EditCategoryFormProps) {
 
     onClose();
   }
+
+  const flatCategories = useMemo(() => {
+    return data?.pages.map((page) => page.content).flat();
+  }, [data]);
+
+  // Returns a new array of categories with the super category at the beginning
+  const categories = useMemo(() => {
+    if (!flatCategories || !category) return [];
+    if (!category.superCategoryId) return flatCategories;
+
+    return [
+      {
+        categoryId: category.superCategoryId,
+        name: category.superCategoryName,
+      },
+      ...flatCategories.filter(
+        (item) => item.categoryId !== category.superCategoryId,
+      ),
+    ];
+  }, [flatCategories, category]);
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className={"flex flex-col gap-2"}>
@@ -60,11 +86,12 @@ export function EditCategoryForm({ onClose, category }: EditCategoryFormProps) {
         control={control}
         defaultSelectedKeys={[category.superCategoryId || ""]}
         isLoading={isLoading}
-        items={data?.content || []}
+        items={categories}
         label={"Super category"}
         name={"superCategoryId"}
+        onOpenChange={setIsOpen}
         placeholder={"Select a super category"}
-        defaultValue={<SelectItem key={"default"}>Hola</SelectItem>}
+        scrollRef={scrollerRef}
       >
         {(item) => {
           return <SelectItem key={item.categoryId}>{item.name}</SelectItem>;
