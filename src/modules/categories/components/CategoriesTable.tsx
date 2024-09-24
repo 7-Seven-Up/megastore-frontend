@@ -74,7 +74,8 @@ export function CategoriesTable() {
         aria-label="List of categories"
         bottomContentPlacement={"outside"}
         bottomContent={
-          data && (
+          data &&
+          data.content.length > 0 && (
             <div className="flex w-full flex-wrap items-center justify-center gap-4 sm:justify-between">
               <Pagination
                 color="primary"
@@ -111,6 +112,7 @@ export function CategoriesTable() {
           )}
         </TableHeader>
         <TableBody
+          emptyContent={"There are no categories to show"}
           items={data?.content || []}
           loadingContent={
             <div
