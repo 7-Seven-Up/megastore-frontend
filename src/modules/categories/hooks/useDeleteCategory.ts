@@ -7,7 +7,7 @@ import { deleteCategory } from "@/modules/categories/categories.service.ts";
 
 export function useDeleteCategory() {
   const queryClient = useQueryClient();
-  const { mutate, isSuccess, isPending } = useMutation({
+  const { mutate } = useMutation({
     mutationFn: deleteCategory,
     mutationKey: [DELETE_CATEGORY_KEY],
     onSuccess: async () => {
@@ -17,5 +17,7 @@ export function useDeleteCategory() {
     },
   });
 
-  return { mutate, isSuccess, isPending };
+  return {
+    deleteCategory: mutate,
+  };
 }

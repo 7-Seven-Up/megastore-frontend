@@ -17,5 +17,8 @@ export function useCreateCategory() {
     },
   });
 
-  return { mutateAsync, isPending };
+  return {
+    createCategory: mutateAsync,
+    isCreating: isPending,
+  };
 }
