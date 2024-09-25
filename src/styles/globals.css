@@ -4,6 +4,19 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Variables */
+:root {
+  --admin-sidebar-width: 20rem;
+
+  @media (width < 1024px) {
+     --admin-sidebar-width: 16rem;
+  }
+
+  @media (width < 768px) {
+     --admin-sidebar-width: 4rem;
+  }
+}
+
 .fadeInUp {
   animation: fadeInUp 0.4s ease;
 }

@@ -1,5 +1,7 @@
 import { Button, Link } from "@nextui-org/react";
 import { SubmitHandler, useForm } from "react-hook-form";
+import { Button } from "@nextui-org/react";
+import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 
 import { InputField } from "@/shared/components/ui/InputField.tsx";
@@ -9,12 +11,17 @@ import {
   SignInSchemaType,
 } from "@/modules/auth/schemas/sign-in.schema.ts";
 import { Title } from "@/shared/components/typography/Title.tsx";
+import { useSignIn } from "@auth/hooks/useSignIn.ts";
 
 export function SignInForm() {
+  const { mutate, isPending } = useSignIn();
   const { control, handleSubmit } = useForm<SignInSchemaType>({
     resolver: zodResolver(SignInSchema),
   });
-  const onSubmit: SubmitHandler<SignInSchemaType> = (data) => console.log(data);
+
+  function onSubmit(data: SignInSchemaType) {
+    mutate(data);
+  }
 
   return (
     <form
@@ -54,7 +61,7 @@ export function SignInForm() {
         </div>
       </div>
 
-      <Button color={"secondary"} type={"submit"}>
+      <Button isLoading={isPending} color={"secondary"} type={"submit"}>
         Sign In
       </Button>
     </form>
