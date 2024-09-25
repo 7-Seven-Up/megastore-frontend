@@ -2,6 +2,7 @@ import { Button, Link } from "@nextui-org/react";
 import { PlusIcon } from "@/shared/components/icons/PlusIcon.tsx";
 import { Title } from "@/shared/components/typography/Title.tsx";
 import { Outlet } from "react-router-dom";
+import { SizesTable } from "@/modules/sizes/components/SizesTable";
 
 export function SizeAdminPage() {
   return (
@@ -20,7 +21,7 @@ export function SizeAdminPage() {
           Create new
         </Button>
       </header>
-      {/* <SizesTable /> */}
+      <SizesTable />
       <Outlet />
     </div>
   );
