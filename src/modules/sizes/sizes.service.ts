@@ -27,3 +27,7 @@ export async function updateSize(params: UpdateSizeRequest) {
   });
   return response.data;
 }
+
+export async function deleteSize(sizeId: string) {
+  await httpClient.delete(`${SIZES_URL}/${sizeId}`);
+}
