@@ -3,7 +3,6 @@ import { Size } from "./interfaces/responses/size.interface";
 import { CreateSizeRequest } from "./interfaces/requests/create-size.interface";
 import { PaginationRequest } from "@/shared/interfaces/pagination/pagination-request.interface";
 import { SizeResponse } from "./interfaces/responses/size-response.interface";
-import { UpdateSizeRequest } from "./interfaces/requests/update-size.interface";
 
 const SIZES_URL = `${import.meta.env.VITE_BACKEND_URL}/api/v1/sizes`;
 
@@ -21,7 +20,7 @@ export async function getSizes(params: PaginationRequest) {
   return response.data;
 }
 
-export async function updateSize(params: UpdateSizeRequest) {
+export async function updateSize(params: Size) {
   const response = await httpClient.put<Size>(`${SIZES_URL}/${params.sizeId}`, {
     ...params,
   });

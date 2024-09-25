@@ -1,6 +1,6 @@
 import { z } from "zod";
 
-export const SizeSchema = z.object({
+export const CreateSizeSchema = z.object({
   name: z
     .string({
       required_error: "",
@@ -17,4 +17,4 @@ export const SizeSchema = z.object({
     }),
 });
 
-export type SizeSchemaType = z.infer<typeof SizeSchema>;
+export type CreateSizeSchemaType = z.infer<typeof CreateSizeSchema>;

@@ -1,7 +1,10 @@
 import { InputField } from "@/shared/components/ui/InputField.tsx";
 import { Button } from "@nextui-org/react";
 import { useZodForm } from "@/shared/hooks/useZodForm.ts";
-import { SizeSchema, SizeSchemaType } from "../schemas/size.schema";
+import {
+  CreateSizeSchema,
+  CreateSizeSchemaType,
+} from "../schemas/create-size.schema";
 import { useCreateSize } from "../hooks/useCreateSize";
 
 interface CreateSizeFormProps {
@@ -9,24 +12,24 @@ interface CreateSizeFormProps {
 }
 
 export function CreateSizeForm({ onClose }: CreateSizeFormProps) {
-  const { control, handleSubmit } = useZodForm(SizeSchema);
+  const { control, handleSubmit } = useZodForm(CreateSizeSchema);
   const { createSize, isCreating } = useCreateSize();
 
-  async function onSubmit(data: SizeSchemaType) {
+  async function onSubmit(data: CreateSizeSchemaType) {
     await createSize(data);
     onClose();
   }
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className={"flex flex-col gap-2"}>
-      <InputField<SizeSchemaType>
+      <InputField<CreateSizeSchemaType>
         control={control}
         label={"Size name"}
         name={"name"}
         placeholder={"Type the size name"}
       />
 
-      <InputField<SizeSchemaType>
+      <InputField<CreateSizeSchemaType>
         control={control}
         label={"Size description"}
         name={"description"}

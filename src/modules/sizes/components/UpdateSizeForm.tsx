@@ -2,7 +2,10 @@ import { InputField } from "@/shared/components/ui/InputField.tsx";
 import { Button } from "@nextui-org/react";
 import { useZodForm } from "@/shared/hooks/useZodForm.ts";
 import { Size } from "../interfaces/responses/size.interface";
-import { SizeSchema, SizeSchemaType } from "../schemas/size.schema";
+import {
+  UpdateSizeSchema,
+  UpdateSizeSchemaType,
+} from "../schemas/update-size.schema";
 import { useUpdateSize } from "../hooks/useUpdateSize";
 
 interface UpdateSizeFormProps {
@@ -11,10 +14,10 @@ interface UpdateSizeFormProps {
 }
 
 export function UpdateSizeForm({ onClose, size }: UpdateSizeFormProps) {
-  const { control, handleSubmit } = useZodForm(SizeSchema);
+  const { control, handleSubmit } = useZodForm(UpdateSizeSchema);
   const { updateSize, isUpdating } = useUpdateSize();
 
-  async function onSubmit(data: SizeSchemaType) {
+  async function onSubmit(data: UpdateSizeSchemaType) {
     await updateSize({
       sizeId: size.sizeId,
       ...data,
@@ -25,7 +28,7 @@ export function UpdateSizeForm({ onClose, size }: UpdateSizeFormProps) {
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className={"flex flex-col gap-2"}>
-      <InputField<SizeSchemaType>
+      <InputField<UpdateSizeSchemaType>
         control={control}
         defaultValue={size.name}
         label={"Size name"}
@@ -33,7 +36,7 @@ export function UpdateSizeForm({ onClose, size }: UpdateSizeFormProps) {
         placeholder={"Type the size name"}
       />
 
-      <InputField<SizeSchemaType>
+      <InputField<UpdateSizeSchemaType>
         control={control}
         defaultValue={size.description}
         label={"Size description"}
