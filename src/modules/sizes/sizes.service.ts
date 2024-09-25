@@ -15,7 +15,7 @@ export async function createSize(params: CreateSizeRequest) {
 }
 
 export async function getSizes(params: PaginationRequest) {
-  const response = await httpClient.get<SizeResponse[]>(SIZES_URL, {
+  const response = await httpClient.get<SizeResponse>(SIZES_URL, {
     params,
   });
   return response.data;
