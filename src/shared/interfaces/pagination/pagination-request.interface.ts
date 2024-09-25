@@ -1,5 +1,5 @@
 export interface PaginationRequest {
-  pageNumber?: number;
+  page?: number;
   pageSize?: number;
   sortAttribute?: string;
   sortOrder?: "asc" | "desc";
