@@ -17,6 +17,7 @@ import { UnauthenticatedRoute } from "@/shared/pages/routes/UnauthenticatedRoute
 import { CategoryAdminPage } from "@/shared/pages/admin/CategoryAdminPage.tsx";
 import { CreateCategoryPage } from "@/shared/pages/admin/CreateCategoryPage.tsx";
 import { SizeAdminPage } from "@/shared/pages/admin/SizeAdminPage";
+import { CreateSizePage } from "@/shared/pages/admin/CreateSizePage";
 
 export default function RoutesProvider() {
   const navigate = useNavigate();
@@ -39,7 +40,7 @@ export default function RoutesProvider() {
               <Route path={"create"} element={<CreateCategoryPage />} />
             </Route>
             <Route path={"sizes"} element={<SizeAdminPage />}>
-              {/* <Route path={"create"} element={<CreateSizePage />} /> */}
+              <Route path={"create"} element={<CreateSizePage />} />
             </Route>
           </Route>
         </Route>
