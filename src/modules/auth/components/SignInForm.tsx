@@ -1,6 +1,4 @@
 import { Button, Link } from "@nextui-org/react";
-import { SubmitHandler, useForm } from "react-hook-form";
-import { Button } from "@nextui-org/react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 
