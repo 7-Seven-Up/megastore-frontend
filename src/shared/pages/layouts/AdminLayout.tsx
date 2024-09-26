@@ -2,6 +2,7 @@ import { Outlet, useLocation } from "react-router-dom";
 import { Link } from "@nextui-org/react";
 import { CategoryIcon } from "@/shared/components/icons/CategoryIcon.tsx";
 import { HomeIcon } from "@/shared/components/icons/HomeIcon.tsx";
+import { SizeIcon } from "@/shared/components/icons/SizeIcon";
 
 export function AdminLayout() {
   const { pathname } = useLocation();
@@ -15,6 +16,11 @@ export function AdminLayout() {
       icon: CategoryIcon,
       label: "Categories",
       path: "/admin/categories",
+    },
+    {
+      icon: SizeIcon,
+      label: "Sizes",
+      path: "/admin/sizes",
     },
   ];
 
