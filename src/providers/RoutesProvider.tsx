@@ -13,6 +13,10 @@ import { ProtectedRoute } from "@/shared/pages/routes/ProtectedRoute.tsx";
 import { Role } from "@/modules/users/enums/role.enum.ts";
 import { SignInPage } from "@/shared/pages/auth/SignInPage.tsx";
 import { SignUpPage } from "@/shared/pages/auth/SignUpPage.tsx";
+import RecoverPasswordPage from "@/shared/pages/user/RecoverPasswordPage.tsx";
+import SendEmailToRecoverPasswordPage from "@/shared/pages/user/SendEmailToRecoverPasswordPage.tsx";
+import EmailSentToRecoverPassword from "@/modules/user/components/EmailSentToRecoverPassword.tsx";
+import NotFoundPage from "@/shared/pages/NotFoundPage.tsx";
 import { UnauthenticatedRoute } from "@/shared/pages/routes/UnauthenticatedRoute.tsx";
 import { CategoryAdminPage } from "@/shared/pages/admin/CategoryAdminPage.tsx";
 import { CreateCategoryPage } from "@/shared/pages/admin/CreateCategoryPage.tsx";
@@ -56,7 +60,17 @@ export default function RoutesProvider() {
           <Route path={"signin"} element={<SignInPage />} />
           <Route path={"activate"} element={<ActivateUserPage />} />
           <Route path={"email-sent"} element={<EmailSent />} />
+          <Route path={"recover-password"} element={<RecoverPasswordPage />} />
+          <Route
+            path={"send-email"}
+            element={<SendEmailToRecoverPasswordPage />}
+          />
+          <Route
+            path={"recover-password-email-sent"}
+            element={<EmailSentToRecoverPassword />}
+          />
         </Route>
+        <Route path={"/not-found"} element={<NotFoundPage />} />
       </Routes>
     </NextUIProvider>
   );

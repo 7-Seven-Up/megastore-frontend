@@ -1,0 +1,22 @@
+import { httpClient } from "@/shared/lib/httpClient.ts";
+import { RecoverPasswordRequest } from "@/modules/user/interfaces/requests/recover-password.interface.ts";
+import { SendEmailRequest } from "@/modules/user/interfaces/requests/send-email.interface.ts";
+
+const USER_ENDPOINT = `${import.meta.env.VITE_BACKEND_URL}/api/v1/users`;
+export const recoverPassword = async ({
+  newPassword,
+  confirmNewPassword,
+  token,
+}: RecoverPasswordRequest) => {
+  await httpClient.post<void>(`${USER_ENDPOINT}/recover-password`, {
+    password: newPassword,
+    confirmPassword: confirmNewPassword,
+    recoverPasswordToken: token,
+  });
+};
+
+export const sendRecoverPasswordEmail = async ({ email }: SendEmailRequest) => {
+  await httpClient.post<void>(`${USER_ENDPOINT}/recover-password/send-email`, {
+    email,
+  });
+};

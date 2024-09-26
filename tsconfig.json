@@ -9,7 +9,8 @@
     "paths": {
       "@/*": ["./src/*"],
       "@/auth/*": ["./src/modules/auth/*"],
-      "@/products/*": ["./src/modules/products/*"]
+      "@/products/*": ["./src/modules/products/*"],
+      "@/users/*" : ["./src/modules/user/"]
     }
   }
 }

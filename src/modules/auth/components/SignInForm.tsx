@@ -1,4 +1,4 @@
-import { Button } from "@nextui-org/react";
+import { Button, Link } from "@nextui-org/react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 
@@ -50,6 +50,13 @@ export function SignInForm() {
           name={"password"}
           placeholder={"Type your password"}
         />
+      </div>
+
+      <div className={"flex flex-col items-center justify-center gap-8"}>
+        <div className={"flex gap-2"}>
+          <p className={"text-content4-foreground"}>Forgot your password?</p>
+          <Link href={"/auth/send-email"}>Recover Password</Link>
+        </div>
       </div>
 
       <Button isLoading={isPending} color={"secondary"} type={"submit"}>
