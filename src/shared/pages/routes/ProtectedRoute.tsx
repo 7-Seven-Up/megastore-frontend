@@ -1,6 +1,6 @@
 import { Navigate } from "react-router-dom";
 import { PropsWithChildren } from "react";
-import { Role } from "@/modules/users/enums/role.enum.ts";
+import { Role } from "@/modules/user/enums/role.enum.ts";
 import { useAuthStore } from "@auth/hooks/useAuthStore.ts";
 
 interface ProtectedRouteProps extends PropsWithChildren {
