@@ -15,8 +15,8 @@ export const recoverPassword = async ({
   });
 };
 
-export const sendRecoverPasswordEmail = async ({ email }: SendEmailRequest) => {
-  await httpClient.post<void>(`${USER_ENDPOINT}/recover-password/send-email`, {
+export const sendEmail = async ({ email, path }: SendEmailRequest) => {
+  await httpClient.post<void>(`${USER_ENDPOINT}${path}`, {
     email,
   });
 };

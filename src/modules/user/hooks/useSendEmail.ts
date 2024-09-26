@@ -1,14 +1,14 @@
 import { useMutation } from "@tanstack/react-query";
-import { sendRecoverPasswordEmail } from "@/modules/user/user.service.ts";
+import { sendEmail } from "@/modules/user/user.service.ts";
 import { useNavigate } from "react-router-dom";
 
-export const useSendEmail = () => {
+export const useSendEmail = ({ navigate_to }: { navigate_to: string }) => {
   const navigate = useNavigate();
   const { isError, isPending, isSuccess, mutate } = useMutation({
     mutationKey: [""],
-    mutationFn: sendRecoverPasswordEmail,
+    mutationFn: sendEmail,
     onSuccess: () => {
-      navigate("/auth/recover-password-email-sent", { replace: true });
+      navigate(navigate_to, { replace: true });
     },
   });
 
