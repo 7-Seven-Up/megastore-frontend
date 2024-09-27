@@ -45,7 +45,7 @@ export function ImageInput({ onImageSelect, ...rest }: ImageInputProps) {
     <div {...rest}>
       <section
         className={
-          "grid grid-cols-12 items-center justify-between gap-4 rounded-lg bg-default-100 p-4"
+          "grid grid-cols-12 items-center justify-between gap-4 rounded-xl bg-default-100 p-4"
         }
       >
         <RenderIf condition={selectedImages.length === 0}>
