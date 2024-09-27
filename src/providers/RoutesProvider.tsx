@@ -22,6 +22,8 @@ import { CategoryAdminPage } from "@/shared/pages/admin/CategoryAdminPage.tsx";
 import { CreateCategoryPage } from "@/shared/pages/admin/CreateCategoryPage.tsx";
 import { SizeAdminPage } from "@/shared/pages/admin/SizeAdminPage";
 import { CreateSizePage } from "@/shared/pages/admin/CreateSizePage";
+import { ProductAdminPage } from "@/shared/pages/admin/ProductAdminPage.tsx";
+import { CreateProductPage } from "@/shared/pages/admin/CreateProductPage.tsx";
 import { ResendActivationEmailPage } from "@/shared/pages/user/ResendActivationEmailPage.tsx";
 import { ActivationEmailResent } from "@/shared/pages/auth/ActivationEmailResent.tsx";
 
@@ -47,6 +49,9 @@ export default function RoutesProvider() {
             </Route>
             <Route path={"sizes"} element={<SizeAdminPage />}>
               <Route path={"create"} element={<CreateSizePage />} />
+            </Route>
+            <Route path={"products"} element={<ProductAdminPage />}>
+              <Route path={"create"} element={<CreateProductPage />} />
             </Route>
           </Route>
         </Route>
