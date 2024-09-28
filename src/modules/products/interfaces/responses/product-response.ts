@@ -1,4 +1,6 @@
-export interface ProductResponse {
+import { PaginatedResponse } from "@/shared/interfaces/pagination/paginated-response.interface.ts";
+
+export interface Product {
   productId: string;
   name: string;
   description: string;
@@ -9,3 +11,5 @@ export interface ProductResponse {
   sizeName: string;
   variantOfName: string;
 }
+
+export type ProductResponse = PaginatedResponse<Product>;
