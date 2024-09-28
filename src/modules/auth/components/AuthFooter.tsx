@@ -17,8 +17,8 @@ export function AuthFooter({
         <p className={"text-content4-foreground"}>{actionText}</p>
         <Link href={linkHref}>{linkText}</Link>
       </div>
-      <Link color={"secondary"} href={"/"}>
-        Back to home
+      <Link href={"/auth/resend-activation-email"} color={"secondary"}>
+        Didn't receive an activation email?
       </Link>
     </footer>
   );

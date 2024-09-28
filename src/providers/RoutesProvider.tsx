@@ -10,7 +10,7 @@ import { EmailSent } from "@/shared/pages/auth/EmailSent.tsx";
 import { HomePage } from "@/shared/pages/HomePage.tsx";
 import { ProductsPage } from "@/shared/pages/ProductsPage.tsx";
 import { ProtectedRoute } from "@/shared/pages/routes/ProtectedRoute.tsx";
-import { Role } from "@/modules/users/enums/role.enum.ts";
+import { Role } from "@/modules/user/enums/role.enum.ts";
 import { SignInPage } from "@/shared/pages/auth/SignInPage.tsx";
 import { SignUpPage } from "@/shared/pages/auth/SignUpPage.tsx";
 import RecoverPasswordPage from "@/shared/pages/user/RecoverPasswordPage.tsx";
@@ -22,6 +22,10 @@ import { CategoryAdminPage } from "@/shared/pages/admin/CategoryAdminPage.tsx";
 import { CreateCategoryPage } from "@/shared/pages/admin/CreateCategoryPage.tsx";
 import { SizeAdminPage } from "@/shared/pages/admin/SizeAdminPage";
 import { CreateSizePage } from "@/shared/pages/admin/CreateSizePage";
+import { ProductAdminPage } from "@/shared/pages/admin/ProductAdminPage.tsx";
+import { CreateProductPage } from "@/shared/pages/admin/CreateProductPage.tsx";
+import { ResendActivationEmailPage } from "@/shared/pages/user/ResendActivationEmailPage.tsx";
+import { ActivationEmailResent } from "@/shared/pages/auth/ActivationEmailResent.tsx";
 
 export default function RoutesProvider() {
   const navigate = useNavigate();
@@ -46,6 +50,9 @@ export default function RoutesProvider() {
             <Route path={"sizes"} element={<SizeAdminPage />}>
               <Route path={"create"} element={<CreateSizePage />} />
             </Route>
+            <Route path={"products"} element={<ProductAdminPage />}>
+              <Route path={"create"} element={<CreateProductPage />} />
+            </Route>
           </Route>
         </Route>
         <Route
@@ -60,6 +67,10 @@ export default function RoutesProvider() {
           <Route path={"signin"} element={<SignInPage />} />
           <Route path={"activate"} element={<ActivateUserPage />} />
           <Route path={"email-sent"} element={<EmailSent />} />
+          <Route
+            path={"activation-email-resent"}
+            element={<ActivationEmailResent />}
+          />
           <Route path={"recover-password"} element={<RecoverPasswordPage />} />
           <Route
             path={"send-email"}
@@ -68,6 +79,10 @@ export default function RoutesProvider() {
           <Route
             path={"recover-password-email-sent"}
             element={<EmailSentToRecoverPassword />}
+          />
+          <Route
+            path={"resend-activation-email"}
+            element={<ResendActivationEmailPage />}
           />
         </Route>
         <Route path={"/not-found"} element={<NotFoundPage />} />

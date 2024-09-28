@@ -3,6 +3,7 @@ import { Link } from "@nextui-org/react";
 import { CategoryIcon } from "@/shared/components/icons/CategoryIcon.tsx";
 import { HomeIcon } from "@/shared/components/icons/HomeIcon.tsx";
 import { SizeIcon } from "@/shared/components/icons/SizeIcon";
+import { ShirtFoldedIcon } from "@/shared/components/icons/ShirtFoldedIcon.tsx";
 
 export function AdminLayout() {
   const { pathname } = useLocation();
@@ -11,6 +12,11 @@ export function AdminLayout() {
       icon: HomeIcon,
       label: "Dashboard",
       path: "/admin",
+    },
+    {
+      icon: ShirtFoldedIcon,
+      label: "Products",
+      path: "/admin/products",
     },
     {
       icon: CategoryIcon,

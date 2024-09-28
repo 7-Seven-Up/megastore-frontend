@@ -10,7 +10,7 @@ export default defineConfig({
       "@": path.resolve(__dirname, "./src"),
       "@auth": path.resolve(__dirname, "./src/modules/auth"),
       "@products": path.resolve(__dirname, "./src/modules/products"),
-      "@user": path.resolve(__dirname, "./src/modules/users"),
+      "@user": path.resolve(__dirname, "./src/modules/user"),
     },
   },
 });
