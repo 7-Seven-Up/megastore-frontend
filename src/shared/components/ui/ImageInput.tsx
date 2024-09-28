@@ -81,7 +81,7 @@ export function ImageInput<T extends FieldValues>(props: ImageInputProps<T>) {
                   </Button>
 
                   <input
-                    accept={"image/jpg, image/jpeg, image/png"}
+                    accept={"image/jpg, image/jpeg, image/png, image/webp"}
                     className={"hidden"}
                     multiple={true}
                     onChange={handleOnChange}
