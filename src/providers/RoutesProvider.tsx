@@ -22,6 +22,7 @@ import { CategoryAdminPage } from "@/shared/pages/admin/CategoryAdminPage.tsx";
 import { CreateCategoryPage } from "@/shared/pages/admin/CreateCategoryPage.tsx";
 import { SizeAdminPage } from "@/shared/pages/admin/SizeAdminPage";
 import { CreateSizePage } from "@/shared/pages/admin/CreateSizePage";
+import ProductDetailsPage from "@/shared/pages/product/ProductDetailsPage";
 
 export default function RoutesProvider() {
   const navigate = useNavigate();
@@ -69,6 +70,11 @@ export default function RoutesProvider() {
             path={"recover-password-email-sent"}
             element={<EmailSentToRecoverPassword />}
           />
+        </Route>
+        <Route path={"/products"}>
+          <Route path={":productId"} element={<ProductDetailsPage/>}>
+            
+          </Route>
         </Route>
         <Route path={"/not-found"} element={<NotFoundPage />} />
       </Routes>
