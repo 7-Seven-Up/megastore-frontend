@@ -3,7 +3,7 @@ import { ProductList } from "@/modules/products/components/ProductList";
 
 export function ProductsPage() {
   return (
-    <div>
+    <div className="p-6 w-full">
       <Title>Products Page</Title>
       <ProductList />
       </div>

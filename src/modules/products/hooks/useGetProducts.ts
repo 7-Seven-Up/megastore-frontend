@@ -4,14 +4,14 @@ import { PaginationRequest } from "@/shared/interfaces/pagination/pagination-req
 import { getAllProducts } from "@/modules/products/products.service.ts";
 
 export function useGetProducts(params: PaginationRequest) {
-  const { pageSize = 10, page = 0, ...rest } = params;
+  const { pageSize = 12, page = 0, ...rest } = params;
   const fixedPage = page - 1 < 0 ? page : page - 1;
 
   const { data, isLoading, isError } = useQuery({
     queryFn: () =>
-      getAllProducts({
+      getAllProducts({ 
         page: fixedPage,
-        pageSize: 12,
+        pageSize,
         ...rest,
       }),
     queryKey: [GET_PRODUCTS_KEY, fixedPage, pageSize],
