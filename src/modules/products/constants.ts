@@ -1,0 +1,1 @@
+export const GET_PRODUCTS_KEY = "products/get";
