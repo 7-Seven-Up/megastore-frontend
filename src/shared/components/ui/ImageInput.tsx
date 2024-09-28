@@ -1,17 +1,21 @@
+import { Button, Textarea } from "@nextui-org/react";
 import { ChangeEvent, ComponentProps, useRef, useState } from "react";
-import { Button, Image } from "@nextui-org/react";
-import RenderIf from "@/shared/components/RenderIf.tsx";
+import { Control, Controller, FieldValues, Path } from "react-hook-form";
+import { ImageInputPreview } from "@/shared/components/ui/ImageInputPreview.tsx";
 
-interface ImageInputProps extends ComponentProps<"div"> {
+type ImageInputProps<T extends FieldValues> = ComponentProps<"div"> & {
   onImageSelect: (file: File[]) => void;
-}
+  control: Control<T>;
+  name: Path<T>;
+};
 
-type SelectedImage = {
+export type SelectedImage = {
   file: File;
   previewURL: string;
 };
 
-export function ImageInput({ onImageSelect, ...rest }: ImageInputProps) {
+export function ImageInput<T extends FieldValues>(props: ImageInputProps<T>) {
+  const { onImageSelect, name, control, ...rest } = props;
   const [selectedImages, setSelectedImages] = useState<SelectedImage[]>([]);
   const inputRef = useRef<HTMLInputElement>(null);
 
@@ -29,7 +33,7 @@ export function ImageInput({ onImageSelect, ...rest }: ImageInputProps) {
     });
 
     setSelectedImages(selectedFiles);
-    onImageSelect(selectedFiles.map((file) => file.file));
+    handleOnImageSelect(selectedFiles);
   }
 
   function handleOnClick() {
@@ -39,77 +43,59 @@ export function ImageInput({ onImageSelect, ...rest }: ImageInputProps) {
   function handleOnDelete(index: number) {
     const newImages = selectedImages?.filter((_, i) => i !== index);
     setSelectedImages(newImages);
+    handleOnImageSelect(newImages);
+  }
+
+  function handleOnImageSelect(images: SelectedImage[]) {
+    onImageSelect(images.map((image) => image.file));
   }
 
   return (
     <div {...rest}>
-      <section
-        className={
-          "grid grid-cols-12 items-center justify-between gap-4 rounded-xl bg-default-100 p-4"
-        }
-      >
-        <RenderIf condition={selectedImages.length === 0}>
-          <div
-            className={
-              "col-span-12 flex items-center justify-center lg:col-span-8 lg:justify-start lg:py-2"
-            }
-          >
-            <span className={"text-sm font-normal text-foreground-500"}>
-              There are no images selected.
-            </span>
-          </div>
-        </RenderIf>
-
-        <RenderIf condition={selectedImages.length > 0}>
-          <div className="col-span-12 flex flex-wrap gap-2 lg:col-span-8">
-            {selectedImages.map((image, index) => {
-              const { previewURL } = image;
-
-              return (
-                <div className={"group relative size-24 grow"} key={previewURL}>
-                  <Image
-                    className={"size-full object-cover"}
-                    disableSkeleton
-                    src={previewURL}
+      <Controller
+        name={name}
+        control={control}
+        render={({ fieldState, field }) => {
+          return (
+            <Textarea
+              isInvalid={fieldState.invalid}
+              errorMessage={fieldState.error?.message}
+              label={"Product images"}
+              classNames={{
+                input: "hidden",
+                inputWrapper: "!cursor-auto hover:!bg-default-100",
+              }}
+              startContent={
+                <div className={"grid w-full grid-cols-12"}>
+                  <ImageInputPreview
+                    onDelete={handleOnDelete}
+                    selectedImages={selectedImages}
                   />
 
-                  <div
-                    className={
-                      "absolute inset-0 z-20 flex items-end justify-center rounded-xl bg-black/40 py-2 opacity-0 transition-all duration-75 ease-linear group-hover:opacity-100"
-                    }
+                  <Button
+                    className={"col-span-12 min-h-10 lg:h-full"}
+                    color={"secondary"}
+                    onPress={handleOnClick}
                   >
-                    <Button
-                      color={"danger"}
-                      isIconOnly
-                      onPress={() => handleOnDelete(index)}
-                      size={"sm"}
-                    >
-                      X
-                    </Button>
-                  </div>
+                    Select images
+                  </Button>
+
+                  <input
+                    accept={"image/jpg, image/jpeg, image/png"}
+                    className={"hidden"}
+                    multiple={true}
+                    onChange={handleOnChange}
+                    placeholder={"Select files"}
+                    ref={inputRef}
+                    type={"file"}
+                  />
                 </div>
-              );
-            })}
-          </div>
-        </RenderIf>
-
-        <Button
-          className={"col-span-12 lg:col-span-4 lg:h-full min-h-1"}
-          color={"secondary"}
-          onPress={handleOnClick}
-        >
-          Select images
-        </Button>
-      </section>
-
-      <input
-        accept={"image/jpg, image/jpeg, image/png"}
-        className={"hidden"}
-        multiple={true}
-        onChange={handleOnChange}
-        placeholder={"Select files"}
-        ref={inputRef}
-        type={"file"}
+              }
+              className={"w-full"}
+              {...field}
+            />
+          );
+        }}
       />
     </div>
   );
