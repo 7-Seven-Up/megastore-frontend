@@ -1,7 +1,5 @@
 import { useGetProduct } from "@/modules/products/hooks/useGetProduct";
-import { ProductResponse } from "@/modules/products/interfaces/responses/product-response.interface";
 import { Title } from "@/shared/components/typography/Title";
-import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 
 type ProductDetailsPageParams = {
@@ -10,23 +8,29 @@ type ProductDetailsPageParams = {
 
 export default function ProductDetailsPage() {
   const { productId } = useParams<ProductDetailsPageParams>();
-  const { data } = useGetProduct(productId);
-  const [product, setProduct] = useState<ProductResponse>();
-  useEffect(() => {
-    if (!productId) {
-      return;
-    }
+  console.log("Datos del producto:", productId);
+  const { data, isLoading, isError } = useGetProduct(productId);
+  console.log("Datos del producto:", data);
 
-    console.log(product);
-  }, []);
-  useEffect(() => {
-    setProduct(data);
-  }, [product]);
+  if (isLoading) {
+    return <div>Cargando...</div>;
+  }
+  if (isError) {
+    return <div>Error al cargar el producto.</div>; // Maneja el error
+  }
+
   return (
     <div>
       <header>
-        <Title>{product?.name}</Title>
+        <Title>{data?.name || "producto no encontrado"}</Title>
       </header>
+      <div>
+        <p>Description: {data?.description || ""} Size: {data?.sizeName || ""}{" "}
+        </p>
+        <p>{data?.price}</p>
+        <p>{data?.imagesURLS}</p>
+        <p>Stock: {data?.stock}</p>
+      </div>
     </div>
   );
 }

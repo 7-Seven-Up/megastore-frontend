@@ -3,18 +3,22 @@ import { GET_PRODUCT } from "../constants";
 import { getProduct } from "../product.service";
 
 export const useGetProduct = (productId?: string) => {
-  const { data } = useQuery({
-    queryFn: () => {
+  const { data, isLoading, isError } = useQuery({
+    queryFn: async () => {
       if (!productId) {
         return;
       }
-      return getProduct(productId);
+      const product = await getProduct(productId);
+      console.log("Producto obtenido:", product);
+      return product;
     },
-    queryKey: [GET_PRODUCT],
+    queryKey: [GET_PRODUCT, productId],
     staleTime: Infinity,
   });
 
   return {
     data,
+    isLoading,
+    isError,
   };
 };
