@@ -40,13 +40,28 @@ export const CreateProductSchema = z.object({
     .regex(/^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$/, {
       message: "Color must be a valid hex color.",
     }),
-  sizeId: z.string({
-    required_error: "",
-  }),
-  categoryId: z.string({
-    required_error: "",
-  }),
+  sizeId: z
+    .string({
+      required_error: "",
+    })
+    .min(1, {
+      message: "",
+    }),
+  categoryId: z
+    .string({
+      required_error: "",
+    })
+    .min(1, {
+      message: "",
+    }),
   variantOfId: z.string().optional().nullable(),
+  images: z
+    .array(z.instanceof(File), {
+      required_error: "",
+    })
+    .min(1, {
+      message: "At least one image is required.",
+    }),
 });
 
 export type CreateProductSchemaType = z.infer<typeof CreateProductSchema>;
