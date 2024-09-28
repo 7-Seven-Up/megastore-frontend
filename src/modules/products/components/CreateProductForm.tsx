@@ -9,16 +9,28 @@ import { FormFooter } from "@/shared/components/ui/FormFooter.tsx";
 import { ImageInput } from "@/shared/components/ui/ImageInput.tsx";
 import { InputField } from "@/shared/components/ui/InputField.tsx";
 import { Textarea } from "@nextui-org/react";
+import { useCreateProduct } from "@products/hooks/useCreateProduct.ts";
+import { SizesSelect } from "@/modules/sizes/components/SizesSelect.tsx";
 
 interface CreateProductFormProps {
   onClose: () => void;
 }
 
 export function CreateProductForm({ onClose }: CreateProductFormProps) {
-  const { control, handleSubmit } = useZodForm(CreateProductSchema);
+  const { control, handleSubmit, setValue } = useZodForm(CreateProductSchema);
+  const { createProduct, isCreating } = useCreateProduct();
 
-  function onSubmit(data: CreateProductSchemaType) {
-    console.log(data);
+  async function onSubmit(data: CreateProductSchemaType) {
+    const { images, ...dataWithoutImages } = data;
+
+    await createProduct({
+      createProductRequest: dataWithoutImages,
+      multipartFiles: images,
+    });
+  }
+
+  function handleOnImageSelect(images: File[]) {
+    setValue("images", images, { shouldValidate: true });
   }
 
   return (
@@ -90,18 +102,33 @@ export function CreateProductForm({ onClose }: CreateProductFormProps) {
       />
 
       <CategoriesSelect
-        className={"col-span-12"}
+        className={"col-span-12 lg:col-span-6"}
         control={control}
         label={"Product category"}
+        name={"categoryId"}
         placeholder={"Select a category"}
+      />
+
+      <SizesSelect
+        className={"col-span-12 lg:col-span-6"}
+        control={control}
+        label={"Product size"}
+        name={"sizeId"}
+        placeholder={"Select a size"}
       />
 
       <ImageInput
         className={"col-span-12"}
-        onImageSelect={console.log}
+        control={control}
+        name={"images"}
+        onImageSelect={handleOnImageSelect}
       />
 
-      <FormFooter onClose={onClose} className={"col-span-12"} />
+      <FormFooter
+        className={"col-span-12"}
+        isLoading={isCreating}
+        onClose={onClose}
+      />
     </form>
   );
 }
