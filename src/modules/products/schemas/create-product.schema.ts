@@ -5,12 +5,18 @@ export const CreateProductSchema = z.object({
     .string({
       required_error: "",
     })
+    .min(3, {
+      message: "Name must be at least 3 characters",
+    })
     .max(30, {
       message: "Name must be less than 30 characters.",
     }),
   description: z
     .string({
       required_error: "",
+    })
+    .min(5, {
+      message: "Description must be at least 5 characters",
     })
     .max(80, {
       message: "Description must be less than 80 characters.",
