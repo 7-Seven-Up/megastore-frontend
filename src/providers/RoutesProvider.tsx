@@ -8,7 +8,6 @@ import { AppLayout } from "@/shared/pages/layouts/AppLayout.tsx";
 import { AuthLayout } from "@/shared/pages/layouts/AuthLayout.tsx";
 import { EmailSent } from "@/shared/pages/auth/EmailSent.tsx";
 import { HomePage } from "@/shared/pages/HomePage.tsx";
-import { ProductsPage } from "@/shared/pages/ProductsPage.tsx";
 import { ProtectedRoute } from "@/shared/pages/routes/ProtectedRoute.tsx";
 import { Role } from "@/modules/user/enums/role.enum.ts";
 import { SignInPage } from "@/shared/pages/auth/SignInPage.tsx";
@@ -34,7 +33,6 @@ export default function RoutesProvider() {
       <Routes>
         <Route path={"/"} element={<AppLayout />}>
           <Route index element={<HomePage />} />
-          <Route path={"products"} element={<ProductsPage />} />
           <Route
             path={"admin"}
             element={

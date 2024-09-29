@@ -26,10 +26,6 @@ export function Navbar() {
       path: "/",
       label: "Home",
     },
-    {
-      path: "/products",
-      label: "Products",
-    },
   ];
 
   return (
@@ -43,13 +39,33 @@ export function Navbar() {
     >
       <NavbarContent className="pr-3 lg:hidden" justify="center">
         <NavbarBrand>
-          <Title className={"text-3xl"}>Megastore</Title>
+          <Title className={"text-3xl"}>
+            <Link
+              href={"/"}
+              className={"text-inherit"}
+              style={{
+                fontSize: "inherit",
+              }}
+            >
+              Megastore
+            </Link>
+          </Title>
         </NavbarBrand>
       </NavbarContent>
 
       <NavbarContent className="hidden gap-4 lg:flex" justify="center">
         <NavbarBrand className={"pr-4"}>
-          <Title>Megastore</Title>
+          <Title>
+            <Link
+              href={"/"}
+              className={"text-inherit"}
+              style={{
+                fontSize: "inherit",
+              }}
+            >
+              Megastore
+            </Link>
+          </Title>
         </NavbarBrand>
         {menuItems.map(({ path, label }) => {
           return (
