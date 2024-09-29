@@ -5,7 +5,6 @@ import { useNavigate } from "react-router-dom";
 export function useSendNewActivationToken() {
   const navigate = useNavigate();
   const { mutate, isSuccess, isError } = useMutation({
-    mutationKey: [""],
     mutationFn: sendNewActivationToken,
     onSuccess: () => {
       navigate("/auth/activation-email-resent", { replace: true });

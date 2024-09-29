@@ -6,7 +6,6 @@ import { toast } from "sonner";
 export function useActivateUser() {
   const navigate = useNavigate();
   const { isError, isPending, isSuccess, mutate } = useMutation({
-    mutationKey: [""],
     mutationFn: activateUser,
     onSuccess: () => {
       toast.success("Account activated successfully", { duration: 3000 });
