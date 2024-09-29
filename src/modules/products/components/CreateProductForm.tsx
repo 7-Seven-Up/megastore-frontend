@@ -27,6 +27,8 @@ export function CreateProductForm({ onClose }: CreateProductFormProps) {
       createProductRequest: dataWithoutImages,
       multipartFiles: images,
     });
+
+    onClose();
   }
 
   function handleOnImageSelect(images: File[]) {
@@ -57,6 +59,7 @@ export function CreateProductForm({ onClose }: CreateProductFormProps) {
         label={"Product color"}
         name={"color"}
         type={"color"}
+        defaultValue={"#000000"}
       />
 
       <Controller
