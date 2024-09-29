@@ -18,5 +18,5 @@ export function useGetCategories(params: PaginationRequest) {
     staleTime: Infinity,
   });
 
-  return { data, isLoading, isError };
+  return { categories: data, isLoading, isError };
 }

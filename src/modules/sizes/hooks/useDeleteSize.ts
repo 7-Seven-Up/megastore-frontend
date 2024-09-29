@@ -4,7 +4,7 @@ import { deleteSize } from "@/modules/sizes/sizes.service";
 
 export function useDeleteSize() {
   const queryClient = useQueryClient();
-  const { mutate } = useMutation({
+  const { mutateAsync } = useMutation({
     mutationFn: deleteSize,
     mutationKey: [DELETE_SIZE_KEY],
     onSuccess: async () => {
@@ -15,6 +15,6 @@ export function useDeleteSize() {
   });
 
   return {
-    deleteSize: mutate,
+    deleteSize: mutateAsync,
   };
 }
