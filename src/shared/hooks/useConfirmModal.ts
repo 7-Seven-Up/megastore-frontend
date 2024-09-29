@@ -33,8 +33,12 @@ export const useConfirmModal = create<ConfirmModalStore>((set) => ({
       modalVisible: true,
       onConfirm: async () => {
         set({ isLoading: true });
-        await props.onConfirm();
-        set({ isLoading: false, modalVisible: false });
+        props
+          .onConfirm()
+          .then()
+          .finally(() => {
+            set({ isLoading: false, modalVisible: false });
+          });
       },
     });
   },
