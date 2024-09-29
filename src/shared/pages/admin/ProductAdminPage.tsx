@@ -2,6 +2,7 @@ import { Outlet } from "react-router-dom";
 import { Button, Link } from "@nextui-org/react";
 import { PlusIcon } from "@/shared/components/icons/PlusIcon.tsx";
 import { Title } from "@/shared/components/typography/Title.tsx";
+import { ProductsTable } from "@products/components/ProductsTable.tsx";
 
 export function ProductAdminPage() {
   return (
@@ -20,6 +21,7 @@ export function ProductAdminPage() {
           Create new
         </Button>
       </header>
+      <ProductsTable />
       <Outlet />
     </div>
   );
