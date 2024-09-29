@@ -1,12 +1,12 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { CREATE_PRODUCTS_KEY, GET_PRODUCTS_KEY } from "@products/constants.ts";
-import { createProduct } from "@products/product.service.ts";
+import { DELETE_PRODUCTS_KEY, GET_PRODUCTS_KEY } from "@products/constants.ts";
+import { deleteProduct } from "@products/product.service.ts";
 
-export function useCreateProduct() {
+export function useDeleteProduct() {
   const queryClient = useQueryClient();
   const { mutateAsync, isPending } = useMutation({
-    mutationKey: [CREATE_PRODUCTS_KEY],
-    mutationFn: createProduct,
+    mutationFn: deleteProduct,
+    mutationKey: [DELETE_PRODUCTS_KEY],
     onSuccess: async () => {
       await queryClient.invalidateQueries({
         queryKey: [GET_PRODUCTS_KEY],
@@ -15,7 +15,7 @@ export function useCreateProduct() {
   });
 
   return {
-    createProduct: mutateAsync,
-    isCreating: isPending,
+    deleteProduct: mutateAsync,
+    isDeleting: isPending,
   };
 }

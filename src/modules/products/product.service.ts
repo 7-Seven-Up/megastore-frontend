@@ -1,6 +1,10 @@
 import { CreateProductParams } from "@products/interfaces/requests/create-product.interface.ts";
-import { Product } from "@products/interfaces/responses/product-response.ts";
+import {
+  Product,
+  ProductResponse,
+} from "@products/interfaces/responses/product-response.ts";
 import { httpClient } from "@/shared/lib/httpClient.ts";
+import { PaginationRequest } from "@/shared/interfaces/pagination/pagination-request.interface.ts";
 
 const PRODUCTS_URL = `${import.meta.env.VITE_BACKEND_URL}/api/v1/products`;
 
@@ -19,4 +23,15 @@ export async function createProduct(params: CreateProductParams) {
 
   const response = await httpClient.post<Product>(PRODUCTS_URL, formData);
   return response.data;
+}
+
+export async function getProducts(params: PaginationRequest) {
+  const response = await httpClient.get<ProductResponse>(PRODUCTS_URL, {
+    params,
+  });
+  return response.data;
+}
+
+export async function deleteProduct(productId: string) {
+  await httpClient.delete(`${PRODUCTS_URL}/${productId}`);
 }

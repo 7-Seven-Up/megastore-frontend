@@ -18,6 +18,11 @@ httpClient.interceptors.response.use(
         : (error.response?.data.message ?? "An unknown error occurred.");
 
     toast.error(errorMessage);
+
+    if (error.response?.status === 401) {
+      useAuthStore.getState().logout();
+    }
+
     return Promise.reject(error);
   },
 );

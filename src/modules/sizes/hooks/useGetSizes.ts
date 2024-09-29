@@ -18,5 +18,5 @@ export function useGetSizes(params: PaginationRequest) {
     staleTime: Infinity,
   });
 
-  return { data, isLoading, isError };
+  return { sizes: data, isLoading, isError };
 }

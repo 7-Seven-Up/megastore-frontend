@@ -1,11 +1,8 @@
 import {
-  Button,
-  ButtonGroup,
   Modal,
   ModalBody,
   ModalContent,
   ModalHeader,
-  Pagination,
   Spinner,
   Table,
   TableBody,
@@ -17,10 +14,11 @@ import {
 } from "@nextui-org/react";
 import { TableActions } from "@/shared/components/ui/TableActions.tsx";
 import { useDeleteCategory } from "@/modules/categories/hooks/useDeleteCategory.ts";
-import { useMemo, useState } from "react";
+import { useState } from "react";
 import { Category } from "@/modules/categories/interfaces/responses/category.interface.ts";
 import { EditCategoryForm } from "@/modules/categories/components/EditCategoryForm.tsx";
 import { useGetCategories } from "@/modules/categories/hooks/useGetCategories.ts";
+import { PaginationControls } from "@/shared/components/ui/PaginationControls.tsx";
 
 const columns = [
   {
@@ -43,7 +41,7 @@ const columns = [
 
 export function CategoriesTable() {
   const [currentPage, setCurrentPage] = useState(1);
-  const { data, isLoading } = useGetCategories({
+  const { categories, isLoading } = useGetCategories({
     page: currentPage,
   });
   const { deleteCategory } = useDeleteCategory();
@@ -61,12 +59,9 @@ export function CategoriesTable() {
     setCurrentPage(page);
   }
 
-  const label = useMemo(() => {
-    if (!data) return;
-    return `Showing from ${data.pageable.offset + 1} to ${
-      data.pageable.offset + data.numberOfElements
-    } categories`;
-  }, [data]);
+  async function handleOnDelete(categoryId: string) {
+    await deleteCategory(categoryId);
+  }
 
   return (
     <>
@@ -74,35 +69,14 @@ export function CategoriesTable() {
         aria-label="List of categories"
         bottomContentPlacement={"outside"}
         bottomContent={
-          data &&
-          data.content.length > 0 && (
-            <div className="flex w-full flex-wrap items-center justify-center gap-4 sm:justify-between">
-              <Pagination
-                color="primary"
-                isCompact
-                onChange={(page) => handlePageChange(page)}
-                page={currentPage}
-                showControls
-                showShadow
-                size={"lg"}
-                total={data.totalPages}
-              />
-              <p className={"text-content4-foreground"}>{label}</p>
-              <ButtonGroup>
-                <Button
-                  isDisabled={data.first}
-                  onPress={() => handlePageChange(currentPage - 1)}
-                >
-                  Previous
-                </Button>
-                <Button
-                  isDisabled={data.last}
-                  onPress={() => handlePageChange(currentPage + 1)}
-                >
-                  Next
-                </Button>
-              </ButtonGroup>
-            </div>
+          categories &&
+          categories.content.length > 0 && (
+            <PaginationControls
+              currentPage={currentPage}
+              handlePageChange={handlePageChange}
+              labelName={"categories"}
+              paginatedResponse={categories}
+            />
           )
         }
       >
@@ -113,7 +87,7 @@ export function CategoriesTable() {
         </TableHeader>
         <TableBody
           emptyContent={"There are no categories to show"}
-          items={data?.content || []}
+          items={categories?.content || []}
           loadingContent={
             <div
               className={
@@ -140,7 +114,7 @@ export function CategoriesTable() {
                 <TableActions
                   deleteContent={"Delete category"}
                   editContent={"Edit category"}
-                  onDelete={() => deleteCategory(category.categoryId)}
+                  onDelete={() => handleOnDelete(category.categoryId)}
                   onEdit={() => handleOnEdit(category)}
                   confirmModalProps={{
                     title: "Delete category",
