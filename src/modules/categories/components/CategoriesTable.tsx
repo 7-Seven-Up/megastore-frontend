@@ -74,7 +74,7 @@ export function CategoriesTable() {
             <PaginationControls
               currentPage={currentPage}
               handlePageChange={handlePageChange}
-              labelName={"Categories"}
+              labelName={"categories"}
               paginatedResponse={categories}
             />
           )
