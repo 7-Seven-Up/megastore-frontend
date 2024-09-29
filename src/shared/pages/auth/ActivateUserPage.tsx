@@ -1,28 +1,36 @@
-import { Button } from "@nextui-org/react";
-import { toast } from "sonner";
-import { useMutation } from "@tanstack/react-query";
-import { useNavigate, useSearchParams } from "react-router-dom";
+import { Button, Link } from "@nextui-org/react";
+import { useSearchParams } from "react-router-dom";
 
-import { ActivateUserRequest } from "@auth/interfaces/requests/activate-user.interface.ts";
 import { Title } from "@/shared/components/typography/Title.tsx";
-import { activateUser } from "@/modules/auth/auth.service.ts";
+import { useActivateUser } from "@auth/hooks/useActivateUser.ts";
+import { useSendNewActivationToken } from "@auth/hooks/useSendNewActivationToken.ts";
 
 export function ActivateUserPage() {
   const [searchParams] = useSearchParams();
-  const navigate = useNavigate();
-  const { mutate, isPending, isError, isSuccess } = useMutation({
-    mutationFn: (params: ActivateUserRequest) => activateUser(params),
-    onSuccess: () => {
-      toast.success("Account activated successfully", { duration: 3000 });
-      navigate("/auth/signin", { replace: true });
-    },
-  });
+  const {
+    mutate: activateUserMutate,
+    isPending: activateUserIsPending,
+    isError: activateUserIsError,
+    isSuccess: activateUserIsSuccess,
+  } = useActivateUser();
+
+  const {
+    mutate: sendNewTokenMutate,
+    isSuccess: sendNewTokenIsSuccess,
+    isError: sendNewTokenIsError,
+  } = useSendNewActivationToken();
 
   async function handleActivate() {
     const userId = searchParams.get("userId");
     const activationToken = searchParams.get("activationToken");
     if (!userId || !activationToken) return;
-    mutate({ userId, activationToken });
+    activateUserMutate({ userId, activationToken });
+  }
+
+  async function handleSendNewActivationToken() {
+    const activationToken = searchParams.get("activationToken");
+    if (!activationToken) return;
+    sendNewTokenMutate({ activationToken });
   }
 
   return (
@@ -36,12 +44,21 @@ export function ActivateUserPage() {
       </div>
       <Button
         color={"secondary"}
-        isDisabled={isSuccess || isError}
-        isLoading={isPending}
+        isDisabled={activateUserIsSuccess || activateUserIsError}
+        isLoading={activateUserIsPending}
         onClick={handleActivate}
       >
         Activate account
       </Button>
+      <div className={"text-center"}>
+        <Link
+          isDisabled={sendNewTokenIsSuccess || sendNewTokenIsError}
+          color={"secondary"}
+          onPress={handleSendNewActivationToken}
+        >
+          Is your activation token expired? Click here to regenerate it.
+        </Link>
+      </div>
     </div>
   );
 }

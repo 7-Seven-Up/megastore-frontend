@@ -17,6 +17,15 @@ export const activateUser = async (params: ActivateUserRequest) => {
   );
 };
 
+export async function sendNewActivationToken(params: {
+  activationToken: string;
+}) {
+  await httpClient.post<void>(
+    `${BACKEND_URL}/api/v1/users/send-new-activation-token`,
+    params,
+  );
+}
+
 export async function signUpUser(params: SignUpRequest) {
   await httpClient.post(`${BACKEND_URL}/auth/signup`, params);
 }
