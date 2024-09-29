@@ -11,6 +11,7 @@ import { InputField } from "@/shared/components/ui/InputField.tsx";
 import { Textarea } from "@nextui-org/react";
 import { useCreateProduct } from "@products/hooks/useCreateProduct.ts";
 import { SizesSelect } from "@/modules/sizes/components/SizesSelect.tsx";
+import { ProductsSelect } from "@products/components/ProductsSelect.tsx";
 
 interface CreateProductFormProps {
   onClose: () => void;
@@ -118,6 +119,12 @@ export function CreateProductForm({ onClose }: CreateProductFormProps) {
         label={"Product size"}
         name={"sizeId"}
         placeholder={"Select a size"}
+      />
+
+      <ProductsSelect
+        control={control}
+        className={"col-span-12"}
+        placeholder={"Select a product variation"}
       />
 
       <ImageInput
