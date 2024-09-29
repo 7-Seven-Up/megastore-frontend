@@ -1,5 +1,11 @@
 import { Title } from "@/shared/components/typography/Title.tsx";
+import { ProductList } from "@/modules/products/components/ProductList";
 
 export function ProductsPage() {
-  return <Title>ProductsPage</Title>;
+  return (
+    <div className="p-6 w-full">
+      <Title>Products Page</Title>
+      <ProductList />
+      </div>
+  );
 }
