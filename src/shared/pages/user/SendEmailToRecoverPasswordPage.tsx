@@ -2,9 +2,13 @@ import SendEmailForm from "@/modules/user/components/SendEmailForm.tsx";
 
 export default function SendEmailToRecoverPasswordPage() {
   return (
-    <div className={"fadeInUp flex flex-col items-center gap-8 text-center"}>
+    <div
+      className={
+        "fadeInUp flex max-w-screen-sm flex-col items-center gap-8 p-6 text-center"
+      }
+    >
       <div className={"flex flex-col items-center gap-6"}>
-        <div className={"flex flex-col content-center items-center"}>
+        <div className={"flex w-full flex-col content-center items-center"}>
           <SendEmailForm path="/recover-password/send-email" />
         </div>
         <div className={"flex flex-col content-center items-center"}>
