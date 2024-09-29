@@ -1,4 +1,4 @@
-import { Button, Link } from "@nextui-org/react";
+import { Button } from "@nextui-org/react";
 import { useSearchParams } from "react-router-dom";
 
 import { Title } from "@/shared/components/typography/Title.tsx";
@@ -48,13 +48,15 @@ export function ActivateUserPage() {
         Activate account
       </Button>
       <div className={"text-center"}>
-        <Link
+        <Button
+          className={
+            "cursor-pointer border-none bg-transparent p-0 text-purple-500 underline"
+          }
           isDisabled={sendNewTokenIsSuccess || sendNewTokenIsError}
-          color={"secondary"}
-          onPress={handleSendNewActivationToken}
+          onClick={handleSendNewActivationToken}
         >
           Is your activation token expired? Click here to regenerate it.
-        </Link>
+        </Button>
       </div>
     </div>
   );
