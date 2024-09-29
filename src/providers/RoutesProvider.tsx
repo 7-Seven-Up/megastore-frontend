@@ -1,4 +1,4 @@
-import { Route, Routes, useNavigate } from "react-router-dom";
+import { Navigate, Route, Routes, useNavigate } from "react-router-dom";
 import { NextUIProvider } from "@nextui-org/react";
 
 import { ActivateUserPage } from "@/shared/pages/auth/ActivateUserPage.tsx";
@@ -83,7 +83,8 @@ export default function RoutesProvider() {
             element={<ResendActivationEmailPage />}
           />
         </Route>
-        <Route path={"/not-found"} element={<NotFoundPage />} />
+        <Route path={"not-found"} element={<NotFoundPage />} />
+        <Route path="*" element={<Navigate replace to="/not-found" />} />
       </Routes>
     </NextUIProvider>
   );
