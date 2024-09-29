@@ -15,9 +15,9 @@ export function useActivateUser() {
   });
 
   return {
-    mutate,
-    isPending,
-    isError,
-    isSuccess,
+    activateUserMutate: mutate,
+    activateUserIsPending: isPending,
+    activateUserIsError: isError,
+    activateUserIsSuccess: isSuccess,
   };
 }

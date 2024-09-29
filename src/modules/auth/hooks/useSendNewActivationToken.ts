@@ -13,8 +13,8 @@ export function useSendNewActivationToken() {
   });
 
   return {
-    mutate,
-    isSuccess,
-    isError,
+    sendNewTokenMutate: mutate,
+    sendNewTokenIsSuccess: isSuccess,
+    sendNewTokenIsError: isError,
   };
 }

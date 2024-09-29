@@ -8,17 +8,14 @@ import { useSendNewActivationToken } from "@auth/hooks/useSendNewActivationToken
 export function ActivateUserPage() {
   const [searchParams] = useSearchParams();
   const {
-    mutate: activateUserMutate,
-    isPending: activateUserIsPending,
-    isError: activateUserIsError,
-    isSuccess: activateUserIsSuccess,
+    activateUserMutate,
+    activateUserIsPending,
+    activateUserIsError,
+    activateUserIsSuccess,
   } = useActivateUser();
 
-  const {
-    mutate: sendNewTokenMutate,
-    isSuccess: sendNewTokenIsSuccess,
-    isError: sendNewTokenIsError,
-  } = useSendNewActivationToken();
+  const { sendNewTokenMutate, sendNewTokenIsSuccess, sendNewTokenIsError } =
+    useSendNewActivationToken();
 
   async function handleActivate() {
     const userId = searchParams.get("userId");
