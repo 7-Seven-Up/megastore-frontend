@@ -1,23 +1,31 @@
-import { Tooltip, useDisclosure } from "@nextui-org/react";
+import { Tooltip } from "@nextui-org/react";
 import { DeleteIcon } from "@/shared/components/icons/DeleteIcon.tsx";
 import { EditIcon } from "@/shared/components/icons/EditIcon.tsx";
-import { ConfirmModal } from "@/shared/components/ui/ConfirmModal.tsx";
+import {
+  ConfirmModalProps,
+  useConfirmModal,
+} from "@/shared/hooks/useConfirmModal.ts";
 
 interface TableActionsProps {
   deleteContent: string;
   editContent: string;
-  onDelete: () => void;
+  onDelete: () => Promise<void>;
   onEdit: () => void;
-  confirmModalProps: {
-    title: string;
-    description: string;
-  };
+  confirmModalProps: Omit<ConfirmModalProps, "onConfirm">;
 }
 
 export function TableActions(props: TableActionsProps) {
   const { deleteContent, editContent, onDelete, onEdit, confirmModalProps } =
     props;
-  const { isOpen, onOpen, onClose } = useDisclosure();
+  const { showConfirmModal } = useConfirmModal();
+
+  function handleDelete() {
+    showConfirmModal({
+      description: confirmModalProps.description,
+      onConfirm: onDelete,
+      title: confirmModalProps.title,
+    });
+  }
 
   return (
     <div className="flex items-center gap-4">
@@ -32,17 +40,11 @@ export function TableActions(props: TableActionsProps) {
       <Tooltip color="danger" content={deleteContent} delay={0} closeDelay={0}>
         <button
           className="cursor-pointer text-lg text-danger active:opacity-50"
-          onClick={onOpen}
+          onClick={handleDelete}
         >
           <DeleteIcon />
         </button>
       </Tooltip>
-      <ConfirmModal
-        isOpen={isOpen}
-        onClose={onClose}
-        onConfirm={onDelete}
-        {...confirmModalProps}
-      />
     </div>
   );
 }

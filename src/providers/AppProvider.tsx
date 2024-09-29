@@ -4,6 +4,7 @@ import { BrowserRouter } from "react-router-dom";
 
 import RoutesProvider from "./RoutesProvider.tsx";
 import { Toaster } from "sonner";
+import { ConfirmModal } from "@/shared/components/ConfirmModal.tsx";
 
 const queryClient = new QueryClient();
 export default function AppProvider() {
@@ -12,6 +13,7 @@ export default function AppProvider() {
       <QueryClientProvider client={queryClient}>
         <BrowserRouter>
           <Toaster richColors />
+          <ConfirmModal />
           <RoutesProvider />
         </BrowserRouter>
       </QueryClientProvider>

@@ -1,11 +1,8 @@
 import {
-  Button,
-  ButtonGroup,
   Modal,
   ModalBody,
   ModalContent,
   ModalHeader,
-  Pagination,
   Spinner,
   Table,
   TableBody,
@@ -17,10 +14,11 @@ import {
 } from "@nextui-org/react";
 import { TableActions } from "@/shared/components/ui/TableActions.tsx";
 import { useDeleteSize } from "../hooks/useDeleteSize";
-import { useMemo, useState } from "react";
+import { useState } from "react";
 import { UpdateSizeForm } from "./UpdateSizeForm";
 import { useGetSizes } from "../hooks/useGetSizes";
 import { Size } from "../interfaces/responses/size.interface";
+import { PaginationControls } from "@/shared/components/ui/PaginationControls.tsx";
 
 const columns = [
   {
@@ -39,7 +37,7 @@ const columns = [
 
 export function SizesTable() {
   const [currentPage, setCurrentPage] = useState(1);
-  const { data, isLoading } = useGetSizes({
+  const { sizes, isLoading } = useGetSizes({
     page: currentPage,
   });
   const { deleteSize } = useDeleteSize();
@@ -55,48 +53,20 @@ export function SizesTable() {
     setCurrentPage(page);
   }
 
-  const label = useMemo(() => {
-    if (!data) return;
-    return `Showing from ${data.pageable.offset + 1} to ${
-      data.pageable.offset + data.numberOfElements
-    } sizes`;
-  }, [data]);
-
   return (
     <>
       <Table
         aria-label="List of sizes"
         bottomContentPlacement={"outside"}
         bottomContent={
-          data &&
-          data.content.length > 0 && (
-            <div className="flex w-full flex-wrap items-center justify-center gap-4 sm:justify-between">
-              <Pagination
-                color="primary"
-                isCompact
-                onChange={(page) => handlePageChange(page)}
-                page={currentPage}
-                showControls
-                showShadow
-                size={"lg"}
-                total={data.totalPages}
-              />
-              <p className={"text-content4-foreground"}>{label}</p>
-              <ButtonGroup>
-                <Button
-                  isDisabled={data.first}
-                  onPress={() => handlePageChange(currentPage - 1)}
-                >
-                  Previous
-                </Button>
-                <Button
-                  isDisabled={data.last}
-                  onPress={() => handlePageChange(currentPage + 1)}
-                >
-                  Next
-                </Button>
-              </ButtonGroup>
-            </div>
+          sizes &&
+          sizes.content.length > 0 && (
+            <PaginationControls
+              currentPage={currentPage}
+              handlePageChange={handlePageChange}
+              labelName={"sizes"}
+              paginatedResponse={sizes}
+            />
           )
         }
       >
@@ -107,7 +77,7 @@ export function SizesTable() {
         </TableHeader>
         <TableBody
           emptyContent={"There are no sizes to show"}
-          items={data?.content || []}
+          items={sizes?.content || []}
           loadingContent={
             <div
               className={
