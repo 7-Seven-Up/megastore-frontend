@@ -51,7 +51,7 @@ const columns = [
 ];
 
 export function ProductsTable() {
-  const [currentPage, setCurrentPage] = useState(0);
+  const [currentPage, setCurrentPage] = useState(1);
   const { deleteProduct } = useDeleteProduct();
   const { productResponse, isLoading } = useGetProducts({
     page: currentPage,
