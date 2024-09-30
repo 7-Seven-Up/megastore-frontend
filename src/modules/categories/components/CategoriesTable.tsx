@@ -120,6 +120,8 @@ export function CategoriesTable() {
                     title: "Delete category",
                     description: `Are you sure you want to delete the category ${category.name}?`,
                   }}
+                  allowEdit
+                  allowDelete
                 />
               </TableCell>
             </TableRow>

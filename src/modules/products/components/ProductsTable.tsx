@@ -150,7 +150,7 @@ export function ProductsTable() {
                 deleteContent={"Delete product"}
                 editContent={"Edit product"}
                 onDelete={() => handleDelete(product.productId)}
-                onEdit={console.log}
+                allowDelete
               />
             </TableCell>
           </TableRow>
