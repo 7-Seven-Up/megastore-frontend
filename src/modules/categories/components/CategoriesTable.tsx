@@ -117,9 +117,11 @@ export function CategoriesTable() {
               </TableCell>
               <TableCell>{category.name}</TableCell>
               <TableCell>
-                {category.description ?? (
-                  <i className="text-gray-500">{"<No description>"}</i>
-                )}
+                <span
+                  className={`${!category.description ? "text-content4-foreground" : ""}`}
+                >
+                  {category.description || "No description"}
+                </span>
               </TableCell>
               <TableCell>
                 <span

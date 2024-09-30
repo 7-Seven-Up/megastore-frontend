@@ -20,14 +20,9 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
         }}
       />
 
-      <div className="flex flex-col gap-2 p-6">
+      <div className="flex flex-col p-6">
         <div className={"flex flex-col"}>
-          <h2 className="font-medium capitalize">{product.name}</h2>
-          <h2 className={"line-clamp-2 text-sm text-foreground-500"}>
-            {product.description ?? (
-              <i className="text-gray-500">{"<No description>"}</i>
-            )}
-          </h2>
+          <h2 className="text-sm capitalize">{product.name}</h2>
         </div>
         <h3 className={"text-2xl font-semibold"}>${product.price}</h3>
       </div>

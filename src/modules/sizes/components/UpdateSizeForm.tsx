@@ -38,7 +38,7 @@ export function UpdateSizeForm({ onClose, size }: UpdateSizeFormProps) {
 
       <InputField<UpdateSizeSchemaType>
         control={control}
-        defaultValue={size.description}
+        defaultValue={size.description ?? ""}
         label={"Size description"}
         name={"description"}
         placeholder={"Type the size description"}

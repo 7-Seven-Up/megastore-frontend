@@ -13,7 +13,8 @@ export const CreateCategorySchema = z.object({
     .max(50, {
       message: "Description must be less than 50 characters",
     })
-    .optional(),
+    .optional()
+    .nullable(),
   superCategoryId: z.string().optional(),
 });
 
