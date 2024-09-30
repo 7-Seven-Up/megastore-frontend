@@ -101,6 +101,8 @@ export function SizesTable() {
                     title: "Delete size",
                     description: `Are you sure you want to delete the size ${size.name}?`,
                   }}
+                  allowEdit
+                  allowDelete
                 />
               </TableCell>
               <TableCell>{size.name}</TableCell>
