@@ -26,6 +26,10 @@ export function ControlledSelect<T extends FieldValues>(
     rules: props.rules,
   };
 
+  const {
+    items: { length },
+  } = props;
+
   return (
     <Controller
       render={({ fieldState, field }) => (
@@ -33,8 +37,13 @@ export function ControlledSelect<T extends FieldValues>(
           className={"w-full"}
           errorMessage={fieldState.error?.message}
           isInvalid={fieldState.invalid}
+          classNames={{
+            selectorIcon: `${length > 0 ? "block" : "hidden"}`,
+            trigger: `${length > 0 ? "cursor-pointer" : "cursor-not-allowed"}`,
+          }}
           {...props}
           {...field}
+          placeholder={`${length > 0 ? props.label : "No items available"}`}
         >
           {props.items.map((item) => {
             return props.children(item);
