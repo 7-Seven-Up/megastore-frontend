@@ -87,7 +87,7 @@ export function Navbar() {
       {/* Content for desktop */}
       <NavbarContent justify="end" className={"hidden lg:flex"}>
         <RoleBasedVisibility allowedRoles={[Role.ADMIN]}>
-          <Link href={"/admin"}>
+          <Link href={"/admin/products"}>
             <LayoutIcon />
           </Link>
           <Divider orientation={"vertical"} />
@@ -136,7 +136,7 @@ export function Navbar() {
         <div className={"flex flex-col gap-2"}>
           <RoleBasedVisibility allowedRoles={[Role.ADMIN]}>
             <NavbarMenuItem isActive={pathname === "/admin"}>
-              <Link href={"/admin"} color={"foreground"}>
+              <Link href={"/admin/products"} color={"foreground"}>
                 Admin panel
               </Link>
             </NavbarMenuItem>
