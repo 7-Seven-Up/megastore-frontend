@@ -14,7 +14,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
       <Image
         src={firstImageUrl}
         alt={product.name}
-        className="mb-auto h-32 w-full rounded-bl-none rounded-br-none object-cover"
+        className="mb-auto h-52 w-full rounded-bl-none rounded-br-none object-cover"
         classNames={{
           wrapper: "!max-w-full",
         }}
