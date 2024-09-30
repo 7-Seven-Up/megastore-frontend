@@ -23,6 +23,7 @@ const columns = [
   {
     key: "name",
     label: "NAME",
+    width: 300,
   },
   {
     key: "description",
@@ -55,7 +56,6 @@ export function ProductsTable() {
   const { deleteProduct } = useDeleteProduct();
   const { productResponse, isLoading } = useGetProducts({
     page: currentPage,
-    pageSize: 20,
   });
 
   function handlePageChange(page: number) {
@@ -86,7 +86,11 @@ export function ProductsTable() {
       }
     >
       <TableHeader columns={columns}>
-        {(column) => <TableColumn key={column.key}>{column.label}</TableColumn>}
+        {(column) => (
+          <TableColumn key={column.key} width={column.width}>
+            {column.label}
+          </TableColumn>
+        )}
       </TableHeader>
       <TableBody
         emptyContent={"There are no products to show"}
@@ -122,7 +126,7 @@ export function ProductsTable() {
               </div>
             </TableCell>
             <TableCell>
-              <span className={"line-clamp-2 max-w-[30ch] 2xl:max-w-fit"}>
+              <span className={"line-clamp-2 max-w-fit"}>
                 {product.description ?? (
                   <i className="text-gray-500">{"<No description>"}</i>
                 )}

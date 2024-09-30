@@ -14,7 +14,7 @@ export function useGetProducts(params: PaginationRequest) {
         pageSize,
         ...rest,
       }),
-    queryKey: [GET_PRODUCTS_KEY, fixedPage],
+    queryKey: [GET_PRODUCTS_KEY, fixedPage, pageSize],
     staleTime: Infinity,
   });
 
