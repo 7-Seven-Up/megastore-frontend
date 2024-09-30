@@ -22,16 +22,16 @@ import { PaginationControls } from "@/shared/components/ui/PaginationControls.ts
 
 const columns = [
   {
+    key: "actions",
+    label: "ACTIONS",
+  },
+  {
     key: "name",
     label: "NAME",
   },
   {
     key: "description",
     label: "DESCRIPTION",
-  },
-  {
-    key: "actions",
-    label: "ACTIONS",
   },
 ];
 
@@ -91,8 +91,6 @@ export function SizesTable() {
         >
           {(size) => (
             <TableRow key={size.sizeId}>
-              <TableCell>{size.name}</TableCell>
-              <TableCell>{size.description}</TableCell>
               <TableCell>
                 <TableActions
                   deleteContent={"Delete size"}
@@ -107,6 +105,8 @@ export function SizesTable() {
                   allowDelete
                 />
               </TableCell>
+              <TableCell>{size.name}</TableCell>
+              <TableCell>{size.description}</TableCell>
             </TableRow>
           )}
         </TableBody>
