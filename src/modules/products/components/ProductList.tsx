@@ -10,12 +10,7 @@ export const ProductList: React.FC = () => {
 
   return (
     <>
-      <div
-        className="grid h-full auto-cols-fr place-content-center items-center justify-center gap-4"
-        style={{
-          gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))",
-        }}
-      >
+      <div className="grid h-full auto-cols-fr grid-cols-[repeat(auto-fill,minmax(300px,1fr))] place-content-center items-center justify-center gap-4">
         {isLoading &&
           Array.from({ length: 3 }).map((_, index) => (
             <div className={"flex flex-col gap-2"} key={index}>
