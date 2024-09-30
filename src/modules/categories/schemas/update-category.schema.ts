@@ -12,12 +12,11 @@ export const UpdateCategorySchema = z.object({
       message: "Name must be less than 20 characters",
     }),
   description: z
-    .string({
-      required_error: "",
-    })
+    .string()
     .max(50, {
       message: "Description must be less than 50 characters",
-    }),
+    })
+    .optional(),
   superCategoryId: z.string().optional().nullable(),
 });
 
