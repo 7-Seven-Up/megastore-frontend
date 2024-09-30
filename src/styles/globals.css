@@ -4,22 +4,22 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Variables */
 :root {
   --admin-sidebar-width: 20rem;
 
   @media (width < 1024px) {
-     --admin-sidebar-width: 16rem;
+    --admin-sidebar-width: 16rem;
   }
 
   @media (width < 768px) {
-     --admin-sidebar-width: 4rem;
+    --admin-sidebar-width: 4rem;
   }
 }
 
 .fadeInUp {
   animation: fadeInUp 0.4s ease;
 }
+
 
 @keyframes fadeInUp {
   0% {
@@ -29,5 +29,18 @@
   100% {
     opacity: 1;
     transform: translateY(0);
+  }
+}
+
+.fadeIn {
+  animation: fadeIn 0.4s ease;
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
   }
 }
