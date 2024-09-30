@@ -17,7 +17,8 @@ export const UpdateSizeSchema = z.object({
     })
     .max(50, {
       message: "Description must be less than 50 characters",
-    }),
+    })
+    .optional(),
 });
 
 export type UpdateSizeSchemaType = z.infer<typeof UpdateSizeSchema>;

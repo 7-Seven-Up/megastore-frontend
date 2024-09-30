@@ -123,7 +123,9 @@ export function ProductsTable() {
             </TableCell>
             <TableCell>
               <span className={"line-clamp-2 max-w-[30ch] 2xl:max-w-fit"}>
-                {product.description}
+                {product.description ?? (
+                  <i className="text-gray-500">{"<No description>"}</i>
+                )}
               </span>
             </TableCell>
             <TableCell>${product.price}</TableCell>

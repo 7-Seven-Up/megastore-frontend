@@ -9,12 +9,11 @@ export const CreateSizeSchema = z.object({
       message: "Name must be less than 20 characters",
     }),
   description: z
-    .string({
-      required_error: "",
-    })
+    .string()
     .max(50, {
       message: "Description must be less than 50 characters",
-    }),
+    })
+    .optional(),
 });
 
 export type CreateSizeSchemaType = z.infer<typeof CreateSizeSchema>;

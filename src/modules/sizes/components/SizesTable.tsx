@@ -106,7 +106,11 @@ export function SizesTable() {
                 />
               </TableCell>
               <TableCell>{size.name}</TableCell>
-              <TableCell>{size.description}</TableCell>
+              <TableCell>
+                {size.description ?? (
+                  <i className="text-gray-500">{"<No description>"}</i>
+                )}
+              </TableCell>
             </TableRow>
           )}
         </TableBody>

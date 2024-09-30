@@ -3,7 +3,7 @@ import { PaginatedResponse } from "@/shared/interfaces/pagination/paginated-resp
 export interface Product {
   variantOfName: string;
   color: string;
-  description: string;
+  description: string | null;
   imagesURLS: string[];
   name: string;
   price: number;
