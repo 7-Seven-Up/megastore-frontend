@@ -22,6 +22,10 @@ import { PaginationControls } from "@/shared/components/ui/PaginationControls.ts
 
 const columns = [
   {
+    key: "actions",
+    label: "ACTIONS",
+  },
+  {
     key: "name",
     label: "NAME",
   },
@@ -32,10 +36,6 @@ const columns = [
   {
     key: "superCategory",
     label: "SUPER CATEGORY",
-  },
-  {
-    key: "actions",
-    label: "ACTIONS",
   },
 ];
 
@@ -101,15 +101,6 @@ export function CategoriesTable() {
         >
           {(category) => (
             <TableRow key={category.categoryId}>
-              <TableCell>{category.name}</TableCell>
-              <TableCell>{category.description}</TableCell>
-              <TableCell>
-                <span
-                  className={`${!category.superCategoryName ? "text-content4-foreground" : ""}`}
-                >
-                  {category.superCategoryName || "No super category"}
-                </span>
-              </TableCell>
               <TableCell>
                 <TableActions
                   deleteContent={"Delete category"}
@@ -121,6 +112,15 @@ export function CategoriesTable() {
                     description: `Are you sure you want to delete the category ${category.name}?`,
                   }}
                 />
+              </TableCell>
+              <TableCell>{category.name}</TableCell>
+              <TableCell>{category.description}</TableCell>
+              <TableCell>
+                <span
+                  className={`${!category.superCategoryName ? "text-content4-foreground" : ""}`}
+                >
+                  {category.superCategoryName || "No super category"}
+                </span>
               </TableCell>
             </TableRow>
           )}
