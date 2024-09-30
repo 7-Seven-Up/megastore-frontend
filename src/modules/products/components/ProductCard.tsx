@@ -1,6 +1,5 @@
 import React from "react";
 import { Product } from "../interfaces/product-response.interface";
-import { Link } from "react-router-dom";
 import { Image } from "@nextui-org/react";
 
 interface ProductCardProps {
@@ -11,8 +10,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
   const firstImageUrl = product.imagesURLS?.[0];
 
   return (
-    <Link
-      to={`/products/${product.productId}`}
+    <div
       className="flex h-full w-full flex-grow flex-col rounded-2xl shadow-md"
     >
       <Image
@@ -33,6 +31,6 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
         </div>
         <h3 className={"text-2xl font-semibold"}>${product.price}</h3>
       </div>
-    </Link>
+    </div>
   );
 };
