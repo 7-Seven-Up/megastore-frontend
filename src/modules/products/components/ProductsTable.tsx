@@ -17,6 +17,10 @@ import { TableLoading } from "@/shared/components/ui/TableLoading.tsx";
 
 const columns = [
   {
+    key: "actions",
+    label: "ACTIONS",
+  },
+  {
     key: "name",
     label: "NAME",
   },
@@ -43,10 +47,6 @@ const columns = [
   {
     key: "variantOf",
     label: "VARIANT OF",
-  },
-  {
-    key: "actions",
-    label: "ACTIONS",
   },
 ];
 
@@ -97,6 +97,19 @@ export function ProductsTable() {
         {(product) => (
           <TableRow key={product.productId}>
             <TableCell>
+              <TableActions
+                confirmModalProps={{
+                  title: "Delete product",
+                  description: `Are you sure you want to delete the product ${product.name}?`,
+                }}
+                deleteContent={"Delete product"}
+                editContent={"Edit product"}
+                onDelete={() => handleDelete(product.productId)}
+                onEdit={console.log}
+              />
+            </TableCell>
+
+            <TableCell>
               <div className={"flex items-center gap-4"}>
                 <Image
                   alt={`${product.name} image`}
@@ -139,19 +152,6 @@ export function ProductsTable() {
               {product.variantOfName ?? (
                 <span className={"text-gray-400"}>No variant</span>
               )}
-            </TableCell>
-
-            <TableCell>
-              <TableActions
-                confirmModalProps={{
-                  title: "Delete product",
-                  description: `Are you sure you want to delete the product ${product.name}?`,
-                }}
-                deleteContent={"Delete product"}
-                editContent={"Edit product"}
-                onDelete={() => handleDelete(product.productId)}
-                onEdit={console.log}
-              />
             </TableCell>
           </TableRow>
         )}
