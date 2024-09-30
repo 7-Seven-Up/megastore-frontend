@@ -12,15 +12,11 @@ export const CreateProductSchema = z.object({
       message: "Name must be less than 30 characters.",
     }),
   description: z
-    .string({
-      required_error: "",
-    })
-    .min(5, {
-      message: "Description must be at least 5 characters",
-    })
+    .string()
     .max(80, {
       message: "Description must be less than 80 characters.",
-    }),
+    })
+    .optional(),
   stock: z
     .number({
       coerce: true,
