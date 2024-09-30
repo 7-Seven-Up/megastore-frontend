@@ -88,8 +88,14 @@ export function SignUpForm() {
           label={"Phone number"}
           name={"phoneNumber"}
           placeholder={"Type your phone number"}
-          rules={{ required: true }}
           type={"tel"}
+          maxLength={10}
+          onInput={(e) => {
+            e.currentTarget.value = e.currentTarget.value.replace(
+              /[^0-9]/g,
+              "",
+            );
+          }}
         />
       </div>
 
