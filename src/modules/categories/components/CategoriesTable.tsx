@@ -116,7 +116,11 @@ export function CategoriesTable() {
                 />
               </TableCell>
               <TableCell>{category.name}</TableCell>
-              <TableCell>{category.description}</TableCell>
+              <TableCell>
+                {category.description ?? (
+                  <i className="text-gray-500">{"<No description>"}</i>
+                )}
+              </TableCell>
               <TableCell>
                 <span
                   className={`${!category.superCategoryName ? "text-content4-foreground" : ""}`}
