@@ -1,5 +1,5 @@
 import { useInfiniteQuery } from "@tanstack/react-query";
-import { getProducts } from "@products/product.service.ts";
+import { getProducts } from "@products/products.service.ts";
 import { GET_PRODUCTS_KEY } from "@products/constants.ts";
 
 export function useInfiniteProducts() {

@@ -1,6 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import { GET_PRODUCTS_KEY } from "@products/constants.ts";
-import { getProducts } from "@products/product.service.ts";
+import { getProducts } from "@products/products.service.ts";
 import { PaginationRequest } from "@/shared/interfaces/pagination/pagination-request.interface.ts";
 
 export function useGetProducts(params: PaginationRequest) {

@@ -1,6 +1,6 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { CREATE_PRODUCTS_KEY, GET_PRODUCTS_KEY } from "@products/constants.ts";
-import { createProduct } from "@products/product.service.ts";
+import { createProduct } from "@products/products.service.ts";
 
 export function useCreateProduct() {
   const queryClient = useQueryClient();
