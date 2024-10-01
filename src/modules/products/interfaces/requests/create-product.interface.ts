@@ -1,12 +1,12 @@
 interface CreateProductRequest {
   categoryId: string;
   color: string;
-  description: string;
+  description: string | null;
   name: string;
   price: number;
   sizeId: string;
   stock: number;
-  variantOfId?: string | null;
+  variantOfId: string | null;
 }
 
 export interface CreateProductParams {

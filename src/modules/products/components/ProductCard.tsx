@@ -1,5 +1,5 @@
 import React from "react";
-import { Product } from "../interfaces/product-response.interface";
+import { Product } from "../interfaces/responses/product-response.interface.ts";
 import { Image } from "@nextui-org/react";
 
 interface ProductCardProps {
