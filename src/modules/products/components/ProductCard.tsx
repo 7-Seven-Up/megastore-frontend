@@ -7,28 +7,34 @@ interface ProductCardProps {
 }
 
 export const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
-  const firstImageUrl = product.imagesURLS?.[0];
+  const firstImageUrl = product.imagesURLS[0];
+  const secondImageUrl = product.imagesURLS[1];
 
   return (
     <div className="flex h-full w-full flex-grow flex-col rounded-2xl shadow-md">
-      <Image
-        src={firstImageUrl}
-        alt={product.name}
-        className="mb-auto h-52 w-full rounded-bl-none rounded-br-none object-cover"
-        classNames={{
-          wrapper: "!max-w-full",
-        }}
-      />
+      <div className={"group h-64 w-full"}>
+        <Image
+          src={firstImageUrl}
+          alt={product.name}
+          className={`fadeIn block h-64 w-full rounded-bl-none rounded-br-none object-cover ${secondImageUrl ? "group-hover:hidden" : "group-hover:block"}`}
+          classNames={{
+            wrapper: "!max-w-full",
+          }}
+        />
 
-      <div className="flex flex-col gap-2 p-6">
-        <div className={"flex flex-col"}>
-          <h2 className="font-medium capitalize">{product.name}</h2>
-          <h2 className={"line-clamp-2 text-sm text-foreground-500"}>
-            {product.description ?? (
-              <i className="text-gray-500">{"<No description>"}</i>
-            )}
-          </h2>
-        </div>
+        {secondImageUrl && (
+          <Image
+            src={secondImageUrl}
+            className="fadeIn hidden h-64 w-full animate-drip-expand rounded-bl-none rounded-br-none object-cover group-hover:block"
+            classNames={{
+              wrapper: "!max-w-full",
+            }}
+          />
+        )}
+      </div>
+
+      <div className="flex flex-col p-6">
+        <h2 className="text-sm capitalize">{product.name}</h2>
         <h3 className={"text-2xl font-semibold"}>${product.price}</h3>
       </div>
     </div>

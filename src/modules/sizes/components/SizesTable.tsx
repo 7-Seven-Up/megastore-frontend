@@ -107,9 +107,11 @@ export function SizesTable() {
               </TableCell>
               <TableCell>{size.name}</TableCell>
               <TableCell>
-                {size.description ?? (
-                  <i className="text-gray-500">{"<No description>"}</i>
-                )}
+                <span
+                  className={`${!size.description ? "text-content4-foreground" : ""}`}
+                >
+                  {size.description || "No description"}
+                </span>
               </TableCell>
             </TableRow>
           )}

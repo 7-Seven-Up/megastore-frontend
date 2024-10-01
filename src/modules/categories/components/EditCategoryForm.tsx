@@ -59,7 +59,9 @@ export function EditCategoryForm({ onClose, category }: EditCategoryFormProps) {
         name: category.superCategoryName,
       },
       ...flatCategories.filter(
-        (item) => item.categoryId !== category.superCategoryId,
+        (item) =>
+          item.categoryId !== category.superCategoryId &&
+          item.categoryId !== category.categoryId,
       ),
     ];
   }, [flatCategories, category]);
@@ -76,7 +78,7 @@ export function EditCategoryForm({ onClose, category }: EditCategoryFormProps) {
 
       <InputField<UpdateCategorySchemaType>
         control={control}
-        defaultValue={category.description}
+        defaultValue={category.description ?? ""}
         label={"Category description"}
         name={"description"}
         placeholder={"Type the category description"}

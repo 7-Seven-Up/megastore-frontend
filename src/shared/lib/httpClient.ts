@@ -13,9 +13,10 @@ httpClient.interceptors.response.use(
   (response) => response,
   (error: AxiosError<ErrorResponse>) => {
     const errorMessage =
-      error.status === 403 || error.status === 401
+      error.response?.data.message ??
+      (error.status === 403 || error.status === 401
         ? "You are not authorized to access this resource."
-        : (error.response?.data.message ?? "An unknown error occurred.");
+        : "An unknown error occurred.");
 
     toast.error(errorMessage);
 
