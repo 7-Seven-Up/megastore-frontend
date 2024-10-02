@@ -127,7 +127,7 @@ export function ProductsTable() {
             </TableCell>
             <TableCell>
               <span className={"line-clamp-2 max-w-fit"}>
-                {product.description ?? (
+                {product.description || (
                   <p className="text-content4-foreground">No description</p>
                 )}
               </span>
@@ -155,7 +155,7 @@ export function ProductsTable() {
 
             <TableCell>{product.sizeName}</TableCell>
             <TableCell>
-              {product.variantOfName ?? (
+              {product.variantOfName || (
                 <span className={"text-gray-400"}>No variant</span>
               )}
             </TableCell>

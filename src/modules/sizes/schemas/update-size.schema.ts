@@ -1,4 +1,5 @@
 import { z } from "zod";
+import { optionalToNull } from "@/shared/utils/optionalToNull.ts";
 
 export const UpdateSizeSchema = z.object({
   name: z
@@ -12,13 +13,12 @@ export const UpdateSizeSchema = z.object({
       message: "Name must be less than 20 characters",
     }),
   description: z
-    .string({
-      required_error: "",
-    })
+    .string()
     .max(50, {
       message: "Description must be less than 50 characters",
     })
-    .optional(),
+    .optional()
+    .transform(optionalToNull),
 });
 
 export type UpdateSizeSchemaType = z.infer<typeof UpdateSizeSchema>;

@@ -1,4 +1,5 @@
 import { z } from "zod";
+import { optionalToNull } from "@/shared/utils/optionalToNull.ts";
 
 export const UpdateCategorySchema = z.object({
   name: z
@@ -17,8 +18,8 @@ export const UpdateCategorySchema = z.object({
       message: "Description must be less than 50 characters",
     })
     .optional()
-    .nullable(),
-  superCategoryId: z.string().optional().nullable(),
+    .transform(optionalToNull),
+  superCategoryId: z.string().optional().transform(optionalToNull),
 });
 
 export type UpdateCategorySchemaType = z.infer<typeof UpdateCategorySchema>;
