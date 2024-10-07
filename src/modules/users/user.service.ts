@@ -1,6 +1,8 @@
 import { httpClient } from "@/shared/lib/httpClient.ts";
-import { RecoverPasswordRequest } from "@/modules/user/interfaces/requests/recover-password.interface.ts";
-import { SendEmailRequest } from "@/modules/user/interfaces/requests/send-email.interface.ts";
+import {
+  RecoverPasswordRequest
+} from "@/modules/users/interfaces/requests/recover-password.interface.ts";
+import { SendEmailRequest } from "@/modules/users/interfaces/requests/send-email.interface.ts";
 
 const USER_ENDPOINT = `${import.meta.env.VITE_BACKEND_URL}/api/v1/users`;
 export const recoverPassword = async ({

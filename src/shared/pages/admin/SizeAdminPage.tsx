@@ -4,7 +4,7 @@ import { Title } from "@/shared/components/typography/Title.tsx";
 import { Outlet } from "react-router-dom";
 import { SizesTable } from "@/modules/sizes/components/SizesTable";
 
-export function SizeAdminPage() {
+export default function SizeAdminPage() {
   return (
     <div className={"flex min-h-screenMinusNavbar flex-col gap-6 p-6"}>
       <header

@@ -6,7 +6,7 @@ import {
   TableCell,
   TableColumn,
   TableHeader,
-  TableRow,
+  TableRow
 } from "@nextui-org/react";
 import { useGetProducts } from "@products/hooks/useGetProducts.ts";
 import { TableActions } from "@/shared/components/ui/TableActions.tsx";
@@ -14,6 +14,7 @@ import { useState } from "react";
 import { useDeleteProduct } from "@products/hooks/useDeleteProduct.ts";
 import { PaginationControls } from "@/shared/components/ui/PaginationControls.tsx";
 import { TableLoading } from "@/shared/components/ui/TableLoading.tsx";
+import { currencyFormatter } from "@/shared/utils/currencyFormatter.ts";
 
 const columns = [
   {
@@ -132,7 +133,7 @@ export function ProductsTable() {
                 )}
               </span>
             </TableCell>
-            <TableCell>${product.price}</TableCell>
+            <TableCell>{currencyFormatter(product.price, "es-AR", "ARS")}</TableCell>
             <TableCell>
               <Chip
                 className="capitalize"

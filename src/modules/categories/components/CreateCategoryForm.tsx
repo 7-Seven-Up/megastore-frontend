@@ -23,14 +23,14 @@ export function CreateCategoryForm({ onClose }: CreateCategoryFormProps) {
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className={"flex flex-col gap-2"}>
-      <InputField<CreateCategorySchemaType>
+      <InputField
         control={control}
         label={"Category name"}
         name={"name"}
         placeholder={"Type the category name"}
       />
 
-      <InputField<CreateCategorySchemaType>
+      <InputField
         control={control}
         label={"Category description"}
         name={"description"}

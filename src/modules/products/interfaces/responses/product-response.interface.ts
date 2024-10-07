@@ -3,13 +3,13 @@ import { PaginatedResponse } from "@/shared/interfaces/pagination/paginated-resp
 export interface Product {
   productId: string;
   name: string;
-  description: string | null;
+  description?: string;
   price: number;
   imagesURLS: string[];
   stock: number;
   color: string;
   sizeName: string;
-  variantOfName: string;
+  variantOfName?: string;
 }
 
 export type ProductResponse = PaginatedResponse<Product>;

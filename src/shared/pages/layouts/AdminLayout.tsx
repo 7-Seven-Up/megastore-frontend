@@ -1,10 +1,10 @@
 import { Outlet, useLocation } from "react-router-dom";
-import { Link } from "@nextui-org/react";
+import { Link, Tooltip } from "@nextui-org/react";
 import { CategoryIcon } from "@/shared/components/icons/CategoryIcon.tsx";
 import { SizeIcon } from "@/shared/components/icons/SizeIcon";
 import { ShirtFoldedIcon } from "@/shared/components/icons/ShirtFoldedIcon.tsx";
 
-export function AdminLayout() {
+export default function AdminLayout() {
   const { pathname } = useLocation();
   const adminItems = [
     {
@@ -28,7 +28,7 @@ export function AdminLayout() {
     <section className={"min-h-screenMinusNavbar w-full"}>
       <aside
         className={
-          "fixed flex h-full w-adminSidebar flex-col gap-2 border-1 border-b-0 border-t-0 border-r-default/50 bg-background p-2 md:p-6"
+          "fixed flex h-full w-adminSidebar flex-col gap-2 border-1 border-b-0 border-t-0 border-r-default/50 bg-background p-2 lg:p-4 2xl:p-6"
         }
       >
         {adminItems.map((item) => {
@@ -36,14 +36,28 @@ export function AdminLayout() {
           const isActive = pathname === path;
 
           return (
-            <Link
-              className={`flex items-center justify-center gap-3 rounded-md px-4 py-2 text-medium text-foreground transition-all duration-75 ease-linear md:justify-start md:px-4 md:py-3 ${isActive ? "bg-primary/10 font-medium" : "hover:bg-primary/5 hover:font-medium"} transition-all duration-75 ease-linear`}
-              href={path}
+            <Tooltip
               key={path}
+              className={"font-medium 2xl:hidden"}
+              closeDelay={0}
+              content={label}
+              placement={"right"}
             >
-              <div>{icon()}</div>
-              <span className={"hidden md:block"}>{label}</span>
-            </Link>
+              <Link
+                className={`flex flex-col items-center justify-center rounded-md px-1 py-2 text-medium text-foreground transition-all duration-75 ease-linear md:justify-start 2xl:flex-row 2xl:gap-3 2xl:px-4 2xl:py-3 ${isActive ? "bg-primary/10 2xl:font-medium" : "hover:bg-primary/5 hover:font-medium"} transition-all duration-75 ease-linear`}
+                href={path}
+              >
+                <div>{icon()}</div>
+                <span className={"hidden 2xl:block"}>{label}</span>
+                <span
+                  className={
+                    "w-full break-words text-center text-tiny lg:hidden"
+                  }
+                >
+                  {label}
+                </span>
+              </Link>
+            </Tooltip>
           );
         })}
       </aside>

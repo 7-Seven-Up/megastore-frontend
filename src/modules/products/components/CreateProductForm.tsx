@@ -41,7 +41,7 @@ export function CreateProductForm({ onClose }: CreateProductFormProps) {
       className={"grid grid-cols-12 gap-2"}
       onSubmit={handleSubmit(onSubmit)}
     >
-      <InputField<CreateProductSchemaType>
+      <InputField
         className={"col-span-12 lg:col-span-10"}
         control={control}
         label={"Product name"}
@@ -49,7 +49,7 @@ export function CreateProductForm({ onClose }: CreateProductFormProps) {
         placeholder={"Type the product name"}
       />
 
-      <InputField<CreateProductSchemaType>
+      <InputField
         className={"col-span-12 flex lg:col-span-2"}
         classNames={{
           label: "mb-2",
@@ -82,7 +82,7 @@ export function CreateProductForm({ onClose }: CreateProductFormProps) {
         }}
       />
 
-      <InputField<CreateProductSchemaType>
+      <InputField
         className={"col-span-12 lg:col-span-6"}
         control={control}
         label={"Product stock"}
@@ -91,7 +91,7 @@ export function CreateProductForm({ onClose }: CreateProductFormProps) {
         type={"number"}
       />
 
-      <InputField<CreateProductSchemaType>
+      <InputField
         className={"col-span-12 lg:col-span-6"}
         control={control}
         label={"Product price"}

@@ -1,6 +1,6 @@
-import SendEmailForm from "@/modules/user/components/SendEmailForm.tsx";
+import SendEmailForm from "@/modules/users/components/SendEmailForm.tsx";
 
-export default function SendEmailToRecoverPasswordPage() {
+export function SendEmailToRecoverPasswordPage() {
   return (
     <div
       className={

@@ -8,7 +8,7 @@ import {
   NavbarItem,
   NavbarMenu,
   NavbarMenuItem,
-  NavbarMenuToggle,
+  NavbarMenuToggle
 } from "@nextui-org/react";
 import { useLocation } from "react-router-dom";
 import { Title } from "@/shared/components/typography/Title.tsx";
@@ -16,7 +16,7 @@ import { useAuthStore } from "@auth/hooks/useAuthStore.ts";
 import RenderIf from "@/shared/components/RenderIf.tsx";
 import { LayoutIcon } from "@/shared/components/icons/LayoutIcon.tsx";
 import { RoleBasedVisibility } from "@/shared/components/ui/RoleBasedVisibility.tsx";
-import { Role } from "@/modules/user/enums/role.enum.ts";
+import { Role } from "@/modules/users/enums/role.enum.ts";
 
 export function Navbar() {
   const { isAuthenticated, logout } = useAuthStore();

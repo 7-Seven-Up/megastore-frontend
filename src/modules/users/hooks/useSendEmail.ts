@@ -1,5 +1,5 @@
 import { useMutation } from "@tanstack/react-query";
-import { sendEmail } from "@/modules/user/user.service.ts";
+import { sendEmail } from "@/modules/users/user.service.ts";
 import { useNavigate } from "react-router-dom";
 
 export const useSendEmail = ({ navigate_to }: { navigate_to: string }) => {

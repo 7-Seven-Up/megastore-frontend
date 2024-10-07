@@ -1,6 +1,6 @@
 import { Title } from "@/shared/components/typography/Title.tsx";
 
-export default function EmailSentToRecoverPassword() {
+export function EmailSentToRecoverPassword() {
   return (
     <div className={"fadeInUp flex flex-col items-center gap-6 text-center"}>
       <header>

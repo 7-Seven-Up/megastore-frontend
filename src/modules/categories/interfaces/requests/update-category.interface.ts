@@ -1,6 +1,6 @@
 export interface UpdateCategoryRequest {
   categoryId: string;
-  description: string | null;
+  description?: string;
   name: string;
-  superCategoryId: string | null;
+  superCategoryId?: string;
 }

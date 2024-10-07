@@ -1,27 +1,27 @@
-import RecoverPasswordForm from "@/modules/user/components/RecoverPasswordForm.tsx";
+import RecoverPasswordForm from "@/modules/users/components/RecoverPasswordForm.tsx";
 import { Title } from "@/shared/components/typography/Title.tsx";
-import { useSearchParams } from "react-router-dom";
-import { useRecoverPasswordValidationParams } from "@/modules/user/hooks/useRecoverPasswordValidationParams.ts";
-import { useEffect } from "react";
+import { useNavigate, useSearchParams } from "react-router-dom";
+import { useEffect, useMemo } from "react";
 
 type RecoverPasswordParams = {
   token: string | null;
 };
 
-export default function RecoverPasswordPage() {
+export function RecoverPasswordPage() {
   const [searchParams] = useSearchParams();
+  const navigate = useNavigate()
 
-  const params: RecoverPasswordParams = {
-    token: searchParams.get("token"),
-  };
-
-  const { redirectToNotFound } = useRecoverPasswordValidationParams();
+  const params = useMemo<RecoverPasswordParams>(() => {
+    return {
+      token: searchParams.get("token"),
+    };
+  }, [searchParams])
 
   useEffect(() => {
     if (!params.token) {
-      redirectToNotFound();
+      navigate("/not-found");
     }
-  }, [params]);
+  }, [params, navigate]);
 
   return (
     <div className={"fadeInUp grid w-full grid-cols-1 gap-6 p-12"}>
