@@ -1,5 +1,6 @@
 import { z } from "zod";
 import { optionalToNull } from "@/shared/utils/optionalToNull.ts";
+import { MAXIMUM_IMAGE_SIZE } from "@products/constants.ts";
 
 export const CreateProductSchema = z.object({
   name: z
@@ -65,7 +66,13 @@ export const CreateProductSchema = z.object({
     })
     .min(1, {
       message: "At least one image is required.",
-    }),
+    })
+    .refine(
+      (images) => images.every((image) => image.size < MAXIMUM_IMAGE_SIZE),
+      {
+        message: "Every image size must be less than 1MB",
+      },
+    ),
 });
 
 export type CreateProductSchemaType = z.infer<typeof CreateProductSchema>;
