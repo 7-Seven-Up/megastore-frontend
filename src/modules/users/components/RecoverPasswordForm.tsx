@@ -2,11 +2,11 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { PasswordInput } from "@/shared/components/ui/PasswordInput.tsx";
 import {
-  RecoverPasswordSchema,
   ChangePasswordRecoverPasswordSchemaType,
-} from "@/modules/user/schemas/recover-password.schema.ts";
+  RecoverPasswordSchema
+} from "@/modules/users/schemas/recover-password.schema.ts";
 import { Button } from "@nextui-org/react";
-import { useRecoverPassword } from "@/modules/user/hooks/useRecoverPassword.ts";
+import { useRecoverPassword } from "@/modules/users/hooks/useRecoverPassword.ts";
 
 type RecoverPasswordProps = {
   token: string;

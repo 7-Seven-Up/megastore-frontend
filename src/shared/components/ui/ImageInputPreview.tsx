@@ -13,12 +13,15 @@ export function ImageInputPreview({
 }: ImageInputPreviewProps) {
   return (
     <RenderIf condition={selectedImages.length > 0}>
-      <div className="col-span-12 mb-2 flex flex-wrap gap-2">
+      <div className="col-span-12 mb-2 grid grid-cols-12 gap-2">
         {selectedImages.map((image, index) => {
           const { previewURL } = image;
 
           return (
-            <div className={"relative size-24 grow"} key={previewURL}>
+            <div
+              className={"relative col-span-3 max-h-24 lg:col-span-2"}
+              key={previewURL}
+            >
               <Image
                 className={"size-full object-cover"}
                 disableSkeleton

@@ -18,7 +18,12 @@ interface EditCategoryFormProps {
 }
 
 export function EditCategoryForm({ onClose, category }: EditCategoryFormProps) {
-  const { control, handleSubmit } = useZodForm(UpdateCategorySchema);
+  const { control, handleSubmit } = useZodForm(UpdateCategorySchema, {
+    defaultValues: {
+      name: category.name,
+      description: category.description || undefined,
+    },
+  });
   const { updateCategory, isUpdating } = useUpdateCategory();
   const { data, fetchNextPage, hasNextPage, isLoading } =
     useInfiniteCategories();
@@ -32,10 +37,6 @@ export function EditCategoryForm({ onClose, category }: EditCategoryFormProps) {
   });
 
   async function onSubmit(data: UpdateCategorySchemaType) {
-    if (data.superCategoryId === "") {
-      data.superCategoryId = null;
-    }
-
     await updateCategory({
       categoryId: category.categoryId,
       ...data,
@@ -68,17 +69,15 @@ export function EditCategoryForm({ onClose, category }: EditCategoryFormProps) {
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className={"flex flex-col gap-2"}>
-      <InputField<UpdateCategorySchemaType>
+      <InputField
         control={control}
-        defaultValue={category.name}
         label={"Category name"}
         name={"name"}
         placeholder={"Type the category name"}
       />
 
-      <InputField<UpdateCategorySchemaType>
+      <InputField
         control={control}
-        defaultValue={category.description ?? ""}
         label={"Category description"}
         name={"description"}
         placeholder={"Type the category description"}

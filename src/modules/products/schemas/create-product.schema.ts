@@ -1,5 +1,4 @@
 import { z } from "zod";
-import { optionalToNull } from "@/shared/utils/optionalToNull.ts";
 
 export const CreateProductSchema = z.object({
   name: z
@@ -17,13 +16,15 @@ export const CreateProductSchema = z.object({
     .max(80, {
       message: "Description must be less than 80 characters.",
     })
-    .optional()
-    .transform(optionalToNull),
+    .optional(),
   stock: z
     .number({
       coerce: true,
       message: "",
       required_error: "",
+    })
+    .int({
+      message: "Stock must be an integer.",
     })
     .min(0, {
       message: "Stock must be positive.",
@@ -33,6 +34,9 @@ export const CreateProductSchema = z.object({
       coerce: true,
       message: "",
       required_error: "",
+    })
+    .int({
+      message: "Price must be an integer.",
     })
     .min(0, {
       message: "Price must be positive.",
@@ -58,7 +62,7 @@ export const CreateProductSchema = z.object({
     .min(1, {
       message: "",
     }),
-  variantOfId: z.string().optional().transform(optionalToNull),
+  variantOfId: z.string().optional(),
   images: z
     .array(z.instanceof(File), {
       required_error: "",

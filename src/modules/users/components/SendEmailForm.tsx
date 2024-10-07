@@ -1,10 +1,7 @@
 import { InputField } from "@/shared/components/ui/InputField.tsx";
 import { Button } from "@nextui-org/react";
-import {
-  SendEmailSchemaType,
-  SendEmailSchema,
-} from "@/modules/user/schemas/send-email.schema.ts";
-import { useSendEmail } from "@/modules/user/hooks/useSendEmail.ts";
+import { SendEmailSchema, SendEmailSchemaType } from "@/modules/users/schemas/send-email.schema.ts";
+import { useSendEmail } from "@/modules/users/hooks/useSendEmail.ts";
 import { Title } from "@/shared/components/typography/Title";
 import { PATH_TO_NAVIGATE_MAP } from "../route-constants";
 import { useZodForm } from "@/shared/hooks/useZodForm.ts";

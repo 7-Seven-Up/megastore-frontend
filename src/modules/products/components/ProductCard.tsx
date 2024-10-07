@@ -1,6 +1,7 @@
 import React from "react";
 import { Product } from "../interfaces/responses/product-response.interface.ts";
 import { Image } from "@nextui-org/react";
+import { currencyFormatter } from "@/shared/utils/currencyFormatter.ts";
 
 interface ProductCardProps {
   product: Product;
@@ -25,7 +26,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
         {secondImageUrl && (
           <Image
             src={secondImageUrl}
-            className="fadeIn hidden h-64 w-full animate-drip-expand rounded-bl-none rounded-br-none object-cover group-hover:block"
+            className="fadeIn hidden h-64 w-full rounded-bl-none rounded-br-none object-cover group-hover:block"
             classNames={{
               wrapper: "!max-w-full",
             }}
@@ -35,7 +36,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
 
       <div className="flex flex-col p-6">
         <h2 className="text-sm capitalize">{product.name}</h2>
-        <h3 className={"text-2xl font-semibold"}>${product.price}</h3>
+        <h3 className={"text-2xl font-semibold"}>{currencyFormatter(product.price, "es-AR", "ARS")}</h3>
       </div>
     </div>
   );

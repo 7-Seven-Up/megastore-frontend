@@ -2,7 +2,7 @@ import { CreateProductForm } from "@products/components/CreateProductForm.tsx";
 import { Modal, ModalBody, ModalContent, ModalHeader } from "@nextui-org/react";
 import { useNavigate } from "react-router-dom";
 
-export function CreateProductPage() {
+export default function CreateProductPage() {
   const navigate = useNavigate();
 
   function onClose() {

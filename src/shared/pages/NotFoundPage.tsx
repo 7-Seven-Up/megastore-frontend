@@ -3,7 +3,7 @@ import { Subtitle } from "@/shared/components/typography/Subtitle.tsx";
 import { Button, Link } from "@nextui-org/react";
 import { Logo } from "@/shared/components/ui/Logo.tsx";
 
-export default function NotFoundPage() {
+export function NotFoundPage() {
   return (
     <div className={"grid min-h-screen grid-cols-2 gap-8"}>
       <div

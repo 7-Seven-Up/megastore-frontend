@@ -40,17 +40,15 @@ export function SignUpForm() {
           label={"Username"}
           name={"username"}
           placeholder={"Type your username"}
-          rules={{ required: true }}
           type={"text"}
         />
 
-        <InputField<SignUpSchemaType>
+        <InputField
           className={"col-span-12 lg:col-span-6"}
           control={control}
           label={"E-mail"}
           name={"email"}
           placeholder={"Type your e-mail"}
-          rules={{ required: true }}
           type={"email"}
         />
 
@@ -72,17 +70,16 @@ export function SignUpForm() {
           rules={{ required: true }}
         />
 
-        <InputField<SignUpSchemaType>
+        <InputField
           className={"col-span-12 lg:col-span-6"}
           control={control}
           label={"Full name"}
           name={"fullName"}
           placeholder={"Type your full name"}
-          rules={{ required: true }}
           type={"text"}
         />
 
-        <InputField<SignUpSchemaType>
+        <InputField
           className={"col-span-12 lg:col-span-6"}
           control={control}
           label={"Phone number"}

@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import { useMutation } from "@tanstack/react-query";
-import { recoverPassword } from "@/modules/user/user.service.ts";
+import { recoverPassword } from "@/modules/users/user.service.ts";
 
 export const useRecoverPassword = () => {
   const navigate = useNavigate();
