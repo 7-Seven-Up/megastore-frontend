@@ -1,8 +1,8 @@
-import { CreateSizeForm } from "@/modules/sizes/components/CreateSizeForm";
+import { CreateSizeForm } from "@/modules/sizes/components/CreateSizeForm.tsx";
 import { Modal, ModalBody, ModalContent, ModalHeader } from "@nextui-org/react";
 import { useNavigate } from "react-router-dom";
 
-export default function CreateSizePage() {
+export function CreateSizePage() {
   const navigate = useNavigate();
 
   function onClose() {

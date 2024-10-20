@@ -4,7 +4,7 @@ import { Title } from "@/shared/components/typography/Title.tsx";
 import { Outlet } from "react-router-dom";
 import { CategoriesTable } from "@/modules/categories/components/CategoriesTable.tsx";
 
-export default function CategoryAdminPage() {
+export function CategoriesAdminPage() {
   return (
     <div className={"flex min-h-screenMinusNavbar flex-col gap-6 p-6"}>
       <header

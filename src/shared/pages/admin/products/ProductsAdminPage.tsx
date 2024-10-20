@@ -4,7 +4,7 @@ import { PlusIcon } from "@/shared/components/icons/PlusIcon.tsx";
 import { Title } from "@/shared/components/typography/Title.tsx";
 import { ProductsTable } from "@products/components/ProductsTable.tsx";
 
-export default function ProductAdminPage() {
+export function ProductsAdminPage() {
   return (
     <div className={"flex min-h-screenMinusNavbar flex-col gap-6 p-6"}>
       <header

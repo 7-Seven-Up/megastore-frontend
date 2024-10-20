@@ -2,9 +2,9 @@ import { Button, Link } from "@nextui-org/react";
 import { PlusIcon } from "@/shared/components/icons/PlusIcon.tsx";
 import { Title } from "@/shared/components/typography/Title.tsx";
 import { Outlet } from "react-router-dom";
-import { SizesTable } from "@/modules/sizes/components/SizesTable";
+import { SizesTable } from "@/modules/sizes/components/SizesTable.tsx";
 
-export default function SizeAdminPage() {
+export function SizesAdminPage() {
   return (
     <div className={"flex min-h-screenMinusNavbar flex-col gap-6 p-6"}>
       <header
