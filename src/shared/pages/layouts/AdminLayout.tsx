@@ -4,7 +4,7 @@ import { CategoryIcon } from "@/shared/components/icons/CategoryIcon.tsx";
 import { SizeIcon } from "@/shared/components/icons/SizeIcon";
 import { ShirtFoldedIcon } from "@/shared/components/icons/ShirtFoldedIcon.tsx";
 
-export default function AdminLayout() {
+export function AdminLayout() {
   const { pathname } = useLocation();
   const adminItems = [
     {

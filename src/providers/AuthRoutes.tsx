@@ -1,4 +1,4 @@
-import { Navigate, Route } from "react-router-dom";
+import { Navigate, Route, Routes } from "react-router-dom";
 
 import { ActivateUserPage } from "@/shared/pages/auth/ActivateUserPage.tsx";
 import { ActivationEmailResent } from "@/shared/pages/auth/ActivationEmailResent.tsx";
@@ -14,34 +14,37 @@ import { UnauthenticatedRoute } from "@/shared/pages/routes/UnauthenticatedRoute
 
 export function AuthRoutes() {
   return (
-    <Route
-      path={"/auth"}
-      element={
-        <UnauthenticatedRoute>
-          <AuthLayout />
-        </UnauthenticatedRoute>
-      }
-    >
-      <Route path={""} element={<Navigate to="signin" replace />} />
-      <Route path={"*"} element={<Navigate to="signin" replace />} />
-      <Route path={"activate"} element={<ActivateUserPage />} />
+    <Routes>
       <Route
-        path={"activation-email-resent"}
-        element={<ActivationEmailResent />}
-      />
-      <Route path={"email-sent"} element={<EmailSent />} />
-      <Route path={"recover-password"} element={<RecoverPasswordPage />} />
-      <Route
-        path={"recover-password-email-sent"}
-        element={<EmailSentToRecoverPassword />}
-      />
-      <Route
-        path={"resend-activation-email"}
-        element={<ResendActivationEmailPage />}
-      />
-      <Route path={"send-email"} element={<SendEmailToRecoverPasswordPage />} />
-      <Route path={"signin"} element={<SignInPage />} />
-      <Route path={"signup"} element={<SignUpPage />} />
-    </Route>
+        element={
+          <UnauthenticatedRoute>
+            <AuthLayout />
+          </UnauthenticatedRoute>
+        }
+      >
+        <Route path={"activate"} element={<ActivateUserPage />} />
+        <Route
+          path={"activation-email-resent"}
+          element={<ActivationEmailResent />}
+        />
+        <Route path={"email-sent"} element={<EmailSent />} />
+        <Route path={"recover-password"} element={<RecoverPasswordPage />} />
+        <Route
+          path={"recover-password-email-sent"}
+          element={<EmailSentToRecoverPassword />}
+        />
+        <Route
+          path={"resend-activation-email"}
+          element={<ResendActivationEmailPage />}
+        />
+        <Route
+          path={"send-email"}
+          element={<SendEmailToRecoverPasswordPage />}
+        />
+        <Route path={"signin"} element={<SignInPage />} />
+        <Route path={"signup"} element={<SignUpPage />} />
+        <Route path={"*"} element={<Navigate to="signin" replace />} />
+      </Route>
+    </Routes>
   );
 }
