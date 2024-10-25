@@ -20,6 +20,20 @@ export async function getSizes(params: PaginationRequest) {
   return response.data;
 }
 
+export async function getDeletedSizes(params: PaginationRequest) {
+  const response = await httpClient.get<SizeResponse>(`${SIZES_URL}/deleted`, {
+    params,
+  });
+  return response.data;
+}
+
+export async function restoreSize(sizeId: string) {
+  const response = await httpClient.post<Size>(
+    `${SIZES_URL}/${sizeId}/restore`,
+  );
+  return response.data;
+}
+
 export async function updateSize(params: Size) {
   const response = await httpClient.put<Size>(`${SIZES_URL}/${params.sizeId}`, {
     ...params,
