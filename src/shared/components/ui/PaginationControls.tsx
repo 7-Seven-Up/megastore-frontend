@@ -19,18 +19,18 @@ export function PaginationControls<T>(props: PaginationControlsProps<T>) {
   }, [paginatedResponse, props.labelName]);
 
   return (
-    <div className="flex w-full flex-wrap items-center justify-center gap-4 rounded-2xl p-4 shadow-[rgba(99,99,99,0.2)_0px_2px_8px_0px] sm:justify-between">
+    <div className="flex w-full flex-wrap items-center justify-center gap-4 rounded-2xl p-4 sm:justify-between">
       <Pagination
+        showShadow
         color="primary"
         isCompact
         onChange={(page) => handlePageChange(page)}
         page={currentPage}
         showControls
-        showShadow
         size={"lg"}
         total={paginatedResponse.totalPages}
       />
-      <p className={"text-center text-content4-foreground"}>{label}</p>
+      <p className={"text-center italic opacity-50"}>{label}</p>
       <ButtonGroup>
         <Button
           isDisabled={paginatedResponse.first}
