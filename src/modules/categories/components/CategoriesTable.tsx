@@ -12,7 +12,7 @@ import {
   TableRow,
   useDisclosure,
 } from "@nextui-org/react";
-import { TableActions } from "@/shared/components/ui/TableActions.tsx";
+import { EditDeleteActions } from "@shared/components/ui/EditDeleteActions.tsx";
 import { useDeleteCategory } from "@/modules/categories/hooks/useDeleteCategory.ts";
 import { useState } from "react";
 import { Category } from "@/modules/categories/interfaces/responses/category.interface.ts";
@@ -102,7 +102,7 @@ export function CategoriesTable() {
           {(category) => (
             <TableRow key={category.categoryId}>
               <TableCell>
-                <TableActions
+                <EditDeleteActions
                   deleteContent={"Delete category"}
                   editContent={"Edit category"}
                   onDelete={() => handleOnDelete(category.categoryId)}
