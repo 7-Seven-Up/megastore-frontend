@@ -6,10 +6,10 @@ import {
   TableCell,
   TableColumn,
   TableHeader,
-  TableRow
+  TableRow,
 } from "@nextui-org/react";
 import { useGetProducts } from "@products/hooks/useGetProducts.ts";
-import { TableActions } from "@/shared/components/ui/TableActions.tsx";
+import { EditDeleteActions } from "@shared/components/ui/EditDeleteActions.tsx";
 import { useState } from "react";
 import { useDeleteProduct } from "@products/hooks/useDeleteProduct.ts";
 import { PaginationControls } from "@/shared/components/ui/PaginationControls.tsx";
@@ -102,7 +102,7 @@ export function ProductsTable() {
         {(product) => (
           <TableRow key={product.productId}>
             <TableCell>
-              <TableActions
+              <EditDeleteActions
                 confirmModalProps={{
                   title: "Delete product",
                   description: `Are you sure you want to delete the product ${product.name}?`,
@@ -133,7 +133,9 @@ export function ProductsTable() {
                 )}
               </span>
             </TableCell>
-            <TableCell>{currencyFormatter(product.price, "es-AR", "ARS")}</TableCell>
+            <TableCell>
+              {currencyFormatter(product.price, "es-AR", "ARS")}
+            </TableCell>
             <TableCell>
               <Chip
                 className="capitalize"
