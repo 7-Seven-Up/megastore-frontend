@@ -10,7 +10,9 @@
       "@/*": ["./src/*"],
       "@/auth/*": ["./src/modules/auth/*"],
       "@/products/*": ["./src/modules/products/*"],
-      "@/users/*" : ["./src/modules/user/"]
+      "@/users/*" : ["./src/modules/users/"],
+      "@/shared/*": ["./src/shared/*"],
+      "@/sizes/*": ["./src/modules/sizes/*"]
     }
   }
 }

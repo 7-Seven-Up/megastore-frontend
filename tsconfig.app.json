@@ -30,6 +30,18 @@
       "@products/*": [
         "./src/modules/products/*"
       ],
+      "@users/*": [
+        "./src/modules/users/*"
+      ],
+      "@shared/*": [
+        "./src/shared/*"
+      ],
+      "@sizes/*": [
+        "./src/modules/sizes/*"
+      ],
+      "@categories/*": [
+        "./src/modules/categories/*"
+      ],
     }
   },
   "include": ["src"],
