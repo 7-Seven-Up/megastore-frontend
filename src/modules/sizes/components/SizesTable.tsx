@@ -1,8 +1,5 @@
+import React from "react";
 import {
-  Modal,
-  ModalBody,
-  ModalContent,
-  ModalHeader,
   Spinner,
   Table,
   TableBody,
@@ -10,15 +7,16 @@ import {
   TableColumn,
   TableHeader,
   TableRow,
-  useDisclosure,
 } from "@nextui-org/react";
-import { TableActions } from "@/shared/components/ui/TableActions.tsx";
-import { useDeleteSize } from "../hooks/useDeleteSize";
-import { useState } from "react";
-import { UpdateSizeForm } from "./UpdateSizeForm";
-import { useGetSizes } from "../hooks/useGetSizes";
-import { Size } from "../interfaces/responses/size.interface";
-import { PaginationControls } from "@/shared/components/ui/PaginationControls.tsx";
+
+import {
+  AVAILABLE_TABLE_ACTIONS,
+  TableActions,
+} from "@shared/interfaces/table-actions.interface.ts";
+import { EditDeleteActions } from "@shared/components/ui/EditDeleteActions.tsx";
+import { RestoreActions } from "@shared/components/ui/RestoreActions.tsx";
+import { Size } from "@sizes/interfaces/responses/size.interface.ts";
+import { SizeResponse } from "@sizes/interfaces/responses/size-response.interface.ts";
 
 const columns = [
   {
@@ -35,41 +33,22 @@ const columns = [
   },
 ];
 
-export function SizesTable() {
-  const [currentPage, setCurrentPage] = useState(1);
-  const { sizes, isLoading } = useGetSizes({
-    page: currentPage,
-  });
-  const { deleteSize } = useDeleteSize();
-  const { onOpen, onClose, isOpen } = useDisclosure();
-  const [updatingSize, setUpdatingSize] = useState<Size | undefined>(undefined);
+interface SizesTableProps {
+  bottomContent: React.ReactNode;
+  isLoading: boolean;
+  sizes?: SizeResponse;
+  tableActionsProps: TableActions<Size, string>;
+}
 
-  function handleOnEdit(size: Size) {
-    setUpdatingSize(size);
-    onOpen();
-  }
-
-  function handlePageChange(page: number) {
-    setCurrentPage(page);
-  }
-
+export function SizesTable({
+  bottomContent,
+  isLoading,
+  sizes,
+  tableActionsProps,
+}: SizesTableProps) {
   return (
     <>
-      <Table
-        aria-label="List of sizes"
-        bottomContentPlacement={"outside"}
-        bottomContent={
-          sizes &&
-          sizes.content.length > 0 && (
-            <PaginationControls
-              currentPage={currentPage}
-              handlePageChange={handlePageChange}
-              labelName={"sizes"}
-              paginatedResponse={sizes}
-            />
-          )
-        }
-      >
+      <Table aria-label="List of sizes" bottomContent={bottomContent}>
         <TableHeader columns={columns}>
           {(column) => (
             <TableColumn key={column.key}>{column.label}</TableColumn>
@@ -92,18 +71,28 @@ export function SizesTable() {
           {(size) => (
             <TableRow key={size.sizeId}>
               <TableCell>
-                <TableActions
-                  deleteContent={"Delete size"}
-                  editContent={"Edit size"}
-                  onDelete={() => deleteSize(size.sizeId)}
-                  onEdit={() => handleOnEdit(size)}
-                  confirmModalProps={{
-                    title: "Delete size",
-                    description: `Are you sure you want to delete the size ${size.name}?`,
-                  }}
-                  allowEdit
-                  allowDelete
-                />
+                {tableActionsProps.type === AVAILABLE_TABLE_ACTIONS.RESTORE && (
+                  <RestoreActions
+                    onRestore={() => tableActionsProps.onRestore(size.sizeId)}
+                    toolTipContent={"Restore size"}
+                  />
+                )}
+
+                {tableActionsProps.type ===
+                  AVAILABLE_TABLE_ACTIONS.EDIT_DELETE && (
+                  <EditDeleteActions
+                    deleteContent={"Delete size"}
+                    editContent={"Edit size"}
+                    onDelete={() => tableActionsProps.onDelete(size.sizeId)}
+                    onEdit={() => tableActionsProps.onEdit(size)}
+                    confirmModalProps={{
+                      title: "Delete size",
+                      description: `Are you sure you want to delete the size ${size.name}?`,
+                    }}
+                    allowEdit
+                    allowDelete
+                  />
+                )}
               </TableCell>
               <TableCell>{size.name}</TableCell>
               <TableCell>
@@ -117,16 +106,6 @@ export function SizesTable() {
           )}
         </TableBody>
       </Table>
-      {updatingSize && (
-        <Modal isOpen={isOpen} onClose={onClose} backdrop={"blur"} size={"lg"}>
-          <ModalContent>
-            <ModalHeader>Edit size</ModalHeader>
-            <ModalBody>
-              <UpdateSizeForm size={updatingSize} onClose={onClose} />
-            </ModalBody>
-          </ModalContent>
-        </Modal>
-      )}
     </>
   );
 }
