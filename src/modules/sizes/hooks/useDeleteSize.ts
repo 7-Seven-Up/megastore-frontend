@@ -1,5 +1,9 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { DELETE_SIZE_KEY, GET_SIZES_KEY } from "@/modules/sizes/constants";
+import {
+  DELETE_SIZE_KEY,
+  GET_DELETED_SIZES_KEY,
+  GET_SIZES_KEY,
+} from "@/modules/sizes/constants";
 import { deleteSize } from "@/modules/sizes/sizes.service";
 
 export function useDeleteSize() {
@@ -8,9 +12,14 @@ export function useDeleteSize() {
     mutationFn: deleteSize,
     mutationKey: [DELETE_SIZE_KEY],
     onSuccess: async () => {
-      await queryClient.invalidateQueries({
-        queryKey: [GET_SIZES_KEY],
-      });
+      await Promise.all([
+        queryClient.invalidateQueries({
+          queryKey: [GET_SIZES_KEY],
+        }),
+        queryClient.invalidateQueries({
+          queryKey: [GET_DELETED_SIZES_KEY],
+        }),
+      ]);
     },
   });
 
