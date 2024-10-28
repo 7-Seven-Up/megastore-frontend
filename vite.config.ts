@@ -13,6 +13,7 @@ export default defineConfig({
       "@user": path.resolve(__dirname, "./src/modules/users"),
       "@sizes": path.resolve(__dirname, "./src/modules/sizes"),
       "@shared": path.resolve(__dirname, "./src/shared"),
+      "@categories": path.resolve(__dirname, "./src/modules/categories"),
     },
   },
 });
