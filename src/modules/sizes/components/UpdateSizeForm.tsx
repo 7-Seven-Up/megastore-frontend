@@ -1,12 +1,12 @@
-import { InputField } from "@/shared/components/ui/InputField.tsx";
-import { useZodForm } from "@/shared/hooks/useZodForm.ts";
+import { FormFooter } from "@shared/components/ui/FormFooter.tsx";
+import { InputField } from "@shared/components/ui/InputField.tsx";
 import { Size } from "../interfaces/responses/size.interface";
+import { useUpdateSize } from "../hooks/useUpdateSize";
+import { useZodForm } from "@shared/hooks/useZodForm.ts";
 import {
   UpdateSizeSchema,
   UpdateSizeSchemaType,
 } from "../schemas/update-size.schema";
-import { useUpdateSize } from "../hooks/useUpdateSize";
-import { FormFooter } from "@/shared/components/ui/FormFooter.tsx";
 
 interface UpdateSizeFormProps {
   size: Size;
