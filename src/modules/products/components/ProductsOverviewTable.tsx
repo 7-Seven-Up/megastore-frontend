@@ -1,17 +1,9 @@
 import { useState } from "react";
-import {
-  Chip,
-  Image,
-  TableCell,
-  TableRow,
-  useDisclosure,
-} from "@nextui-org/react";
+import { Chip, Image, TableCell, TableRow } from "@nextui-org/react";
 
 import { EditDeleteActions } from "@shared/components/ui/EditDeleteActions.tsx";
-import { EditProductModal } from "@products/components/EditProductModal.tsx";
 import { GenericTable } from "@shared/components/ui/GenericTable.tsx";
 import { PRODUCTS_TABLE_COLUMNS } from "@products/constants.ts";
-import { Product } from "@products/interfaces/responses/product-response.interface.ts";
 import { TablePagination } from "@shared/components/ui/TablePagination.tsx";
 import { currencyFormatter } from "@shared/utils/currencyFormatter.ts";
 import { useDeleteProduct } from "@products/hooks/useDeleteProduct.ts";
@@ -21,16 +13,9 @@ export function ProductsOverviewTable() {
   const [page, setPage] = useState(1);
   const { deleteProduct } = useDeleteProduct();
   const { productResponse, isLoading } = useGetProducts({ page });
-  const [editingProduct, setEditingProduct] = useState<Product>();
-  const { onClose, isOpen, onOpen } = useDisclosure();
 
   function handlePageChange(page: number) {
     setPage(page);
-  }
-
-  function handleOnEdit(product: Product) {
-    setEditingProduct(product);
-    onOpen();
   }
 
   async function handleDelete(productId: string) {
@@ -66,8 +51,8 @@ export function ProductsOverviewTable() {
                 }}
                 deleteContent={"Delete product"}
                 editContent={"Edit product"}
-                onEdit={() => handleOnEdit(product)}
                 onDelete={() => handleDelete(product.productId)}
+                disableEdit={true}
               />
             </TableCell>
 
@@ -122,14 +107,6 @@ export function ProductsOverviewTable() {
           </TableRow>
         )}
       </GenericTable>
-
-      {editingProduct && (
-        <EditProductModal
-          editingProduct={editingProduct}
-          isOpen={isOpen}
-          onClose={onClose}
-        />
-      )}
     </>
   );
 }
