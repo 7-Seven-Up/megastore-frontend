@@ -1,20 +1,20 @@
 import { useState } from "react";
+import { TableCell, TableRow } from "@nextui-org/react";
 
-import { AVAILABLE_TABLE_ACTIONS } from "@shared/interfaces/table-actions.interface.ts";
-import { PaginationControls } from "@shared/components/ui/PaginationControls.tsx";
-import { SizesTable } from "@sizes/components/SizesTable.tsx";
+import { GenericTable } from "@shared/components/ui/GenericTable.tsx";
+import { RestoreActions } from "@shared/components/ui/RestoreActions.tsx";
+import { SIZES_TABLE_COLUMNS } from "@sizes/constants.ts";
+import { TablePagination } from "@shared/components/ui/TablePagination.tsx";
 import { useGetDeletedSizes } from "@sizes/hooks/useGetDeletedSizes.ts";
 import { useRestoreSize } from "@sizes/hooks/useRestoreSize.ts";
 
 export function DeletedSizesTable() {
-  const [currentPage, setCurrentPage] = useState(1);
+  const [page, setPage] = useState(1);
   const { restoreSize } = useRestoreSize();
-  const { sizes, isLoading } = useGetDeletedSizes({
-    page: currentPage,
-  });
+  const { sizes, isLoading } = useGetDeletedSizes({ page });
 
   function handlePageChange(page: number) {
-    setCurrentPage(page);
+    setPage(page);
   }
 
   async function handleRestoreSize(sizeId: string) {
@@ -22,24 +22,32 @@ export function DeletedSizesTable() {
   }
 
   return (
-    <SizesTable
+    <GenericTable
+      aria-label={"List of deleted sizes"}
       bottomContent={
-        sizes &&
-        sizes.content.length > 0 && (
-          <PaginationControls
-            currentPage={currentPage}
-            handlePageChange={handlePageChange}
-            labelName={"sizes"}
-            paginatedResponse={sizes}
-          />
-        )
+        <TablePagination
+          handlePageChange={handlePageChange}
+          items={sizes}
+          labelName={"sizes"}
+          page={page}
+        />
       }
-      isLoading={isLoading}
-      sizes={sizes}
-      tableActionsProps={{
-        onRestore: handleRestoreSize,
-        type: AVAILABLE_TABLE_ACTIONS.RESTORE,
+      columns={SIZES_TABLE_COLUMNS}
+      items={sizes?.content || []}
+      tableBodyProps={{
+        isLoading,
+        emptyContent: "There are no deleted sizes to show",
       }}
-    />
+    >
+      {(size) => (
+        <TableRow key={size.sizeId}>
+          <TableCell>
+            <RestoreActions onRestore={() => handleRestoreSize(size.sizeId)} />
+          </TableCell>
+          <TableCell>{size.name}</TableCell>
+          <TableCell>{size.description}</TableCell>
+        </TableRow>
+      )}
+    </GenericTable>
   );
 }

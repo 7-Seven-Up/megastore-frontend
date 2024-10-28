@@ -1,66 +1,36 @@
+import { useState } from "react";
 import {
   Chip,
   Image,
-  Table,
-  TableBody,
   TableCell,
-  TableColumn,
-  TableHeader,
   TableRow,
+  useDisclosure,
 } from "@nextui-org/react";
-import { useGetProducts } from "@products/hooks/useGetProducts.ts";
+
 import { EditDeleteActions } from "@shared/components/ui/EditDeleteActions.tsx";
-import { useState } from "react";
+import { EditProductModal } from "@products/components/EditProductModal.tsx";
+import { GenericTable } from "@shared/components/ui/GenericTable.tsx";
+import { PRODUCTS_TABLE_COLUMNS } from "@products/constants.ts";
+import { Product } from "@products/interfaces/responses/product-response.interface.ts";
+import { TablePagination } from "@shared/components/ui/TablePagination.tsx";
+import { currencyFormatter } from "@shared/utils/currencyFormatter.ts";
 import { useDeleteProduct } from "@products/hooks/useDeleteProduct.ts";
-import { PaginationControls } from "@/shared/components/ui/PaginationControls.tsx";
-import { TableLoading } from "@/shared/components/ui/TableLoading.tsx";
-import { currencyFormatter } from "@/shared/utils/currencyFormatter.ts";
+import { useGetProducts } from "@products/hooks/useGetProducts.ts";
 
-const columns = [
-  {
-    key: "actions",
-    label: "ACTIONS",
-  },
-  {
-    key: "name",
-    label: "NAME",
-    width: 300,
-  },
-  {
-    key: "description",
-    label: "DESCRIPTION",
-  },
-  {
-    key: "price",
-    label: "PRICE",
-  },
-  {
-    key: "stock",
-    label: "STOCK",
-  },
-  {
-    key: "color",
-    label: "COLOR",
-  },
-  {
-    key: "size",
-    label: "SIZE",
-  },
-  {
-    key: "variantOf",
-    label: "VARIANT OF",
-  },
-];
-
-export function ProductsTable() {
-  const [currentPage, setCurrentPage] = useState(1);
+export function ProductsOverviewTable() {
+  const [page, setPage] = useState(1);
   const { deleteProduct } = useDeleteProduct();
-  const { productResponse, isLoading } = useGetProducts({
-    page: currentPage,
-  });
+  const { productResponse, isLoading } = useGetProducts({ page });
+  const [editingProduct, setEditingProduct] = useState<Product>();
+  const { onClose, isOpen, onOpen } = useDisclosure();
 
   function handlePageChange(page: number) {
-    setCurrentPage(page);
+    setPage(page);
+  }
+
+  function handleOnEdit(product: Product) {
+    setEditingProduct(product);
+    onOpen();
   }
 
   async function handleDelete(productId: string) {
@@ -68,36 +38,23 @@ export function ProductsTable() {
   }
 
   return (
-    <Table
-      aria-label="List of products"
-      bottomContentPlacement={"outside"}
-      classNames={{
-        table: "min-w-[1280px]",
-      }}
-      bottomContent={
-        productResponse &&
-        productResponse.content.length > 0 && (
-          <PaginationControls
-            currentPage={currentPage}
+    <>
+      <GenericTable
+        aria-label={"List of products"}
+        bottomContent={
+          <TablePagination
             handlePageChange={handlePageChange}
+            items={productResponse}
             labelName={"products"}
-            paginatedResponse={productResponse}
+            page={page}
           />
-        )
-      }
-    >
-      <TableHeader columns={columns}>
-        {(column) => (
-          <TableColumn key={column.key} width={column.width}>
-            {column.label}
-          </TableColumn>
-        )}
-      </TableHeader>
-      <TableBody
-        emptyContent={"There are no products to show"}
+        }
+        tableBodyProps={{
+          isLoading,
+          emptyContent: "There are no products to show",
+        }}
+        columns={PRODUCTS_TABLE_COLUMNS}
         items={productResponse?.content || []}
-        loadingContent={<TableLoading />}
-        loadingState={isLoading ? "loading" : "idle"}
       >
         {(product) => (
           <TableRow key={product.productId}>
@@ -109,8 +66,8 @@ export function ProductsTable() {
                 }}
                 deleteContent={"Delete product"}
                 editContent={"Edit product"}
+                onEdit={() => handleOnEdit(product)}
                 onDelete={() => handleDelete(product.productId)}
-                allowDelete
               />
             </TableCell>
 
@@ -164,7 +121,15 @@ export function ProductsTable() {
             </TableCell>
           </TableRow>
         )}
-      </TableBody>
-    </Table>
+      </GenericTable>
+
+      {editingProduct && (
+        <EditProductModal
+          editingProduct={editingProduct}
+          isOpen={isOpen}
+          onClose={onClose}
+        />
+      )}
+    </>
   );
 }

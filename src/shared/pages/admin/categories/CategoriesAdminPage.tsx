@@ -2,7 +2,7 @@ import { Button, Link } from "@nextui-org/react";
 import { PlusIcon } from "@/shared/components/icons/PlusIcon.tsx";
 import { Title } from "@/shared/components/typography/Title.tsx";
 import { Outlet } from "react-router-dom";
-import { CategoriesTable } from "@/modules/categories/components/CategoriesTable.tsx";
+import { CategoriesOverviewTable } from "@categories/components/CategoriesOverviewTable.tsx";
 
 export function CategoriesAdminPage() {
   return (
@@ -21,7 +21,7 @@ export function CategoriesAdminPage() {
           Create new
         </Button>
       </header>
-      <CategoriesTable />
+      <CategoriesOverviewTable />
       <Outlet />
     </div>
   );

@@ -1,28 +1,21 @@
 import { useState } from "react";
-import {
-  Modal,
-  ModalBody,
-  ModalContent,
-  ModalHeader,
-  useDisclosure,
-} from "@nextui-org/react";
+import { TableCell, TableRow, useDisclosure } from "@nextui-org/react";
 
-import { AVAILABLE_TABLE_ACTIONS } from "@shared/interfaces/table-actions.interface.ts";
-import { PaginationControls } from "@shared/components/ui/PaginationControls.tsx";
-import { Size } from "../interfaces/responses/size.interface";
-import { SizesTable } from "@sizes/components/SizesTable.tsx";
-import { UpdateSizeForm } from "./UpdateSizeForm";
-import { useDeleteSize } from "../hooks/useDeleteSize";
-import { useGetSizes } from "../hooks/useGetSizes";
+import { EditDeleteActions } from "@shared/components/ui/EditDeleteActions.tsx";
+import { GenericTable } from "@shared/components/ui/GenericTable.tsx";
+import { SIZES_TABLE_COLUMNS } from "@sizes/constants.ts";
+import { Size } from "@sizes/interfaces/responses/size.interface";
+import { TablePagination } from "@shared/components/ui/TablePagination.tsx";
+import { UpdateSizeModal } from "@sizes/components/UpdateSizeModal.tsx";
+import { useDeleteSize } from "@sizes/hooks/useDeleteSize";
+import { useGetSizes } from "@sizes/hooks/useGetSizes";
 
 export function SizesOverviewTable() {
-  const [currentPage, setCurrentPage] = useState(1);
-  const { sizes, isLoading } = useGetSizes({
-    page: currentPage,
-  });
+  const [page, setPage] = useState(1);
+  const [updatingSize, setUpdatingSize] = useState<Size>();
   const { deleteSize } = useDeleteSize();
   const { onOpen, onClose, isOpen } = useDisclosure();
-  const [updatingSize, setUpdatingSize] = useState<Size | undefined>(undefined);
+  const { sizes, isLoading } = useGetSizes({ page });
 
   function handleOnEdit(size: Size) {
     setUpdatingSize(size);
@@ -30,41 +23,51 @@ export function SizesOverviewTable() {
   }
 
   function handlePageChange(page: number) {
-    setCurrentPage(page);
+    setPage(page);
   }
 
   return (
     <>
-      <SizesTable
-        tableActionsProps={{
-          onDelete: deleteSize,
-          onEdit: handleOnEdit,
-          type: AVAILABLE_TABLE_ACTIONS.EDIT_DELETE,
-        }}
-        sizes={sizes}
-        isLoading={isLoading}
+      <GenericTable
+        aria-label={"List of sizes"}
+        columns={SIZES_TABLE_COLUMNS}
+        items={sizes?.content || []}
+        tableBodyProps={{ isLoading }}
         bottomContent={
-          sizes &&
-          sizes.content.length > 0 && (
-            <PaginationControls
-              currentPage={currentPage}
-              handlePageChange={handlePageChange}
-              labelName={"sizes"}
-              paginatedResponse={sizes}
-            />
-          )
+          <TablePagination
+            handlePageChange={handlePageChange}
+            items={sizes}
+            labelName={"sizes"}
+            page={page}
+          />
         }
-      />
+      >
+        {(size) => (
+          <TableRow key={size.sizeId}>
+            <TableCell>
+              <EditDeleteActions
+                deleteContent={"Delete size"}
+                editContent={"Edit size"}
+                onDelete={() => deleteSize(size.sizeId)}
+                onEdit={() => handleOnEdit(size)}
+                confirmModalProps={{
+                  title: "Delete size",
+                  description: `Are you sure you want to delete the size ${size.name}?`,
+                }}
+              />
+            </TableCell>
+            <TableCell>{size.name}</TableCell>
+            <TableCell>{size.description}</TableCell>
+          </TableRow>
+        )}
+      </GenericTable>
 
       {updatingSize && (
-        <Modal isOpen={isOpen} onClose={onClose} backdrop={"blur"} size={"lg"}>
-          <ModalContent>
-            <ModalHeader>Edit size</ModalHeader>
-            <ModalBody>
-              <UpdateSizeForm size={updatingSize} onClose={onClose} />
-            </ModalBody>
-          </ModalContent>
-        </Modal>
+        <UpdateSizeModal
+          isOpen={isOpen}
+          onClose={onClose}
+          updatingSize={updatingSize}
+        />
       )}
     </>
   );
