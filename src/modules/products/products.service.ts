@@ -32,6 +32,20 @@ export async function getProducts(params: PaginationRequest) {
   return response.data;
 }
 
+export async function getProductDetail(productId: string) {
+  const response = await httpClient.get<Product>(
+    `${PRODUCTS_URL}/${productId}`,
+  );
+  return response.data;
+}
+
+export async function getProductVariants(productId: string) {
+  const response = await httpClient.get<Product[]>(
+    `${PRODUCTS_URL}/${productId}/variants`,
+  );
+  return response.data;
+}
+
 export async function deleteProduct(productId: string) {
   await httpClient.delete(`${PRODUCTS_URL}/${productId}`);
 }
