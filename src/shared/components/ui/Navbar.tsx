@@ -1,3 +1,4 @@
+import { useLocation } from "react-router-dom";
 import {
   Button,
   Divider,
@@ -8,25 +9,27 @@ import {
   NavbarItem,
   NavbarMenu,
   NavbarMenuItem,
-  NavbarMenuToggle
+  NavbarMenuToggle,
 } from "@nextui-org/react";
-import { useLocation } from "react-router-dom";
-import { Title } from "@/shared/components/typography/Title.tsx";
-import { useAuthStore } from "@auth/hooks/useAuthStore.ts";
+
 import RenderIf from "@/shared/components/RenderIf.tsx";
 import { LayoutIcon } from "@/shared/components/icons/LayoutIcon.tsx";
-import { RoleBasedVisibility } from "@/shared/components/ui/RoleBasedVisibility.tsx";
 import { Role } from "@/modules/users/enums/role.enum.ts";
+import { RoleBasedVisibility } from "@/shared/components/ui/RoleBasedVisibility.tsx";
+import { ShoppingCart } from "@shared/components/ui/ShoppingCart.tsx";
+import { Title } from "@/shared/components/typography/Title.tsx";
+import { useAuthStore } from "@auth/hooks/useAuthStore.ts";
+
+const menuItems = [
+  {
+    path: "/",
+    label: "Home",
+  },
+];
 
 export function Navbar() {
   const { isAuthenticated, logout } = useAuthStore();
   const { pathname } = useLocation();
-  const menuItems = [
-    {
-      path: "/",
-      label: "Home",
-    },
-  ];
 
   return (
     <NextNavbar
@@ -80,18 +83,25 @@ export function Navbar() {
 
       {/* Content for mobile */}
       <NavbarContent className="lg:hidden" justify="end">
-        <div className={"pr-2"}></div>
+        <div className={"pr-2"}>
+          <ShoppingCart />
+        </div>
         <NavbarMenuToggle />
       </NavbarContent>
 
       {/* Content for desktop */}
       <NavbarContent justify="end" className={"hidden lg:flex"}>
+        <Link href={"/checkout"}>
+          <div className={"relative"}>
+            <ShoppingCart />
+          </div>
+        </Link>
         <RoleBasedVisibility allowedRoles={[Role.ADMIN]}>
           <Link href={"/admin/products"}>
             <LayoutIcon />
           </Link>
-          <Divider orientation={"vertical"} />
         </RoleBasedVisibility>
+        <Divider orientation={"vertical"} />
 
         <RenderIf condition={!isAuthenticated}>
           <NavbarItem>
