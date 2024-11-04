@@ -27,16 +27,25 @@ export function CheckoutPage() {
 
   return (
     <section className={"grid w-full grid-cols-12 items-center gap-4 p-6"}>
-      <div className={"col-span-5 flex flex-col gap-6"}>
+      <div className={"col-span-12 flex flex-col gap-6 lg:col-span-5"}>
         <Title>Products</Title>
         <ProductsCardContainer />
       </div>
 
-      <div className={"col-span-2 flex h-full items-center justify-center"}>
-        <Divider orientation={"vertical"} />
+      <div
+        className={
+          "col-span-12 flex h-full items-center justify-center lg:col-span-2"
+        }
+      >
+        <Divider orientation={"vertical"} className={"hidden lg:block"} />
+        <Divider orientation={"horizontal"} className={"block lg:hidden"} />
       </div>
 
-      <div className={"col-span-5 flex h-full flex-col items-center gap-2"}>
+      <div
+        className={
+          "col-span-12 flex h-full flex-col items-center gap-2 lg:col-span-5"
+        }
+      >
         <Title>Checkout</Title>
         <Subtitle>
           Total: {currencyFormatter(getTotal, "es-AR", "ARS")}
