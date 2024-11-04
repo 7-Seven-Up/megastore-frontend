@@ -10,6 +10,7 @@ interface QuantitySelectorProps {
   handleRemoveQuantity: () => void;
   isDisabled?: boolean;
   quantity: number;
+  size?: "small" | "normal";
 }
 
 export function QuantitySelector(props: QuantitySelectorProps) {
@@ -20,14 +21,15 @@ export function QuantitySelector(props: QuantitySelectorProps) {
     handleRemoveQuantity,
     isDisabled = false,
     quantity,
+    size = "normal",
   } = props;
 
   return (
-    <div className={"inline-flex w-full min-w-52 flex-1 gap-2"}>
+    <div className={"inline-flex w-full min-w-fit flex-1 gap-2 sm:min-w-52"}>
       <Input
         startContent={
           <Button
-            className={"w-4"}
+            className={`${size === "small" ? "h-6 min-w-10 p-0" : "w-4"}`}
             color={"secondary"}
             isDisabled={disallowRemove}
             onPress={handleRemoveQuantity}
@@ -40,12 +42,16 @@ export function QuantitySelector(props: QuantitySelectorProps) {
         style={{
           textAlign: "center",
         }}
+        size={size === "small" ? "sm" : "md"}
         isDisabled={isDisabled}
         value={quantity.toString()}
         placeholder={"Quantity"}
+        classNames={{
+          inputWrapper: size === "small" ? "w-36" : "",
+        }}
         endContent={
           <Button
-            className={"w-4"}
+            className={`${size === "small" ? "h-6 min-w-10 p-0" : "w-4"}`}
             color={"secondary"}
             isDisabled={disallowAdd}
             onPress={handleAddQuantity}
