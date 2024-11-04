@@ -14,14 +14,15 @@ export function ProductImagePreview(props: ProductImagePreviewProps) {
       onClick={() => setSelectedImage(image)}
       src={image}
       className={
-        "size-24 cursor-pointer rounded-none object-cover lg:size-full"
+        "size-24 cursor-pointer rounded-none object-cover lg:h-fit lg:w-full"
       }
       classNames={{
-        wrapper: "rounded-none h-fit",
+        wrapper: "rounded-none",
       }}
       style={{
         opacity: isSelectedImage ? "50%" : "100%",
       }}
+      disableSkeleton={true}
     />
   );
 }

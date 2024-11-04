@@ -9,7 +9,7 @@ export interface Product {
   stock: number;
   color: string;
   sizeName: string;
-  variantOfName?: string;
+  variantOfId?: string;
 }
 
 export type ProductResponse = PaginatedResponse<Product>;

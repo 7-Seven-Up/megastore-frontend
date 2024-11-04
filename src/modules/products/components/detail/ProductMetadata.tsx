@@ -4,6 +4,7 @@ import { Product } from "@products/interfaces/responses/product-response.interfa
 import { Subtitle } from "@shared/components/typography/Subtitle.tsx";
 import { Title } from "@shared/components/typography/Title.tsx";
 import { currencyFormatter } from "@shared/utils/currencyFormatter.ts";
+import { useGetProductDetail } from "@products/hooks/useGetProductDetail.ts";
 import { useGetProductVariants } from "@products/hooks/useGetProductVariants.ts";
 
 interface ProductMetadataProps {
@@ -11,7 +12,13 @@ interface ProductMetadataProps {
 }
 
 export function ProductMetadata({ product }: ProductMetadataProps) {
-  const { productVariants } = useGetProductVariants(product.productId);
+  const { productVariants } = useGetProductVariants(
+    product.variantOfId ?? product.productId,
+  );
+
+  const { product: superProduct } = useGetProductDetail(
+    product.variantOfId ?? product.productId,
+  );
 
   return (
     <>
@@ -20,13 +27,15 @@ export function ProductMetadata({ product }: ProductMetadataProps) {
         <Subtitle>{currencyFormatter(product.price, "es-AR", "ARS")}</Subtitle>
 
         <div className={"mt-2 flex gap-2"}>
-          <Link
-            className={"opacity-50"}
-            href={`/products/${product.productId}`}
-          >
+          <Link href={`/products/${superProduct?.productId}`}>
             <Image
-              src={product.imagesURLS[0]}
+              disableSkeleton={true}
               className={"size-16 object-cover"}
+              src={superProduct?.imagesURLS[0]}
+              style={{
+                opacity:
+                  product.productId === superProduct?.productId ? 0.5 : 1,
+              }}
             />
           </Link>
           {productVariants?.map((variant) => {
@@ -36,8 +45,12 @@ export function ProductMetadata({ product }: ProductMetadataProps) {
                 key={variant.productId}
               >
                 <Image
+                  disableSkeleton={true}
                   className={"size-16 rounded-md object-cover"}
                   src={variant.imagesURLS[0]}
+                  style={{
+                    opacity: variant.productId === product.productId ? 0.5 : 1,
+                  }}
                 />
               </Link>
             );

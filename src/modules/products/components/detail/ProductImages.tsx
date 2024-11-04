@@ -28,6 +28,7 @@ export function ProductImages({ images }: ProductImagesProps) {
           <ProductImagePreview
             image={src}
             isSelectedImage={selectedImage === src}
+            key={src}
             setSelectedImage={setSelectedImage}
           />
         ))}
@@ -41,6 +42,7 @@ export function ProductImages({ images }: ProductImagesProps) {
           classNames={{
             wrapper: "h-full",
           }}
+          disableSkeleton={true}
         />
       </div>
     </div>
