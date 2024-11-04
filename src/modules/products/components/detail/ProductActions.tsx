@@ -37,7 +37,7 @@ export function ProductActions({ product }: ProductActionsProps) {
           isDisabled={product.stock === 0}
           onPress={handleAddProductToCart}
         >
-          Agregar al carrito
+          Add to cart
         </Button>
       </div>
 
