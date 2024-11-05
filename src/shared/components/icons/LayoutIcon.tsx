@@ -1,4 +1,8 @@
-export function LayoutIcon() {
+import { ComponentProps } from "react";
+
+type LayoutIconProps = ComponentProps<"svg">;
+
+export function LayoutIcon(props: LayoutIconProps) {
   return (
     <svg
       fill="none"
@@ -10,6 +14,7 @@ export function LayoutIcon() {
       viewBox="0 0 24 24"
       width="36"
       xmlns="http://www.w3.org/2000/svg"
+      {...props}
     >
       <path stroke="none" d="M0 0h24v24H0z" fill="none" />
       <path d="M4 4h6v8h-6z" />
