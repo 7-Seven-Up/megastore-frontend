@@ -1,5 +1,5 @@
-import { useCartStore } from "@/modules/cart/hooks/useCartStore.ts";
 import { CartIcon } from "@shared/components/icons/CartIcon.tsx";
+import { useCartStore } from "@/modules/cart/hooks/useCartStore.ts";
 
 export function ShoppingCart() {
   const itemsLength = useCartStore((state) =>
@@ -9,11 +9,11 @@ export function ShoppingCart() {
   return (
     <>
       <div className={"relative"}>
-        <CartIcon />
+        <CartIcon className={"size-7 lg:size-8"} />
         {itemsLength > 0 && (
           <div
             className={
-              "absolute -right-2 -top-2 flex size-4 items-center justify-center rounded-full bg-primary p-3 text-white"
+              "absolute -right-2 -top-2 flex size-1 items-center justify-center rounded-full bg-primary p-3 text-[13px] text-white lg:size-4 lg:text-medium"
             }
           >
             {itemsLength}
