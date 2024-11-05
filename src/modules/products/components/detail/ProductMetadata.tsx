@@ -1,6 +1,8 @@
 import { Image, Link } from "@nextui-org/react";
 
 import { Product } from "@products/interfaces/responses/product-response.interface.ts";
+import { ProductColor } from "@products/components/detail/ProductColor.tsx";
+import { ProductSize } from "@products/components/detail/ProductSize.tsx";
 import { Subtitle } from "@shared/components/typography/Subtitle.tsx";
 import { Title } from "@shared/components/typography/Title.tsx";
 import { currencyFormatter } from "@shared/utils/currencyFormatter.ts";
@@ -57,6 +59,15 @@ export function ProductMetadata({ product }: ProductMetadataProps) {
           })}
         </div>
       </header>
+
+      <div className={"flex items-center gap-2"}>
+        <span className={"pr-3 text-tiny font-bold uppercase text-secondary"}>
+          Color y talle
+        </span>
+        <ProductColor color={product.color} />
+        <ProductSize size={product.sizeName} />
+      </div>
+
       <p>{product.description}</p>
     </>
   );
