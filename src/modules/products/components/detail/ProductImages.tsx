@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { useSearchParams } from "react-router-dom";
 import { Image } from "@nextui-org/react";
 
 import { ProductImagePreview } from "@products/components/detail/ProductImagePreview.tsx";
@@ -8,11 +9,28 @@ interface ProductImagesProps {
 }
 
 export function ProductImages({ images }: ProductImagesProps) {
+  const [searchParams, setSearchParams] = useSearchParams();
   const [selectedImage, setSelectedImage] = useState<string>();
 
   useEffect(() => {
-    setSelectedImage(images[0]);
-  }, [images]);
+    const selectedImageParam = searchParams.get("image");
+
+    if (!selectedImageParam) {
+      setSelectedImage(images[0]);
+      return;
+    }
+
+    const imageIndex = parseInt(selectedImageParam);
+    const image = images.at(imageIndex) ?? images[0];
+    setSelectedImage(image);
+  }, [searchParams, images]);
+
+  function handleImageChange(image: string, index: number) {
+    setSelectedImage(image);
+    setSearchParams({
+      image: index.toString(),
+    });
+  }
 
   return (
     <div
@@ -24,12 +42,12 @@ export function ProductImages({ images }: ProductImagesProps) {
           "order-1 flex w-full gap-2 lg:order-none lg:w-48 lg:flex-col"
         }
       >
-        {images.map((src) => (
+        {images.map((src, index) => (
           <ProductImagePreview
             image={src}
             isSelectedImage={selectedImage === src}
             key={src}
-            setSelectedImage={setSelectedImage}
+            setSelectedImage={(src) => handleImageChange(src, index)}
           />
         ))}
       </div>
