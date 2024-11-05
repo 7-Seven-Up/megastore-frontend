@@ -83,9 +83,12 @@ export function Navbar() {
 
       {/* Content for mobile */}
       <NavbarContent className="lg:hidden" justify="end">
-        <div className={"pr-2"}>
+        <Link href={"/checkout"}>
           <ShoppingCart />
-        </div>
+        </Link>
+        <Link href={"/admin/products"}>
+          <LayoutIcon className={"size-7"} />
+        </Link>
         <NavbarMenuToggle />
       </NavbarContent>
 
@@ -144,14 +147,6 @@ export function Navbar() {
         </div>
 
         <div className={"flex flex-col gap-2"}>
-          <RoleBasedVisibility allowedRoles={[Role.ADMIN]}>
-            <NavbarMenuItem isActive={pathname === "/admin"}>
-              <Link href={"/admin/products"} color={"foreground"}>
-                Admin panel
-              </Link>
-            </NavbarMenuItem>
-          </RoleBasedVisibility>
-
           <RenderIf condition={isAuthenticated}>
             <NavbarMenuItem>
               <Button
