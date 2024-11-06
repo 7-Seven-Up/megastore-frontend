@@ -16,7 +16,7 @@ export function CheckoutPage() {
     return (
       <section
         className={
-          "flex h-full w-full flex-col items-center justify-center gap-4"
+          "flex h-full w-full flex-col items-center justify-center gap-4 p-6"
         }
       >
         <Title>Products</Title>
@@ -27,8 +27,8 @@ export function CheckoutPage() {
 
   return (
     <section className={"grid w-full grid-cols-12 items-center gap-4 p-6"}>
-      <div className={"col-span-12 flex flex-col gap-6 lg:col-span-5"}>
-        <Title>Products</Title>
+      <div className={"col-span-12 flex flex-col gap-4 lg:col-span-5 lg:gap-6"}>
+        <Title className={"text-center lg:text-start"}>Products</Title>
         <ProductsCardContainer />
       </div>
 
@@ -38,7 +38,10 @@ export function CheckoutPage() {
         }
       >
         <Divider orientation={"vertical"} className={"hidden lg:block"} />
-        <Divider orientation={"horizontal"} className={"block lg:hidden"} />
+        <Divider
+          orientation={"horizontal"}
+          className={"my-4 block lg:hidden"}
+        />
       </div>
 
       <div
