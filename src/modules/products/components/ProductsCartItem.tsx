@@ -37,7 +37,7 @@ export function ProductsCartItem(props: ProductsCartItemProps) {
 
   return (
     <div className={"flex items-center justify-between gap-4"}>
-      <div className={"flex items-center gap-4"}>
+      <div className={"flex w-full items-center gap-4"}>
         <Link href={`/products/${product.productId}`}>
           <Image
             className={"size-32 object-cover"}
@@ -45,16 +45,16 @@ export function ProductsCartItem(props: ProductsCartItemProps) {
           />
         </Link>
 
-        <div className={"flex flex-col gap-2"}>
+        <div className={"flex flex-1 flex-col gap-2"}>
           <div className={"flex flex-col"}>
             <p className={"text-lg"}>
-              {product.name} - {product.quantity}
+              {product.name} ({product.sizeName}) x {product.quantity}
             </p>
             <p>{currencyFormatter(product.price, "es-AR", "ARS")}</p>
-            <strong>
+            <p className={"font-medium"}>
               <span>Subtotal: </span>
               {currencyFormatter(subTotal, "es-AR", "ARS")}
-            </strong>
+            </p>
           </div>
 
           <div className={"inline-flex gap-4"}>
