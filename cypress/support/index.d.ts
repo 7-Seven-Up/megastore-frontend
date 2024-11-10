@@ -3,13 +3,7 @@
 
 declare namespace Cypress {
   interface Chainable<Subject = any> {
-    login({
-      username,
-      password,
-    }: {
-      username: string;
-      password: string;
-    }): Promise<void>;
+    login(): Chainable<JQuery<HTMLElement>>;
     dataCy(value: string): Chainable<JQuery<HTMLElement>>;
   }
 }

@@ -1,25 +1,14 @@
-import axios from "axios";
+Cypress.Commands.add("login", () => {
+  const { BACKEND, USER } = Cypress.env();
 
-import { useAuthStore } from "../../src/modules/auth/hooks/useAuthStore";
+  cy.intercept("POST", `${BACKEND.URL}/auth/signin`).as("loginRequest");
 
-Cypress.Commands.add("login", async ({ username, password }) => {
-  const authStore = useAuthStore.getState();
+  cy.visit("/auth/signin");
+  cy.dataCy("username").type(USER.USERNAME);
+  cy.dataCy("password").type(USER.PASSWORD);
+  cy.get("button[type=submit]").click();
 
-  async function login() {
-    const response = await axios.post(
-      "http://localhost:8080/auth/signin",
-      null,
-      {
-        headers: {
-          Authorization: `Basic ${btoa(`${username}:${password}`)}`,
-        },
-      },
-    );
-
-    authStore.login(response.data);
-  }
-
-  return await login();
+  cy.wait("@loginRequest");
 });
 
 Cypress.Commands.add("dataCy", (value) => {
