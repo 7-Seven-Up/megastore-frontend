@@ -41,6 +41,7 @@ export function SignInForm() {
           name={"username"}
           placeholder={"Type your username"}
           type={"text"}
+          data-cy={"username"}
         />
 
         <PasswordInput<SignInSchemaType>
@@ -49,6 +50,7 @@ export function SignInForm() {
           label={"Password"}
           name={"password"}
           placeholder={"Type your password"}
+          data-cy={"password"}
         />
       </div>
 
