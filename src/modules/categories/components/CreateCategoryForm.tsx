@@ -28,6 +28,7 @@ export function CreateCategoryForm({ onClose }: CreateCategoryFormProps) {
         label={"Category name"}
         name={"name"}
         placeholder={"Type the category name"}
+        data-cy={"category-name"}
       />
 
       <InputField
@@ -35,6 +36,7 @@ export function CreateCategoryForm({ onClose }: CreateCategoryFormProps) {
         label={"Category description"}
         name={"description"}
         placeholder={"Type the category description"}
+        data-cy={"category-description"}
       />
 
       <CategoriesSelect
