@@ -39,6 +39,7 @@ export function EditDeleteActions(props: EditDeleteActionsProps) {
           <button
             className="cursor-pointer text-lg text-default-400 active:opacity-50"
             onClick={onEdit}
+            data-cy={"table-edit-button"}
           >
             <EditIcon />
           </button>

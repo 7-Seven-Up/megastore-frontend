@@ -1,18 +1,9 @@
-function visitCreateCategoryPage() {
-  cy.visit("/admin/categories/create");
-}
-
-function fillCategoryName(name: string) {
-  cy.dataCy("category-name").type(name);
-}
-
-function fillCategoryDescription(description: string) {
-  cy.dataCy("category-description").type(description);
-}
-
-function submitForm() {
-  cy.get("button[type=submit]").click();
-}
+import {
+  fillCategoryDescription,
+  fillCategoryName,
+  submitForm,
+  visitCreateCategoryPage,
+} from "./categories-utilities.cy";
 
 describe("Create category", () => {
   beforeEach(() => {

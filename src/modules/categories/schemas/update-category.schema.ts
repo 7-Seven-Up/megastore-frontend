@@ -5,8 +5,8 @@ export const UpdateCategorySchema = z.object({
     .string({
       required_error: "",
     })
-    .min(1, {
-      message: "Name is required",
+    .min(3, {
+      message: "Name must be at least 3 characters",
     })
     .max(20, {
       message: "Name must be less than 20 characters",
