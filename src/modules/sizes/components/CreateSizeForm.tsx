@@ -27,6 +27,7 @@ export function CreateSizeForm({ onClose }: CreateSizeFormProps) {
         label={"Size name"}
         name={"name"}
         placeholder={"Type the size name"}
+        data-cy={"size-name"}
       />
 
       <InputField
@@ -34,6 +35,7 @@ export function CreateSizeForm({ onClose }: CreateSizeFormProps) {
         label={"Size description"}
         name={"description"}
         placeholder={"Type the size description"}
+        data-cy={"size-description"}
       />
 
       <FormFooter onClose={onClose} isLoading={isCreating} />

@@ -5,6 +5,9 @@ export const CreateSizeSchema = z.object({
     .string({
       required_error: "",
     })
+    .min(1, {
+      message: "Name must be at least 1 character",
+    })
     .max(20, {
       message: "Name must be less than 20 characters",
     }),
