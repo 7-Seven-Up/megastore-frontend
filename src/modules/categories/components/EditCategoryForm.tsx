@@ -74,6 +74,7 @@ export function EditCategoryForm({ onClose, category }: EditCategoryFormProps) {
         label={"Category name"}
         name={"name"}
         placeholder={"Type the category name"}
+        data-cy={"category-name"}
       />
 
       <InputField
@@ -81,6 +82,7 @@ export function EditCategoryForm({ onClose, category }: EditCategoryFormProps) {
         label={"Category description"}
         name={"description"}
         placeholder={"Type the category description"}
+        data-cy={"category-description"}
       />
 
       <ControlledSelect
