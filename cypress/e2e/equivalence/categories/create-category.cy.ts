@@ -1,9 +1,10 @@
 import {
   fillCategoryDescription,
   fillCategoryName,
-  submitForm,
   visitCreateCategoryPage,
 } from "./categories-utilities.cy";
+
+import { submitForm } from "../../../cypress-utilities";
 
 describe("Create category", () => {
   beforeEach(() => {
