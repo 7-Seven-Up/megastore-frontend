@@ -2,7 +2,7 @@ import {
   fillCategoryDescription,
   fillCategoryName,
   visitCreateCategoryPage,
-} from "./categories-utilities.cy";
+} from "../../utils/categories.utilities";
 
 import { submitForm } from "../../../cypress-utilities";
 

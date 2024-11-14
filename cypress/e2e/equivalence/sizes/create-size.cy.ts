@@ -3,7 +3,7 @@ import {
   fillSizeDescription,
   fillSizeName,
   visitCreateSizePage,
-} from "./sizes.utilities.cy";
+} from "../../utils/sizes.utilities";
 
 import { submitForm } from "../../../cypress-utilities";
 

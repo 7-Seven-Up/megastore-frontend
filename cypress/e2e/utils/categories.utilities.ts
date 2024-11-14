@@ -1,4 +1,4 @@
-import { clearAndType, fillInput } from "../../../cypress-utilities";
+import { clearAndType, fillInput } from "../../cypress-utilities";
 
 export function visitCreateCategoryPage() {
   cy.visit("/admin/categories/create");
@@ -25,5 +25,9 @@ export function clearAndTypeCategoryDescription(description: string) {
 }
 
 export function assertCategoryUpdatedSuccessfully() {
+  cy.url().should("include", "/admin/categories");
+}
+
+export function assertCategoryCreatedSuccessfully() {
   cy.url().should("include", "/admin/categories");
 }
