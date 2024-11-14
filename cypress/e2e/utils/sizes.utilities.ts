@@ -1,4 +1,4 @@
-import { clearAndType, fillInput } from "../../../cypress-utilities";
+import { clearAndType, fillInput } from "../../cypress-utilities";
 
 export function fillSizeName(name: string) {
   fillInput("size-name", name);

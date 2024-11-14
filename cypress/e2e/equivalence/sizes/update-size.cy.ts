@@ -3,7 +3,7 @@ import {
   clearAndTypeSizeDescription,
   clearAndTypeSizeName,
   visitSizesPage,
-} from "./sizes.utilities.cy";
+} from "../../utils/sizes.utilities";
 
 import { submitForm } from "../../../cypress-utilities";
 

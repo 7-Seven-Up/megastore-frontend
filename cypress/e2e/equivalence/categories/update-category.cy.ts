@@ -2,9 +2,10 @@ import {
   assertCategoryUpdatedSuccessfully,
   clearAndTypeCategoryDescription,
   clearAndTypeCategoryName,
-  submitForm,
   visitCategoriesPage,
-} from "./categories-utilities.cy";
+} from "../../utils/categories.utilities";
+
+import { submitForm } from "../../../cypress-utilities";
 
 describe("Update category", () => {
   beforeEach(() => {
