@@ -38,6 +38,7 @@ export function UpdateSizeForm({ onClose, size }: UpdateSizeFormProps) {
         label={"Size name"}
         name={"name"}
         placeholder={"Type the size name"}
+        data-cy={"size-name"}
       />
 
       <InputField
@@ -45,6 +46,7 @@ export function UpdateSizeForm({ onClose, size }: UpdateSizeFormProps) {
         label={"Size description"}
         name={"description"}
         placeholder={"Type the size description"}
+        data-cy={"size-description"}
       />
 
       <FormFooter onClose={onClose} isLoading={isUpdating} />
