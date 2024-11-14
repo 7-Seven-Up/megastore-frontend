@@ -12,6 +12,10 @@ export function assertSizeCreatedSuccessfully() {
   cy.url().should("include", "/admin/sizes");
 }
 
+export function assertSizeUpdatedSuccessfully() {
+  cy.url().should("include", "/admin/sizes");
+}
+
 export function visitSizesPage() {
   cy.visit("/admin/sizes");
 }
