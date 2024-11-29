@@ -14,8 +14,22 @@ export async function getAllCategories(params: PaginationRequest) {
   return response.data;
 }
 
+export async function getDeletedCategories(params: PaginationRequest) {
+  const response = await httpClient.get<CategoryResponse>(
+    `${CATEGORIES_URL}/deleted`,
+    {
+      params,
+    },
+  );
+  return response.data;
+}
+
 export async function deleteCategory(categoryId: string) {
   await httpClient.delete(`${CATEGORIES_URL}/${categoryId}`);
+}
+
+export async function restoreCategory(categoryId: string) {
+  await httpClient.post(`${CATEGORIES_URL}/${categoryId}/restore`);
 }
 
 export async function createCategory(params: CreateCategoryRequest) {

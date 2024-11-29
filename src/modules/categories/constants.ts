@@ -2,6 +2,8 @@ export const GET_CATEGORIES_KEY = "categories/get";
 export const DELETE_CATEGORY_KEY = "categories/delete";
 export const CREATE_CATEGORY_KEY = "categories/create";
 export const UPDATE_CATEGORY_KEY = "categories/update";
+export const GET_DELETE_CATEGORIES_KEY = "categories/getDelete";
+export const RESTORE_CATEGORY_KEY = "categories/restore";
 
 export const CATEGORIES_TABLE_COLUMNS = [
   {
