@@ -10,6 +10,7 @@ import { ProtectedRoute } from "@/shared/pages/routes/ProtectedRoute.tsx";
 import { SizesAdminPage } from "@/shared/pages/admin/sizes/SizesAdminPage.tsx";
 
 import { Role } from "@/modules/users/enums/role.enum.ts";
+import { ReportsPage } from '@/shared/pages/admin/reports/ReportsPage';
 
 export function AdminRoutes() {
   return (
@@ -32,6 +33,8 @@ export function AdminRoutes() {
         <Route path={"products"} element={<ProductsAdminPage />}>
           <Route path={"create"} element={<CreateProductPage />} />
         </Route>
+
+        <Route path={"reports"} element={<ReportsPage />} />
       </Route>
 
       <Route path="*" element={<Navigate replace to="/admin/products" />} />

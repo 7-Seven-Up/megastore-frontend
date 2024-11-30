@@ -22,6 +22,13 @@ export function AdminLayout() {
       label: "Sizes",
       path: "/admin/sizes",
     },
+    // TODO: Change icon
+    {
+      icon: SizeIcon,
+      label: "Reports",
+      path: "/admin/reports",
+    },
+    
   ];
 
   return (
