@@ -1,25 +1,27 @@
 import { useState } from 'react';
 import { OrderByStateChart } from './charts/OrderByStateChart';
-import { TopClientsChart } from './charts/TopClientsChart';
+import { MostSoldProductChart } from './charts/MostSoldProductChart';
 
 export function ReportsPage() {
 
   const [selectedReport, setSelectedReport] = useState<string>('Orders by state')
   const reports = {
     "Orders by state": <OrderByStateChart />,
-    "Top clients chart": <TopClientsChart />
+    "Most sold products": <MostSoldProductChart />
   }
 
   return (
-    <div className={"flex min-h-screenMinusNavbar flex-col gap-6 p-6"}>
+    <div className={"flex flex-col gap-6 p-6"}>
       <header
-        className={"flex w-full flex-wrap items-center justify-between gap-2"}
+        className={"flex w-full flex-wrap items-center gap-5"}
       >
         <div>
-          <h1>Reports</h1>
+          <p className={"text-4xl"}>Report</p>
         </div>
         <div>
-          <select onChange={(event) => { setSelectedReport(event.target.value) }}>
+          <select 
+            className={"text-xl"}
+            onChange={(event) => { setSelectedReport(event.target.value) }}>
             {
               Object.keys(reports).map(reportType =>  <option key={reportType}>{reportType}</option>)
             }

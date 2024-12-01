@@ -1,4 +1,5 @@
 import { useOrderByState } from '@/modules/reports/hooks/useOrderByState';
+import { BetweenDatesSelector } from '@/shared/components/ui/BetweenDatesSelector';
 import { reportNameFormatter } from '@/shared/utils/reportNameFormatter';
 import { BarChart } from '@mui/x-charts/BarChart/BarChart';
 import { DatePicker, DateValue } from '@nextui-org/react';
@@ -15,17 +16,13 @@ export function OrderByStateChart() {
   }, [dateFrom, dateTo, refetch])
    
   return (
-    <div className={"flex min-h-screenMinusNavbar flex-col gap-6 p-6"}>
-      <div className={"flex gap-6 p-2"}>
-        <div>
-          <p>Date from</p>
-          <DatePicker value={dateFrom} onChange={setDateFrom} label={'Date from'}/>
-        </div>
-        <div>
-          <p>Date to</p>
-          <DatePicker value={dateTo} onChange={setDateTo} label={'Date to'}/>
-        </div>
-      </div>
+    <div className={"flex flex-col gap-6 p-6"}>
+      <BetweenDatesSelector 
+        dateFrom={dateFrom}
+        dateTo={dateTo}
+        setDateFrom={setDateFrom}
+        setDateTo={setDateTo}
+      />
 
       {
         ordersByState && 

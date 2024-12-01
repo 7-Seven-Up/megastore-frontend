@@ -3,6 +3,7 @@ import { Link, Tooltip } from "@nextui-org/react";
 import { CategoryIcon } from "@/shared/components/icons/CategoryIcon.tsx";
 import { SizeIcon } from "@/shared/components/icons/SizeIcon";
 import { ShirtFoldedIcon } from "@/shared/components/icons/ShirtFoldedIcon.tsx";
+import { ReportIcon } from '@/shared/components/icons/ReportIcon';
 
 export function AdminLayout() {
   const { pathname } = useLocation();
@@ -22,9 +23,8 @@ export function AdminLayout() {
       label: "Sizes",
       path: "/admin/sizes",
     },
-    // TODO: Change icon
     {
-      icon: SizeIcon,
+      icon: ReportIcon,
       label: "Reports",
       path: "/admin/reports",
     },
