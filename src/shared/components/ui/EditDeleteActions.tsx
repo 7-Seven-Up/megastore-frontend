@@ -46,21 +46,21 @@ export function EditDeleteActions(props: EditDeleteActionsProps) {
         </Tooltip>
       )}
 
-      {!disableDelete && (
-        <Tooltip
-          closeDelay={0}
-          color="danger"
-          content={deleteContent}
-          delay={0}
+      <Tooltip
+        closeDelay={0}
+        color="danger"
+        content={deleteContent}
+        delay={0}
+        isDisabled={disableDelete}
+      >
+        <button
+          className={`text-lg text-danger active:opacity-50 ${disableDelete ? "pointer-events-none opacity-40" : "cursor-pointer"}`}
+          disabled={disableDelete}
+          onClick={handleDelete}
         >
-          <button
-            className="cursor-pointer text-lg text-danger active:opacity-50"
-            onClick={handleDelete}
-          >
-            <DeleteIcon />
-          </button>
-        </Tooltip>
-      )}
+          <DeleteIcon />
+        </button>
+      </Tooltip>
     </div>
   );
 }

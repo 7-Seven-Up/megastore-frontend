@@ -51,8 +51,13 @@ export function ProductsOverviewTable() {
                 }}
                 deleteContent={"Delete product"}
                 editContent={"Edit product"}
-                onDelete={() => handleDelete(product.productId)}
+                onDelete={
+                  !product.hasVariants
+                    ? () => handleDelete(product.productId)
+                    : undefined
+                }
                 disableEdit={true}
+                disableDelete={product.hasVariants}
               />
             </TableCell>
 
@@ -100,8 +105,10 @@ export function ProductsOverviewTable() {
 
             <TableCell>{product.sizeName}</TableCell>
             <TableCell>
-              {product.variantOfName || (
-                <span className={"text-gray-400"}>No variant</span>
+              {product.variantOfName ? (
+                <span>{product.variantOfName}</span>
+              ) : (
+                <span className={"italic text-gray-400"}>No variant</span>
               )}
             </TableCell>
           </TableRow>

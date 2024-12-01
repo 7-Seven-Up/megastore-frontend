@@ -10,6 +10,8 @@ export interface Product {
   color: string;
   sizeName: string;
   variantOfId?: string;
+  variantOfName?: string;
+  hasVariants: boolean;
 }
 
 export type ProductResponse = PaginatedResponse<Product>;

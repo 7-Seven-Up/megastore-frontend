@@ -31,11 +31,7 @@ export function GenericTable<T>(props: GenericTableProps<T>) {
           </TableColumn>
         )}
       </TableHeader>
-      <TableBody
-        items={items}
-        loadingContent={<TableLoading />}
-        {...tableBodyProps}
-      >
+      <TableBody items={items} loadingContent={<TableLoading />} {...tableBodyProps}>
         {(item) => props.children(item)}
       </TableBody>
     </Table>

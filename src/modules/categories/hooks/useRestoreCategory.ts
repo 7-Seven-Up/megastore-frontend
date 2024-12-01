@@ -1,16 +1,16 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { restoreCategory } from "@categories/categories.service.ts";
 import {
-  DELETE_CATEGORY_KEY,
   GET_CATEGORIES_KEY,
   GET_DELETE_CATEGORIES_KEY,
-} from "@/modules/categories/constants.ts";
-import { deleteCategory } from "@/modules/categories/categories.service.ts";
+  RESTORE_CATEGORY_KEY,
+} from "@categories/constants.ts";
 
-export function useDeleteCategory() {
+export function useRestoreCategory() {
   const queryClient = useQueryClient();
   const { mutateAsync } = useMutation({
-    mutationFn: deleteCategory,
-    mutationKey: [DELETE_CATEGORY_KEY],
+    mutationFn: (categoryId: string) => restoreCategory(categoryId),
+    mutationKey: [RESTORE_CATEGORY_KEY],
     onSuccess: async () => {
       await Promise.all([
         queryClient.invalidateQueries({
@@ -23,7 +23,5 @@ export function useDeleteCategory() {
     },
   });
 
-  return {
-    deleteCategory: mutateAsync,
-  };
+  return { restoreCategory: mutateAsync };
 }
