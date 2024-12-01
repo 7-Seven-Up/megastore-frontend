@@ -9,10 +9,11 @@ import { GenericTable } from "@shared/components/ui/GenericTable.tsx";
 import { TablePagination } from "@shared/components/ui/TablePagination.tsx";
 import { useDeleteCategory } from "@/modules/categories/hooks/useDeleteCategory.ts";
 import { useGetCategories } from "@/modules/categories/hooks/useGetCategories.ts";
+import { usePagination } from "@shared/hooks/usePagination.ts";
 
 export function CategoriesOverviewTable() {
   const [editingCategory, setEditingCategory] = useState<Category>();
-  const [page, setPage] = useState(1);
+  const { page, handlePageChange } = usePagination();
   const { categories, isLoading } = useGetCategories({ page });
   const { deleteCategory } = useDeleteCategory();
   const { onOpen, onClose, isOpen } = useDisclosure();
@@ -20,10 +21,6 @@ export function CategoriesOverviewTable() {
   function handleOnEdit(category: Category) {
     setEditingCategory(category);
     onOpen();
-  }
-
-  function handlePageChange(page: number) {
-    setPage(page);
   }
 
   async function handleOnDelete(categoryId: string) {
