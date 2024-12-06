@@ -13,7 +13,7 @@ export default function RoutesProvider() {
   const navigate = useNavigate();
 
   return (
-    <NextUIProvider navigate={navigate}>
+    <NextUIProvider navigate={navigate} locale='es-AR'>
       <Routes>
         <Route path={"/"} element={<AppLayout />}>
           <Route index element={<HomePage />} />
