@@ -1,4 +1,4 @@
-import SendEmailForm from "@/modules/users/components/SendEmailForm";
+import SendEmailForm from "@/features/users/components/SendEmailForm";
 
 export function ResendActivationEmailPage() {
   return (

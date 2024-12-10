@@ -1,0 +1,11 @@
+:root {
+  --admin-sidebar-width: 20rem;
+
+  @media (width <= 1536px) {
+    --admin-sidebar-width: 6rem;
+  }
+
+  @media (width <= 768px) {
+    --admin-sidebar-width: 5.5rem;
+  }
+}

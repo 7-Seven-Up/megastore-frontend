@@ -2,17 +2,13 @@ import { Button } from "@nextui-org/react";
 import { useSearchParams } from "react-router-dom";
 
 import { Title } from "@/shared/components/typography/Title.tsx";
-import { useActivateUser } from "@auth/hooks/useActivateUser.ts";
-import { useSendNewActivationToken } from "@auth/hooks/useSendNewActivationToken.ts";
+import { useActivateUser } from "@/features/auth/hooks/useActivateUser.ts";
+import { useSendNewActivationToken } from "@/features/auth/hooks/useSendNewActivationToken.ts";
 
 export function ActivateUserPage() {
   const [searchParams] = useSearchParams();
-  const {
-    activateUserMutate,
-    activateUserIsPending,
-    activateUserIsError,
-    activateUserIsSuccess,
-  } = useActivateUser();
+  const { activateUserMutate, activateUserIsPending, activateUserIsError, activateUserIsSuccess } =
+    useActivateUser();
 
   const { sendNewTokenMutate, sendNewTokenIsSuccess, sendNewTokenIsError } =
     useSendNewActivationToken();
@@ -35,8 +31,7 @@ export function ActivateUserPage() {
       <div className={"flex flex-col gap-4 text-center"}>
         <Title>Activate your account</Title>
         <p className={"text-content4-foreground"}>
-          It's simple, just click the button below and start using our
-          e-commerce.
+          It's simple, just click the button below and start using our e-commerce.
         </p>
       </div>
       <Button
@@ -49,9 +44,7 @@ export function ActivateUserPage() {
       </Button>
       <div className={"text-center"}>
         <Button
-          className={
-            "cursor-pointer border-none bg-transparent p-0 text-purple-500 underline"
-          }
+          className={"cursor-pointer border-none bg-transparent p-0 text-purple-500 underline"}
           isDisabled={sendNewTokenIsSuccess || sendNewTokenIsError}
           onClick={handleSendNewActivationToken}
         >

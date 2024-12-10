@@ -1,6 +1,6 @@
 import { Modal, ModalBody, ModalContent, ModalHeader } from "@nextui-org/react";
 import { useNavigate } from "react-router-dom";
-import { CreateCategoryForm } from "@/modules/categories/components/CreateCategoryForm.tsx";
+import { CreateCategoryForm } from "@/features/categories/components/CreateCategoryForm.tsx";
 
 export function CreateCategoryPage() {
   const navigate = useNavigate();

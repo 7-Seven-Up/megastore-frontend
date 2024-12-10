@@ -1,4 +1,4 @@
-import { CreateSizeForm } from "@/modules/sizes/components/CreateSizeForm.tsx";
+import { CreateSizeForm } from "@/features/sizes/components/CreateSizeForm.tsx";
 import { Modal, ModalBody, ModalContent, ModalHeader } from "@nextui-org/react";
 import { useNavigate } from "react-router-dom";
 
