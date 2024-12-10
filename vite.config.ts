@@ -8,12 +8,12 @@ export default defineConfig({
   resolve: {
     alias: {
       "@": path.resolve(__dirname, "./src"),
-      "@auth": path.resolve(__dirname, "./src/modules/auth"),
-      "@products": path.resolve(__dirname, "./src/modules/products"),
-      "@user": path.resolve(__dirname, "./src/modules/users"),
-      "@sizes": path.resolve(__dirname, "./src/modules/sizes"),
+      "@auth": path.resolve(__dirname, "./src/features/auth"),
+      "@categories": path.resolve(__dirname, "./src/features/categories"),
+      "@products": path.resolve(__dirname, "./src/features/products"),
       "@shared": path.resolve(__dirname, "./src/shared"),
-      "@categories": path.resolve(__dirname, "./src/modules/categories"),
+      "@sizes": path.resolve(__dirname, "./src/features/sizes"),
+      "@user": path.resolve(__dirname, "./src/features/users"),
     },
   },
 });

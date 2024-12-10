@@ -1,4 +1,4 @@
-import RecoverPasswordForm from "@/modules/users/components/RecoverPasswordForm.tsx";
+import RecoverPasswordForm from "@/features/users/components/RecoverPasswordForm.tsx";
 import { Title } from "@/shared/components/typography/Title.tsx";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { useEffect, useMemo } from "react";
@@ -9,13 +9,13 @@ type RecoverPasswordParams = {
 
 export function RecoverPasswordPage() {
   const [searchParams] = useSearchParams();
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   const params = useMemo<RecoverPasswordParams>(() => {
     return {
       token: searchParams.get("token"),
     };
-  }, [searchParams])
+  }, [searchParams]);
 
   useEffect(() => {
     if (!params.token) {

@@ -3,7 +3,7 @@ import { toast } from "sonner";
 
 import { ErrorResponse } from "@/shared/interfaces/error-response.interface.ts";
 import { EXCLUDED_BEARER_ROUTES } from "@/shared/lib/constants.ts";
-import { useAuthStore } from "@auth/hooks/useAuthStore.ts";
+import { useAuthStore } from "@/features/auth/hooks/useAuthStore.ts";
 
 export const httpClient = axios.create({
   baseURL: import.meta.env.VITE_BACKEND_URL,
@@ -33,9 +33,7 @@ httpClient.interceptors.request.use(function (config) {
   if (!authResponse) return config;
 
   const { accessToken } = authResponse;
-  const shouldExclude = EXCLUDED_BEARER_ROUTES.some((path) =>
-    config.url?.includes(path),
-  );
+  const shouldExclude = EXCLUDED_BEARER_ROUTES.some((path) => config.url?.includes(path));
 
   if (!shouldExclude && accessToken) {
     config.headers.set("Authorization", `Bearer ${accessToken}`);

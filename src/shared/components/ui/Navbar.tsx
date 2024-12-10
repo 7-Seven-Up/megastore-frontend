@@ -14,11 +14,11 @@ import {
 
 import RenderIf from "@/shared/components/RenderIf.tsx";
 import { LayoutIcon } from "@/shared/components/icons/LayoutIcon.tsx";
-import { Role } from "@/modules/users/enums/role.enum.ts";
+import { Role } from "@/features/users/enums/role.enum.ts";
 import { RoleBasedVisibility } from "@/shared/components/ui/RoleBasedVisibility.tsx";
-import { ShoppingCart } from "@shared/components/ui/ShoppingCart.tsx";
+import { ShoppingCart } from "@/features/cart/components/ShoppingCart.tsx";
 import { Title } from "@/shared/components/typography/Title.tsx";
-import { useAuthStore } from "@auth/hooks/useAuthStore.ts";
+import { useAuthStore } from "@/features/auth/hooks/useAuthStore.ts";
 
 const menuItems = [
   {
@@ -36,9 +36,7 @@ export function Navbar() {
       disableAnimation
       isBlurred
       maxWidth={"full"}
-      className={
-        "border-1 border-r-0 border-t-0 border-b-default/50 bg-background py-3"
-      }
+      className={"border-1 border-r-0 border-t-0 border-b-default/50 bg-background py-3"}
     >
       <NavbarContent className="pr-3 lg:hidden" justify="center">
         <NavbarBrand>
@@ -113,12 +111,7 @@ export function Navbar() {
             </Link>
           </NavbarItem>
           <NavbarItem>
-            <Button
-              as={Link}
-              color="secondary"
-              href="/auth/signup"
-              variant="flat"
-            >
+            <Button as={Link} color="secondary" href="/auth/signup" variant="flat">
               Sign up
             </Button>
           </NavbarItem>
@@ -149,12 +142,7 @@ export function Navbar() {
         <div className={"flex flex-col gap-2"}>
           <RenderIf condition={isAuthenticated}>
             <NavbarMenuItem>
-              <Button
-                onClick={logout}
-                color="secondary"
-                variant="flat"
-                className={"w-full"}
-              >
+              <Button onClick={logout} color="secondary" variant="flat" className={"w-full"}>
                 Logout
               </Button>
             </NavbarMenuItem>

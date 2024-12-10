@@ -8,11 +8,11 @@
     "baseUrl": ".",
     "paths": {
       "@/*": ["./src/*"],
-      "@/auth/*": ["./src/modules/auth/*"],
-      "@/products/*": ["./src/modules/products/*"],
-      "@/users/*" : ["./src/modules/users/"],
+      "@/auth/*": ["./src/features/auth/*"],
+      "@/products/*": ["./src/features/products/*"],
       "@/shared/*": ["./src/shared/*"],
-      "@/sizes/*": ["./src/modules/sizes/*"]
+      "@/sizes/*": ["./src/features/sizes/*"],
+      "@/users/*" : ["./src/features/users/"],
     }
   }
 }

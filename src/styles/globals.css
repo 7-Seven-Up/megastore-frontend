@@ -1,0 +1,15 @@
+@import "animations.css";
+@import "variables.css";
+@import url("https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+::-webkit-scrollbar {
+  @apply size-2;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply rounded-lg bg-[#c2c9d2];
+}

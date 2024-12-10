@@ -1,4 +1,4 @@
-import { CreateProductForm } from "@products/components/CreateProductForm.tsx";
+import { CreateProductForm } from "@/features/products/components/CreateProductForm.tsx";
 import { Modal, ModalBody, ModalContent, ModalHeader } from "@nextui-org/react";
 import { useNavigate } from "react-router-dom";
 
@@ -10,13 +10,7 @@ export function CreateProductPage() {
   }
 
   return (
-    <Modal
-      backdrop={"blur"}
-      isOpen
-      onClose={onClose}
-      scrollBehavior={"inside"}
-      size={"4xl"}
-    >
+    <Modal backdrop={"blur"} isOpen onClose={onClose} scrollBehavior={"inside"} size={"4xl"}>
       <ModalContent>
         <ModalHeader>Create a new product</ModalHeader>
         <ModalBody>

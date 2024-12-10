@@ -2,13 +2,13 @@ import { Outlet } from "react-router-dom";
 import { Button, Link } from "@nextui-org/react";
 
 import RenderIf from "@shared/components/RenderIf.tsx";
-import { DeletedProductsTable } from "@products/components/DeletedProductsTable.tsx";
+import { DeletedProductsTable } from "@/features/products/components/DeletedProductsTable.tsx";
 import { PlusIcon } from "@/shared/components/icons/PlusIcon.tsx";
-import { ProductsOverviewTable } from "@products/components/ProductsOverviewTable.tsx";
+import { ProductsOverviewTable } from "@/features/products/components/ProductsOverviewTable.tsx";
 import { Subtitle } from "@shared/components/typography/Subtitle.tsx";
 import { Title } from "@/shared/components/typography/Title.tsx";
 import { ToggleDeletedButton } from "@shared/components/ui/ToggleDeletedButton.tsx";
-import { useProductsStore } from "@products/hooks/useProductsStore.ts";
+import { useProductsStore } from "@/features/products/hooks/useProductsStore.ts";
 
 export function ProductsAdminPage() {
   const showDeleted = useProductsStore((state) => state.showDeleted);

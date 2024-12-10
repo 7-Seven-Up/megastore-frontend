@@ -1,4 +1,4 @@
-import { ProductList } from "@products/components/ProductList.tsx";
+import { ProductList } from "@/features/products/components/ProductList.tsx";
 
 export function HomePage() {
   return (
