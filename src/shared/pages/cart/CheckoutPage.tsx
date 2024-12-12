@@ -20,7 +20,7 @@ export function CheckoutPage() {
   }
 
   return (
-    <section className={"grid min-h-screenMinusNavbar w-full grid-cols-12 items-center lg:gap-32"}>
+    <section className={"grid min-h-screenMinusNavbar w-full grid-cols-12 items-center 2xl:gap-24"}>
       <div className={"col-span-12 flex flex-col gap-4 p-6 lg:col-span-6 lg:gap-6"}>
         <Title className={"text-center lg:text-start"}>Products</Title>
         <ProductsCardContainer />
