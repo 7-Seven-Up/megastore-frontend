@@ -1,5 +1,5 @@
 import { useMemo, useState } from "react";
-import { Image, Link } from "@nextui-org/react";
+import { Image, Link, Tooltip } from "@nextui-org/react";
 
 import { ProductWithQuantity, useCartStore } from "@/features/cart/hooks/useCartStore.ts";
 import { QuantitySelector } from "@shared/components/ui/QuantitySelector.tsx";
@@ -41,7 +41,7 @@ export function ProductsCartItem(props: ProductsCartItemProps) {
 
         <div className={"flex flex-1 flex-col gap-2"}>
           <div className={"flex flex-col"}>
-            <p className={"text-lg"}>
+            <p className={"line-clamp-1 text-lg"}>
               {product.name} ({product.sizeName}) x {product.quantity}
             </p>
             <p>{currencyFormatter(product.price, "es-AR", "ARS")}</p>
@@ -69,9 +69,11 @@ export function ProductsCartItem(props: ProductsCartItemProps) {
         </div>
       </div>
 
-      <button onClick={onDelete} className={"hidden lg:block"}>
-        <XIcon className={"size-6"} />
-      </button>
+      <Tooltip content={"Remove product from the cart"} showArrow={true} delay={0} closeDelay={0}>
+        <button onClick={onDelete} className={"hidden lg:block"}>
+          <XIcon className={"size-6"} />
+        </button>
+      </Tooltip>
     </div>
   );
 }

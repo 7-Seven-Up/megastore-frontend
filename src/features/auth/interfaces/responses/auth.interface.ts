@@ -4,4 +4,5 @@ export interface AuthResponse {
   accessToken: string;
   role: Role;
   userId: string;
+  username: string;
 }

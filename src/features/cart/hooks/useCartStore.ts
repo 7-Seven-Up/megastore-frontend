@@ -8,6 +8,7 @@ export type ProductWithQuantity = Product & { quantity: number };
 type Store = {
   addProductToCart: (product: Product, quantity: number) => void;
   deleteProductFromCart: (index: number) => void;
+  resetCart: () => void;
   getTotal: () => number;
   items: ProductWithQuantity[];
   getItemsLength: () => number;
@@ -54,6 +55,9 @@ export const useCartStore = create<Store>()(
       },
       getItemsLength: () => {
         return get().items.reduce((acc, item) => acc + item.quantity, 0);
+      },
+      resetCart: () => {
+        set({ items: [] });
       },
     }),
     {
