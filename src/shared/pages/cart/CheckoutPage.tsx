@@ -1,9 +1,7 @@
-import { Divider } from "@nextui-org/react";
-
+import { CheckoutSummary } from "@shared/pages/cart/CheckoutSummary.tsx";
 import { ProductsCardContainer } from "@/features/products/components/ProductsCardContainer.tsx";
 import { Subtitle } from "@shared/components/typography/Subtitle.tsx";
 import { Title } from "@shared/components/typography/Title.tsx";
-import { currencyFormatter } from "@shared/utils/currencyFormatter.ts";
 import { useCartStore } from "@/features/cart/hooks/useCartStore.ts";
 
 export function CheckoutPage() {
@@ -22,21 +20,13 @@ export function CheckoutPage() {
   }
 
   return (
-    <section className={"grid w-full grid-cols-12 items-center gap-4 p-6"}>
-      <div className={"col-span-12 flex flex-col gap-4 lg:col-span-5 lg:gap-6"}>
+    <section className={"grid min-h-screenMinusNavbar w-full grid-cols-12 items-center lg:gap-32"}>
+      <div className={"col-span-12 flex flex-col gap-4 p-6 lg:col-span-6 lg:gap-6"}>
         <Title className={"text-center lg:text-start"}>Products</Title>
         <ProductsCardContainer />
       </div>
 
-      <div className={"col-span-12 flex h-full items-center justify-center lg:col-span-2"}>
-        <Divider orientation={"vertical"} className={"hidden lg:block"} />
-        <Divider orientation={"horizontal"} className={"my-4 block lg:hidden"} />
-      </div>
-
-      <div className={"col-span-12 flex h-full flex-col items-center gap-2 lg:col-span-5"}>
-        <Title>Checkout</Title>
-        <Subtitle>Total: {currencyFormatter(getTotal, "es-AR", "ARS")}</Subtitle>
-      </div>
+      <CheckoutSummary total={getTotal} />
     </section>
   );
 }

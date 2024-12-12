@@ -19,6 +19,7 @@ import { RoleBasedVisibility } from "@/shared/components/ui/RoleBasedVisibility.
 import { ShoppingCart } from "@/features/cart/components/ShoppingCart.tsx";
 import { Title } from "@/shared/components/typography/Title.tsx";
 import { useAuthStore } from "@/features/auth/hooks/useAuthStore.ts";
+import { useQueryClient } from "@tanstack/react-query";
 
 const menuItems = [
   {
@@ -30,6 +31,12 @@ const menuItems = [
 export function Navbar() {
   const { isAuthenticated, logout } = useAuthStore();
   const { pathname } = useLocation();
+  const queryClient = useQueryClient();
+
+  function handleLogout() {
+    logout();
+    queryClient.clear();
+  }
 
   return (
     <NextNavbar
@@ -102,6 +109,13 @@ export function Navbar() {
             <LayoutIcon />
           </Link>
         </RoleBasedVisibility>
+
+        <RoleBasedVisibility allowedRoles={[Role.USER]}>
+          <Link href={"/user/orders"}>
+            <LayoutIcon />
+          </Link>
+        </RoleBasedVisibility>
+
         <Divider orientation={"vertical"} />
 
         <RenderIf condition={!isAuthenticated}>
@@ -119,7 +133,7 @@ export function Navbar() {
 
         <RenderIf condition={isAuthenticated}>
           <NavbarItem>
-            <Button onClick={logout} color="secondary" variant="flat">
+            <Button onClick={handleLogout} color="secondary" variant="flat">
               Logout
             </Button>
           </NavbarItem>
@@ -142,7 +156,7 @@ export function Navbar() {
         <div className={"flex flex-col gap-2"}>
           <RenderIf condition={isAuthenticated}>
             <NavbarMenuItem>
-              <Button onClick={logout} color="secondary" variant="flat" className={"w-full"}>
+              <Button onClick={handleLogout} color="secondary" variant="flat" className={"w-full"}>
                 Logout
               </Button>
             </NavbarMenuItem>
