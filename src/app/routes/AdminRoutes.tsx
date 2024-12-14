@@ -5,11 +5,13 @@ import { CategoriesAdminPage } from "@shared/pages/admin/categories/CategoriesAd
 import { CreateCategoryPage } from "@shared/pages/admin/categories/CreateCategoryPage.tsx";
 import { CreateProductPage } from "@shared/pages/admin/products/CreateProductPage.tsx";
 import { CreateSizePage } from "@shared/pages/admin/sizes/CreateSizePage.tsx";
+import { OrdersAdminPage } from "@shared/pages/admin/orders/OrdersAdminPage.tsx";
 import { ProductsAdminPage } from "@shared/pages/admin/products/ProductsAdminPage.tsx";
 import { ProtectedRoute } from "@shared/pages/routes/ProtectedRoute.tsx";
 import { ReportsPage } from "@shared/pages/admin/reports/ReportsPage.tsx";
 import { Role } from "@/features/users/enums/role.enum.ts";
 import { SizesAdminPage } from "@shared/pages/admin/sizes/SizesAdminPage.tsx";
+import { AdminOrdersDetailPage } from "@shared/pages/admin/orders/AdminOrdersDetailPage.tsx";
 
 export function AdminRoutes() {
   return (
@@ -33,6 +35,8 @@ export function AdminRoutes() {
           <Route path={"create"} element={<CreateProductPage />} />
         </Route>
 
+        <Route path={"orders"} element={<OrdersAdminPage />} />
+        <Route path={"orders/:orderId"} element={<AdminOrdersDetailPage />} />
         <Route path={"reports"} element={<ReportsPage />} />
       </Route>
 

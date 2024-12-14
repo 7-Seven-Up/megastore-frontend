@@ -3,7 +3,8 @@ import { Link, Tooltip } from "@nextui-org/react";
 import { CategoryIcon } from "@/shared/components/icons/CategoryIcon.tsx";
 import { SizeIcon } from "@/shared/components/icons/SizeIcon";
 import { ShirtFoldedIcon } from "@/shared/components/icons/ShirtFoldedIcon.tsx";
-import { ReportIcon } from '@/shared/components/icons/ReportIcon';
+import { ReportIcon } from "@/shared/components/icons/ReportIcon";
+import { ShoppingBagIcon } from "@shared/components/icons/ShoppingBagIcon.tsx";
 
 export function AdminLayout() {
   const { pathname } = useLocation();
@@ -24,11 +25,15 @@ export function AdminLayout() {
       path: "/admin/sizes",
     },
     {
+      icon: ShoppingBagIcon,
+      label: "Orders",
+      path: "/admin/orders",
+    },
+    {
       icon: ReportIcon,
       label: "Reports",
       path: "/admin/reports",
     },
-    
   ];
 
   return (
@@ -40,7 +45,7 @@ export function AdminLayout() {
       >
         {adminItems.map((item) => {
           const { icon, label, path } = item;
-          const isActive = pathname === path;
+          const isActive = pathname.includes(path);
 
           return (
             <Tooltip
@@ -56,11 +61,7 @@ export function AdminLayout() {
               >
                 <div>{icon()}</div>
                 <span className={"hidden 2xl:block"}>{label}</span>
-                <span
-                  className={
-                    "w-full break-words text-center text-tiny lg:hidden"
-                  }
-                >
+                <span className={"w-full break-words text-center text-tiny lg:hidden"}>
                   {label}
                 </span>
               </Link>
