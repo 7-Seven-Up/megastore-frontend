@@ -27,7 +27,6 @@ export function AdminOrdersDetailPage() {
     return <FullscreenLoading className={"h-screenMinusNavbar"} />;
   }
 
-  console.log(order);
   if (!order) {
     return <Navigate to={"/user/orders"} />;
   }
