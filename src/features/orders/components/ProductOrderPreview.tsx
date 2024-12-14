@@ -7,11 +7,10 @@ interface ProductOrderPreviewProps {
 }
 
 export function ProductOrderPreview({ products }: ProductOrderPreviewProps) {
-  console.log(products, products.length);
   return (
     <AvatarGroup max={5} total={products.length - 5}>
-      {products.map((product) => (
-        <Avatar key={product.productId} src={product.imagesURLS[0]} />
+      {products.map((product, index) => (
+        <Avatar key={product.productId + index} src={product.imagesURLS[0]} />
       ))}
     </AvatarGroup>
   );

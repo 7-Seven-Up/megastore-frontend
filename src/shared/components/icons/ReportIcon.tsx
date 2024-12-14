@@ -1,5 +1,14 @@
 export function ReportIcon() {
   return (
-<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="#808080" viewBox="0 0 256 256"><path d="M224,200h-8V40a8,8,0,0,0-8-8H152a8,8,0,0,0-8,8V80H96a8,8,0,0,0-8,8v40H48a8,8,0,0,0-8,8v64H32a8,8,0,0,0,0,16H224a8,8,0,0,0,0-16ZM160,48h40V200H160ZM104,96h40V200H104ZM56,144H88v56H56Z"></path></svg>
+    <svg
+      fill="#53535B"
+      height="32"
+      viewBox="0 0 256 256"
+      width="32"
+      xmlns="http://www.w3.org/2000/svg"
+      className={"size-5 lg:size-7"}
+    >
+      <path d="M232,208a8,8,0,0,1-8,8H32a8,8,0,0,1,0-16h8V136a8,8,0,0,1,8-8H72a8,8,0,0,1,8,8v64H96V88a8,8,0,0,1,8-8h32a8,8,0,0,1,8,8V200h16V40a8,8,0,0,1,8-8h40a8,8,0,0,1,8,8V200h8A8,8,0,0,1,232,208Z"></path>
+    </svg>
   );
 }
