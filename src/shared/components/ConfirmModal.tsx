@@ -10,21 +10,18 @@ import {
 
 export function ConfirmModal() {
   const {
+    cancelLabel,
     description,
     hideConfirmModal,
     isLoading,
     modalVisible,
+    okLabel,
     onConfirm,
     title,
   } = useConfirmModal();
 
   return (
-    <Modal
-      backdrop={"blur"}
-      isOpen={modalVisible}
-      onClose={hideConfirmModal}
-      size={"lg"}
-    >
+    <Modal backdrop={"blur"} isOpen={modalVisible} onClose={hideConfirmModal} size={"lg"}>
       <ModalContent>
         <ModalHeader>{title}</ModalHeader>
         <ModalBody>
@@ -32,10 +29,10 @@ export function ConfirmModal() {
         </ModalBody>
         <ModalFooter>
           <Button color="danger" variant="light" onPress={hideConfirmModal}>
-            Cancel
+            {cancelLabel}
           </Button>
           <Button color="primary" isLoading={isLoading} onPress={onConfirm}>
-            Delete
+            {okLabel}
           </Button>
         </ModalFooter>
       </ModalContent>

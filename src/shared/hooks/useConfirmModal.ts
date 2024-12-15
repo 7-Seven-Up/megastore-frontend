@@ -4,6 +4,8 @@ export type ConfirmModalProps = {
   description: string;
   onConfirm: () => Promise<void>;
   title: string;
+  cancelLabel?: string;
+  okLabel?: string;
 };
 
 type ConfirmModalStore = {
@@ -15,6 +17,8 @@ type ConfirmModalStore = {
   hideConfirmModal: () => void;
   setIsLoading?: (value: boolean) => void;
   showConfirmModal: (props: ConfirmModalProps) => void;
+  cancelLabel?: string;
+  okLabel?: string;
 };
 
 const INITIAL_STATE = {
@@ -23,6 +27,8 @@ const INITIAL_STATE = {
   modalVisible: false,
   onConfirm: async () => {},
   title: "",
+  cancelLabel: "Cancel",
+  okLabel: "Delete",
 };
 
 export const useConfirmModal = create<ConfirmModalStore>((set) => ({

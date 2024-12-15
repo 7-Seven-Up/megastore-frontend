@@ -16,6 +16,7 @@ import { dateFormatter } from "@shared/utils/dateFormatter.ts";
 import { useAuthStore } from "@/features/auth/hooks/useAuthStore.ts";
 import { useCancelOrder } from "@/features/orders/hooks/useCancelOrder.ts";
 import { useGetOrdersByUser } from "@/features/users/hooks/useGetOrdersByUser.ts";
+import { useConfirmModal } from "@shared/hooks/useConfirmModal.ts";
 
 export function OrderDetailPage() {
   const { orderId } = useParams();
@@ -23,6 +24,7 @@ export function OrderDetailPage() {
   const queryClient = useQueryClient();
   const username = useAuthStore((state) => state.authResponse?.username);
   const { cancelOrder, isCanceling } = useCancelOrder();
+  const { showConfirmModal } = useConfirmModal();
 
   const cachedOrders = queryClient.getQueryData([GET_ORDERS_BY_USER_KEY]) as OrderResponse[];
   const { ordersByUser, isLoading } = useGetOrdersByUser(username!, !cachedOrders);
@@ -41,6 +43,16 @@ export function OrderDetailPage() {
   const { orderDetails } = order;
 
   async function handleCancelOrder() {
+    showConfirmModal({
+      cancelLabel: "No",
+      description: "Are you sure you want to cancel this order?",
+      okLabel: "Yes",
+      onConfirm: confirmCancelOrder,
+      title: "Cancel order",
+    });
+  }
+
+  async function confirmCancelOrder() {
     await cancelOrder(orderId!);
     navigate(0);
   }
