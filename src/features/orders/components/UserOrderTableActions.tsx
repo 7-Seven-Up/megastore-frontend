@@ -2,6 +2,7 @@ import { Button, Link, Tooltip } from "@nextui-org/react";
 
 import { XIcon } from "@shared/components/icons/XIcon.tsx";
 import { useCancelOrder } from "@/features/orders/hooks/useCancelOrder.ts";
+import { useConfirmModal } from "@shared/hooks/useConfirmModal.ts";
 
 interface UserOrderTableActionsProps {
   orderId: string;
@@ -10,8 +11,19 @@ interface UserOrderTableActionsProps {
 
 export function UserOrderTableActions({ orderId, allowCancel }: UserOrderTableActionsProps) {
   const { cancelOrder, isCanceling } = useCancelOrder();
+  const { showConfirmModal } = useConfirmModal();
 
   async function handleCancelOrder() {
+    showConfirmModal({
+      cancelLabel: "No",
+      description: "Are you sure you want to cancel this order?",
+      okLabel: "Yes",
+      onConfirm: confirmCancelOrder,
+      title: "Cancel order",
+    });
+  }
+
+  async function confirmCancelOrder() {
     await cancelOrder(orderId);
   }
 

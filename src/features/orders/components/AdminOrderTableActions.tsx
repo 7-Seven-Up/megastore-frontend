@@ -19,6 +19,7 @@ import { OrderState } from "@/features/orders/enums/order-state.enum.ts";
 import { OrderResponse } from "@/features/orders/interfaces/response/order-response.interface.ts";
 import { couldChangeToState } from "@/features/orders/utils/couldChangeToState.ts";
 import RenderIf from "@shared/components/RenderIf.tsx";
+import { useConfirmModal } from "@shared/hooks/useConfirmModal.ts";
 
 interface AdminOrderTableActionsProps {
   order: OrderResponse;
@@ -45,6 +46,7 @@ function getDisabledKeys(order: OrderResponse): string[] {
 
 export function AdminOrderTableActions({ order, viewMore = true }: AdminOrderTableActionsProps) {
   const queryClient = useQueryClient();
+  const { showConfirmModal } = useConfirmModal();
 
   async function invalidateOrderQuery() {
     await queryClient.invalidateQueries({
@@ -53,6 +55,16 @@ export function AdminOrderTableActions({ order, viewMore = true }: AdminOrderTab
   }
 
   async function handleOrderAction(state: ExcludedOrderState) {
+    showConfirmModal({
+      cancelLabel: "Cancel",
+      description: `Order will be marked as ${state.toLowerCase().replace("_", " ")}.`,
+      okLabel: `Mark as ${state.toLowerCase().replace("_", " ")}`,
+      onConfirm: () => confirmOrderAction(state),
+      title: `Are you sure you want to change the order state?`,
+    });
+  }
+
+  async function confirmOrderAction(state: ExcludedOrderState) {
     await ORDER_STATE_FUNCTIONS[state](order.orderId);
     await invalidateOrderQuery();
   }
