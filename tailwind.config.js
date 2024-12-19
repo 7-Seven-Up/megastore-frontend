@@ -14,9 +14,21 @@ export default {
       },
       spacing: {
         adminSidebar: "var(--admin-sidebar-width)",
-        screenMinusNavbar: "calc(100dvh - 90px)",
+        screenMinusNavbar: "calc(100dvh - 95px)",
       },
     },
   },
-  plugins: [nextui()],
+  plugins: [
+    nextui({
+      themes: {
+        light: {
+          colors: {
+            primary: {
+              DEFAULT: "#053262",
+            },
+          },
+        },
+      },
+    }),
+  ],
 };

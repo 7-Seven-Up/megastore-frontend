@@ -9,6 +9,9 @@ import { HomePage } from "@shared/pages/HomePage.tsx";
 import { NotFoundPage } from "@shared/pages/NotFoundPage.tsx";
 import { ProductRoutes } from "@/app/routes/ProductRoutes.tsx";
 import { UserRoutes } from "@/app/routes/UserRoutes.tsx";
+import { CategoriesRoutes } from "@/app/routes/CategoriesRoutes.tsx";
+import { SearchProductRoutes } from "@/app/routes/SearchProductRoutes.tsx";
+import { UserOrGuestRoute } from "@shared/pages/routes/UserOrGuestRoute.tsx";
 
 export default function RoutesProvider() {
   const navigate = useNavigate();
@@ -21,7 +24,16 @@ export default function RoutesProvider() {
           <Route path={"user/*"} element={<UserRoutes />} />
           <Route path={"admin/*"} element={<AdminRoutes />} />
           <Route path={"products/*"} element={<ProductRoutes />} />
-          <Route path={"checkout"} element={<CheckoutPage />} />
+          <Route path={"categories/*"} element={<CategoriesRoutes />} />
+          <Route path={"search/*"} element={<SearchProductRoutes />} />
+          <Route
+            path={"checkout"}
+            element={
+              <UserOrGuestRoute>
+                <CheckoutPage />
+              </UserOrGuestRoute>
+            }
+          />
         </Route>
 
         <Route path={"/auth/*"} element={<AuthRoutes />} />

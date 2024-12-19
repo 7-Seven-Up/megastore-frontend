@@ -1,5 +1,4 @@
 import { Navigate, Route, Routes } from "react-router-dom";
-
 import { OrderDetailPage } from "@shared/pages/orders/OrderDetailPage.tsx";
 import { ProtectedRoute } from "@shared/pages/routes/ProtectedRoute.tsx";
 import { Role } from "@/features/users/enums/role.enum.ts";

@@ -12,7 +12,11 @@ export function CheckoutPage() {
 
   if (items.length === 0) {
     return (
-      <section className={"flex h-full w-full flex-col items-center justify-center gap-4 p-6"}>
+      <section
+        className={
+          "flex h-full min-h-screenMinusNavbar w-full flex-col items-center justify-center gap-4 p-6"
+        }
+      >
         <Title>Products</Title>
         <Subtitle>There are no products in the cart</Subtitle>
       </section>
@@ -20,7 +24,9 @@ export function CheckoutPage() {
   }
 
   return (
-    <section className={"grid min-h-screenMinusNavbar w-full grid-cols-12 items-center lg:gap-32"}>
+    <section
+      className={"grid min-h-screenMinusNavbar w-full grid-cols-12 items-center px-6 lg:gap-32"}
+    >
       <div className={"col-span-12 flex flex-col gap-4 p-6 lg:col-span-6 lg:gap-6"}>
         <Title className={"text-center lg:text-start"}>Products</Title>
         <ProductsCardContainer />

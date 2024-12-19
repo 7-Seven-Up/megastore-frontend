@@ -7,10 +7,16 @@ export function useInfiniteProducts() {
     useInfiniteQuery({
       queryKey: [GET_PRODUCTS_KEY],
       queryFn: async (props) => {
-        return getProducts({
-          page: props.pageParam as number,
-          pageSize: 10,
-        });
+        return getProducts(
+          {
+            page: props.pageParam as number,
+            pageSize: 10,
+          },
+          {
+            name: undefined,
+            category: undefined,
+          },
+        );
       },
       initialPageParam: 0,
       getNextPageParam: (lastPage, allPages) => {

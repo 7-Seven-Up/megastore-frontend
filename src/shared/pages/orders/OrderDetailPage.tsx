@@ -1,13 +1,9 @@
 import { Button, Link } from "@nextui-org/react";
 import { Image } from "@nextui-org/image";
-import { Navigate, useNavigate, useParams } from "react-router-dom";
-import { useQueryClient } from "@tanstack/react-query";
+import { useParams } from "react-router-dom";
 
 import RenderIf from "@shared/components/RenderIf.tsx";
 import { FullscreenLoading } from "@shared/components/ui/FullscreenLoading.tsx";
-import { GET_ORDERS_BY_USER_KEY } from "@/features/users/constants.ts";
-import { OrderResponse } from "@/features/orders/interfaces/response/order-response.interface.ts";
-import { OrderState } from "@/features/orders/enums/order-state.enum.ts";
 import { OrderStateChip } from "@/features/orders/components/OrderStateChip.tsx";
 import { Subtitle } from "@shared/components/typography/Subtitle.tsx";
 import { Title } from "@shared/components/typography/Title.tsx";
@@ -17,28 +13,21 @@ import { useAuthStore } from "@/features/auth/hooks/useAuthStore.ts";
 import { useCancelOrder } from "@/features/orders/hooks/useCancelOrder.ts";
 import { useGetOrdersByUser } from "@/features/users/hooks/useGetOrdersByUser.ts";
 import { useConfirmModal } from "@shared/hooks/useConfirmModal.ts";
+import { FINAL_ORDER_STATES } from "@/features/orders/constants.ts";
 
 export function OrderDetailPage() {
   const { orderId } = useParams();
-  const navigate = useNavigate();
-  const queryClient = useQueryClient();
   const username = useAuthStore((state) => state.authResponse?.username);
   const { cancelOrder, isCanceling } = useCancelOrder();
   const { showConfirmModal } = useConfirmModal();
-
-  const cachedOrders = queryClient.getQueryData([GET_ORDERS_BY_USER_KEY]) as OrderResponse[];
-  const { ordersByUser, isLoading } = useGetOrdersByUser(username!, !cachedOrders);
-
-  const cachedOrder = cachedOrders?.find((order) => order.orderId === orderId);
-  const order = ordersByUser?.find((order) => order.orderId === orderId) || cachedOrder;
+  const { ordersByUser, isLoading } = useGetOrdersByUser(username!);
+  const order = ordersByUser?.find((order) => order.orderId === orderId);
 
   if (isLoading) {
     return <FullscreenLoading className={"h-screenMinusNavbar"} />;
   }
 
-  if (!order) {
-    return <Navigate to={"/user/orders"} />;
-  }
+  if (!order) return;
 
   const { orderDetails } = order;
 
@@ -54,7 +43,6 @@ export function OrderDetailPage() {
 
   async function confirmCancelOrder() {
     await cancelOrder(orderId!);
-    navigate(0);
   }
 
   return (
@@ -70,7 +58,7 @@ export function OrderDetailPage() {
             Go back
           </Button>
 
-          <RenderIf condition={order.state !== OrderState.CANCELLED}>
+          <RenderIf condition={!FINAL_ORDER_STATES.includes(order.state)}>
             <Button
               className={"border-0"}
               color={"danger"}
