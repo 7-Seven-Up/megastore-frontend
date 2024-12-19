@@ -5,6 +5,12 @@ export const UPDATE_CATEGORY_KEY = "categories/update";
 export const GET_DELETE_CATEGORIES_KEY = "categories/getDelete";
 export const RESTORE_CATEGORY_KEY = "categories/restore";
 
+export enum AVAILABLE_CATEGORIES {
+  TSHIRTS = "T-Shirts",
+  OUTERWEAR = "Outerwear",
+  PANTS = "Pants",
+}
+
 export const CATEGORIES_TABLE_COLUMNS = [
   {
     key: "actions",

@@ -1,8 +1,7 @@
 import { TableCell, TableRow } from "@nextui-org/react";
 
 import { GenericTable } from "@shared/components/ui/GenericTable.tsx";
-import { ORDERS_TABLE_COLUMNS } from "@/features/orders/constants.ts";
-import { OrderState } from "@/features/orders/enums/order-state.enum.ts";
+import { FINAL_ORDER_STATES, ORDERS_TABLE_COLUMNS } from "@/features/orders/constants.ts";
 import { OrderStateChip } from "@/features/orders/components/OrderStateChip.tsx";
 import { ProductOrderPreview } from "@/features/orders/components/ProductOrderPreview.tsx";
 import { UserOrderTableActions } from "@/features/orders/components/UserOrderTableActions.tsx";
@@ -30,7 +29,7 @@ export function OrdersByUserTable() {
           <TableCell>
             <UserOrderTableActions
               orderId={order.orderId}
-              allowCancel={order.state !== OrderState.CANCELLED}
+              allowCancel={!FINAL_ORDER_STATES.includes(order.state)}
             />
           </TableCell>
           <TableCell>

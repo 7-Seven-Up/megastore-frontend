@@ -1,13 +1,26 @@
-import React, { useState } from "react";
+import { Dispatch, SetStateAction } from "react";
 import { Skeleton } from "@nextui-org/react";
 
 import { PaginationControls } from "@shared/components/ui/PaginationControls.tsx";
 import { ProductCard } from "@/features/products/components/ProductCard.tsx";
-import { useGetProducts } from "../hooks/useGetProducts.ts";
+import { ProductResponse } from "@/features/products/interfaces/responses/product-response.interface.ts";
 
-export const ProductList: React.FC = () => {
-  const [page, setPage] = useState(1);
-  const { productResponse, isLoading } = useGetProducts({ page });
+interface ProductListProps {
+  isLoading: boolean;
+  onPageChange: Dispatch<SetStateAction<number>>;
+  page: number;
+  productResponse: ProductResponse | undefined;
+}
+
+export const ProductList = ({
+  productResponse,
+  isLoading,
+  page,
+  onPageChange,
+}: ProductListProps) => {
+  function onHandlePageChange(newPage: number) {
+    onPageChange(newPage);
+  }
 
   if (isLoading) {
     return (
@@ -24,7 +37,7 @@ export const ProductList: React.FC = () => {
 
   return (
     <>
-      <div className="grid h-full grid-cols-[repeat(auto-fill,minmax(250px,1fr))] items-center justify-center gap-4">
+      <div className="grid h-full grid-cols-[repeat(auto-fill,minmax(250px,1fr))] items-center justify-between gap-4">
         {productResponse?.content.map((product) => (
           <ProductCard key={product.productId} product={product} />
         ))}
@@ -34,7 +47,7 @@ export const ProductList: React.FC = () => {
         {productResponse && productResponse.content.length > 0 && (
           <PaginationControls
             currentPage={page}
-            handlePageChange={setPage}
+            handlePageChange={onHandlePageChange}
             labelName={"products"}
             paginatedResponse={productResponse}
           />

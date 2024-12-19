@@ -11,11 +11,16 @@ import { useInfiniteCategories } from "@/features/categories/hooks/useInfiniteCa
 
 type CategoriesSelectProps<T extends FieldValues> = Select<T> & {
   defaultSelected?: Category;
+  label?: string;
+  name?: string;
 };
 
 export function CategoriesSelect<T extends FieldValues>({
   control,
   defaultSelected,
+  label,
+  name,
+  placeholder,
   ...rest
 }: CategoriesSelectProps<T>) {
   const { data, fetchNextPage, isLoading, hasNextPage } = useInfiniteCategories();
@@ -49,10 +54,10 @@ export function CategoriesSelect<T extends FieldValues>({
       control={control}
       isLoading={isLoading}
       items={categories || []}
-      label={"Super category"}
-      name={"superCategoryId"}
+      label={label || "Super category"}
+      name={name || "superCategoryId"}
       onOpenChange={setIsOpen}
-      placeholder={"Select a super category"}
+      placeholder={placeholder || "Select a super category"}
       scrollRef={scrollerRef}
       {...rest}
     >

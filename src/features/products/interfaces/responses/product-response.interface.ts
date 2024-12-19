@@ -9,6 +9,8 @@ export interface Product {
   stock: number;
   color: string;
   sizeName: string;
+  categoryId: string;
+  categoryName: string;
   variantOfId?: string;
   variantOfName?: string;
   hasVariants: boolean;

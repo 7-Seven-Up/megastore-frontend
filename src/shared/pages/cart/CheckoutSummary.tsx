@@ -2,6 +2,7 @@ import { useNavigate } from "react-router-dom";
 import { Button } from "@nextui-org/react";
 import { toast } from "sonner";
 
+import { GET_ORDERS_BY_USER_KEY } from "@/features/users/constants.ts";
 import { Subtitle } from "@shared/components/typography/Subtitle.tsx";
 import { Title } from "@shared/components/typography/Title.tsx";
 import { currencyFormatter } from "@shared/utils/currencyFormatter.ts";
@@ -9,7 +10,7 @@ import { useAuthStore } from "@/features/auth/hooks/useAuthStore.ts";
 import { useCartStore } from "@/features/cart/hooks/useCartStore.ts";
 import { useCreateOrder } from "@/features/orders/hooks/useCreateOrder.ts";
 import { useQueryClient } from "@tanstack/react-query";
-import { GET_ORDERS_BY_USER_KEY } from "@/features/users/constants.ts";
+import { GET_ORDERS_KEY } from "@/features/orders/constants.ts";
 
 interface CheckoutSummaryProps {
   total: number;
@@ -39,10 +40,13 @@ export function CheckoutSummary({ total }: CheckoutSummaryProps) {
       userId: userId,
     });
 
-    await queryClient.invalidateQueries({ queryKey: [GET_ORDERS_BY_USER_KEY] });
+    await Promise.all([
+      queryClient.invalidateQueries({ queryKey: [GET_ORDERS_BY_USER_KEY] }),
+      queryClient.invalidateQueries({ queryKey: [GET_ORDERS_KEY] }),
+    ]);
 
     resetCart();
-    toast.success("Order created successfully!", { duration: 3000 });
+    toast.success("Order created successfully!", { duration: 4000 });
     navigate(`/user/orders/${createdOrder.orderId}`, { replace: true });
   }
 
