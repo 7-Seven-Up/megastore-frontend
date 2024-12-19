@@ -180,9 +180,9 @@ export function Navbar() {
 
         <RoleBasedVisibility allowedRoles={[Role.ADMIN]}>
           <Alert
-            title={"Logged as admin"}
+            title={"Logged in as admin"}
             classNames={{
-              mainWrapper: "w-[120px]",
+              mainWrapper: "w-[130px]",
             }}
           />
         </RoleBasedVisibility>
